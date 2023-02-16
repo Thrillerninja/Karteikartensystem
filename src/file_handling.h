@@ -5,6 +5,8 @@
 #ifndef KARTEIKARTENSYSTEM_FILE_HANDLING_H
 #define KARTEIKARTENSYSTEM_FILE_HANDLING_H
 
-Node *loadData(char filepath)
+#include "node.h"
+Node *loadData(char filepath, Node *head);
+void saveData(char filepath, Node *head);
 
 #endif //KARTEIKARTENSYSTEM_FILE_HANDLING_H

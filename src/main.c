@@ -1,11 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "node.h"
-#include "add_node_front.c"
-#include "add_node_back.c"
+#include "add_node.c"
 #include "remove_node.c"
-#include "insert_node.c"
-#include "edit_node.c"
 #include "search_node.c"
 #include "swap_node.c"
 #include "sort_node.c"
@@ -72,7 +69,7 @@ int main(int argc, char **argv)
                 // add operation
                 printf("What data should I insert?:\n");
                 scanf("%d", &arg1);
-                head = addNodeB(arg1, head,ptr);
+                head = addNodeB(arg1, head);
                 break;
 
             case 3:
@@ -89,8 +86,6 @@ int main(int argc, char **argv)
                 printf("What position?:\n");
                 scanf("%d", &arg2);
                 head = insertNode(arg1, arg2, head);
-                if (head == NULL)
-                    printf("Failed to insert into list\n");
                 break;
 
             case 5:
@@ -140,14 +135,19 @@ int main(int argc, char **argv)
                 break;
 
             case 11:
+                head = loadData("test",head);
                 printf("Load from file\n");
+                break;
 
             case 12:
+                saveData("test",head);
                 printf("Save to file\n");
+                break;
 
             case 13:
                 clearScreen(10);
                 exit(0);
+                break;
 
             default:
                 break;
