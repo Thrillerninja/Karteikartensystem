@@ -1,0 +1,10 @@
+//
+// Created by rorba on 16.02.2023.
+//
+
+#ifndef KARTEIKARTENSYSTEM_FILE_HANDLING_H
+#define KARTEIKARTENSYSTEM_FILE_HANDLING_H
+
+Node *loadData(char filepath)
+
+#endif //KARTEIKARTENSYSTEM_FILE_HANDLING_H
