@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\$$Meine Daten\Studium\Programmieren 1\Karteikartensystem\build\_deps\googletest-subbuild\CMakeFiles\1da113e3ed9493bd42158d1b746a7e04\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{FD11648A-0556-3DF3-8DD5-8B6AF8C7DD49}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

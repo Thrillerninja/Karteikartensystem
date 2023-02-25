@@ -1,0 +1,3 @@
+C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate.dir
+C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/_deps/googletest-subbuild/CMakeFiles/ALL_BUILD.dir
+C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/_deps/googletest-subbuild/CMakeFiles/ZERO_CHECK.dir

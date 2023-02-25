@@ -1,0 +1,10 @@
+^C:\$$MEINE DATEN\STUDIUM\PROGRAMMIEREN 1\KARTEIKARTENSYSTEM\BUILD\CMAKEFILES\1C9F7062F8D71AF83787434C0BA6FDEF\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/"$""$"Meine Daten/Studium/Programmieren 1/Karteikartensystem" "-BC:/"$""$"Meine Daten/Studium/Programmieren 1/Karteikartensystem/build" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/"$""$"Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/Karteikartensystem.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

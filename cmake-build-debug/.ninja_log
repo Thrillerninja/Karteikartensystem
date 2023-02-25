@@ -1,0 +1,12 @@
+# ninja log v5
+1	289	6981614010086987	src/CMakeFiles/Karteikartensystem_lib.dir/add_node_back.c.obj	68e82fad34b22723
+34	356	6981614010347051	src/CMakeFiles/Karteikartensystem_lib.dir/edit_node.c.obj	d85cd0d60bfd472a
+49	377	6981614010523320	src/CMakeFiles/Karteikartensystem_lib.dir/insert_node.c.obj	506fdd1ba6e74116
+79	406	6981614011303261	src/CMakeFiles/Karteikartensystem_lib.dir/main.c.obj	534a6b319ffd8cae
+366	16535	6981614172400951	lib/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj	796d0d446aeeb1a0
+66	365	6981614010554368	src/CMakeFiles/Karteikartensystem_lib.dir/remove_node.c.obj	dfd0f2cc48cb729f
+58	380	6981614010694475	src/CMakeFiles/Karteikartensystem_lib.dir/search_node.c.obj	832fd3db6d8bcca6
+15	379	6981614010624527	src/CMakeFiles/Karteikartensystem_lib.dir/add_node_front.c.obj	119b4d43ee5b4ba9
+95	382	6981614010964344	src/CMakeFiles/Karteikartensystem_lib.dir/swap_node.c.obj	b470af12a9b71f8a
+348	501	6981614012286293	src/CMakeFiles/Karteikartensystem_lib.dir/sort_node.c.obj	39cd05b4f1404936
+115	2744	6981614034701752	test/CMakeFiles/Karteikartensystem_test.dir/add_node_front_test.cpp.obj	db6fd881cc06327b

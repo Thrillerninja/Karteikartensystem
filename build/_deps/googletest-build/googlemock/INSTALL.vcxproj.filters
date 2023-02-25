@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\$$Meine Daten\Studium\Programmieren 1\Karteikartensystem\build\CMakeFiles\e0a021de232f075c221bcf7ff9ad5070\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{72873BF8-400E-3A38-8B4E-44B94C6FD5B1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

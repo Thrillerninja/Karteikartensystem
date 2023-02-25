@@ -1,0 +1,10 @@
+^C:\$$MEINE DATEN\STUDIUM\PROGRAMMIEREN 1\KARTEIKARTENSYSTEM\BUILD\_DEPS\GOOGLETEST-SUBBUILD\CMAKEFILES\1DA113E3ED9493BD42158D1B746A7E04\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/"$""$"Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/_deps/googletest-subbuild" "-BC:/"$""$"Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/_deps/googletest-subbuild" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/"$""$"Meine Daten/Studium/Programmieren 1/Karteikartensystem/build/_deps/googletest-subbuild/googletest-populate.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
