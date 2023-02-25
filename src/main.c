@@ -8,6 +8,7 @@
 #include "sort_node.c"
 #include "print_list.c"
 #include "file_handling.c"
+#include "abfrage.c"
 
 void printMenu(int style){
     if (style ==1) {
@@ -26,6 +27,7 @@ void printMenu(int style){
         printf("\t12.Save to file\n");
         printf("\t13.Exit\n");
     }else{
+
         printf("You have the following options:\n");
         printf("\t1. Add a node to the start of the list.       7. Search for a node in the list\n");
         printf("\t2. Add a node at the end of the list.         8. Push node\n");
@@ -45,6 +47,12 @@ void clearScreen(int lines){
 
 int main(int argc, char **argv)
 {
+    char input[100];
+    printf("Type something and press Enter to continue: ");
+    fgets(input, 100, stdin);
+    input[strcspn(input, "\n")] = '\0'; // remove newline
+    printf("You typed: %s\n", input);
+
     int option = -1;
     int arg1 = 0;
     int arg2 = 0;
@@ -58,6 +66,10 @@ int main(int argc, char **argv)
         int num_received = scanf("%d", &option);
         switch(option)
         {
+            case 0:
+                //start the abfrage
+                head = abfrageStart(head);
+                break;
             case 1:
                 // add operation
                 printf("What data should I insert?:\n");
