@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "node.h"
-#include "remove_node.h"
 
 // remove a node from the list
 Node *removeNode(int data, Node *head, Node *ptr)

@@ -6,9 +6,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "node.h"
-#include "swap_node.h"
 
-Node *push(int swap_position, Node * head)
+Node *swap(int swap_position, Node * head)
 {
     if (head == NULL ||head->next == NULL) {
         printf("No List detected, cannot swap\n");
@@ -22,10 +21,11 @@ Node *push(int swap_position, Node * head)
             printf("End of List reached without reaching the swap position, cannot swap\n");
             return head;
         }
-        previous = current;
         current = current->next;
         position++;
     }
+
+    previous = current;
 
     if ( current->next == NULL){
         printf("Reached swap position, but no Element to swap with left in the List, cannot swap\n");

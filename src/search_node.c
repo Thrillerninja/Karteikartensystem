@@ -6,7 +6,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "node.h"
-#include "search_node.h"
 
 void search(int data, Node * head) {
     Node *current = head;

@@ -10,52 +10,51 @@
 // add a node to the list at the front
 Node *addNodeF(int data,Node * head)
 {
-    Node *new = NULL;
+    Node *newNode = NULL;
     if (head == NULL) //if empty
     {
-        new = malloc(sizeof(Node));
-        if (new == NULL)
+        newNode = malloc(sizeof(Node));
+        if (newNode == NULL)
             return NULL;
 
-        new->data = data;
-        head = new;
-        new->next = NULL;
+        newNode->data = data;
+        head = newNode;
+        newNode->next = NULL;
     } else {
-        new = malloc(sizeof(Node));
-        if (new == NULL)
+        newNode = malloc(sizeof(Node));
+        if (newNode == NULL)
             return NULL;
 
-        new->data = data;
-        new->next = head;
-        head = new;
+        newNode->data = data;
+        newNode->next = head;
+        head = newNode;
     }
-
-    return new;
+    return newNode;
 }
 
 Node *addNodeB(int data,Node * head)
 {
-    Node *new = NULL;
+    Node *newNode = NULL;
     Node *ptr = head;
     if (head == NULL) //if empty
     {
-        new = malloc(sizeof(Node));
-        if (new == NULL)
+        newNode = malloc(sizeof(Node));
+        if (newNode == NULL)
             return NULL;
 
-        new->data = data;
-        new->next = NULL;
-        head = new;
+        newNode->data = data;
+        newNode->next = NULL;
+        head = newNode;
     } else {
-        new = malloc(sizeof(Node));
-        if (new == NULL)
+        newNode = malloc(sizeof(Node));
+        if (newNode == NULL)
             return NULL;
 
-        new->data = data;
-        new->next = NULL;
+        newNode->data = data;
+        newNode->next = NULL;
 
         while (ptr->next!= NULL) ptr = ptr->next;
-        ptr->next = new;
+        ptr->next = newNode;
     }
     return head;
     /*
@@ -99,14 +98,14 @@ Node *insertNode(int data, int position, Node * head)   //TODO: fix always inser
         }
     }
 
-    Node *new = malloc(sizeof(Node));
-    if (new == NULL) {
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL) {
         return head;
     }
 
-    new->data = data;
-    new->next = current->next;
-    current->next = new;
+    newNode->data = data;
+    newNode->next = current->next;
+    current->next = newNode;
 
     return head;
 }
@@ -123,4 +122,5 @@ Node *setValue(int data ,int value, Node *head) {
         }
         current = current->next;
     }
+    return head;
 }

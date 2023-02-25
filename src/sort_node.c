@@ -5,13 +5,10 @@
 
 #include <stdio.h>
 #include "node.h"
-#include "sort_node.h"
 #include "swap_node.h"
 
 Node *sort(Node * head) {
     Node *ptr = head;
-    Node *previous = NULL;
-    Node *current = head;
 
     int list_length = 0;
     while(ptr->next != NULL) {  // calculate the list length
@@ -20,13 +17,14 @@ Node *sort(Node * head) {
     }
     printf("Elements in the List: %d\n", list_length+1);
 
-
     for (int i = 0; i < list_length; i++) { //loops threw max number of sorting steps
+        Node *previous = NULL;
+        Node *current = head;
 
         for (int j = 0; j < list_length - i; j++) { //loops threw every element and swaps if needed
             Node *next_node = current->next;
             if (current->data > next_node->data) {  //compares values
-                head = push(j, head);   //swaps
+                head = swap(j, head);   //swaps
                 if (j == 0) {
                     current = head;
                 } else {

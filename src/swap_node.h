@@ -7,7 +7,7 @@
 
 #include "node.h"
 
-Node *push(int swap_position, Node * head);
+Node *swap(int swap_position, Node * head);
 Node *pull(int data, Node * head);
 
 #endif //KARTEIKARTENSYSTEM_SWAP_NODE_H

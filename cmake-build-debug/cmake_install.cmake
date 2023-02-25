@@ -1,4 +1,4 @@
-# Install script for directory: C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem
+# Install script for directory: C:/Users/Thrillerninja/CLionProjects/Karteikartensystem
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,14 +34,14 @@ endif()
 
 # Set default install directory permissions.
 if(NOT DEFINED CMAKE_OBJDUMP)
-  set(CMAKE_OBJDUMP "C:/Program Files/JetBrains/CLion 2022.3/bin/mingw/bin/objdump.exe")
+  set(CMAKE_OBJDUMP "C:/Program Files/JetBrains/CLion 2022.3.2/bin/mingw/bin/objdump.exe")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/cmake-build-debug/src/cmake_install.cmake")
-  include("C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/cmake-build-debug/test/cmake_install.cmake")
-  include("C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/cmake-build-debug/lib/googletest/cmake_install.cmake")
+  include("C:/Users/Thrillerninja/CLionProjects/Karteikartensystem/cmake-build-debug/src/cmake_install.cmake")
+  include("C:/Users/Thrillerninja/CLionProjects/Karteikartensystem/cmake-build-debug/test/cmake_install.cmake")
+  include("C:/Users/Thrillerninja/CLionProjects/Karteikartensystem/cmake-build-debug/lib/googletest/cmake_install.cmake")
 
 endif()
 
@@ -53,5 +53,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Thrillerninja/CLionProjects/Karteikartensystem/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
