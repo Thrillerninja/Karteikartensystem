@@ -7,26 +7,24 @@
 #include "node.h"
 
 // remove a node from the list
-Node *removeNode(int data, Node *head, Node *ptr)
+Node *removeNode(int data, Node *head)
 {
-    Node *current = head;
-    Node *prev = NULL;
-    while (current != NULL)
+    Node *current = head->next;
+    Node *prev = head;
+
+    if (head->data == data){    // if first element needs to be removed (reduces number of necessary structs)
+        Node *temp = head->next;
+        free(head);
+        return temp;
+    }
+
+    while (current != NULL) //returns directly if list is empty
     {
         if (current->data == data)
         {
-            // temporary structure
-            Node *temp = current->next;
-
-            //delete the node
-            free(current);
-
-            if (prev == NULL) {
-                head = temp;
-            } else {
-                prev->next = temp;
-            }
-            break;
+            prev->next = current->next;
+            free(current); //delete the node
+            return head;
         }
         prev = current;
         current = current->next;
