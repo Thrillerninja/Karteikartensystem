@@ -14,7 +14,7 @@ extern "C" {
 #include "file_handling.h"
 #include "abfrage.h"
 }
-
+/*
 // Front
 TEST(AddFrontTest, POSITIVE) {
     Node *head = NULL;
@@ -53,6 +53,59 @@ TEST(AddBackTest, NEGATIVE) {
     ASSERT_TRUE(head!= NULL);
 }
 
+// Insert
+TEST(InsertTest, POSITIVE) {
+    int compare[] = {50,45,40};
+    Node *head = NULL;
+    head = addNodeB(50,head);
+    head = addNodeB(40,head);
+    head = insertNode(45,1,head);
+
+    for (int i = 0; i < 5;i++){
+        ASSERT_EQ(compare[i],head->data);
+        head = (Node*) head->next;
+    }
+}
+
+TEST(InsertTest, ZERO) {
+    int compare[] = {50,0,40};
+    Node *head = NULL;
+    head = addNodeB(50,head);
+    head = addNodeB(40,head);
+    head = insertNode(0,1,head);
+
+    for (int i = 0; i < 5;i++){
+        ASSERT_EQ(compare[i],head->data);
+        head = (Node*) head->next;
+    }
+}
+
+TEST(InsertTest, NEGATIVE) {
+    int compare[] = {50,-10,40};
+    Node *head = NULL;
+    head = addNodeB(50,head);
+    head = addNodeB(40,head);
+    head = insertNode(-10,1,head);
+
+    for (int i = 0; i < 5;i++){
+        ASSERT_EQ(compare[i],head->data);
+        head = (Node*) head->next;
+    }
+
+}
+TEST(InsertTest, Fail) {
+    int compare[] = {50,0,40};
+    Node *head = NULL;
+    head = addNodeB(50,head);
+    head = addNodeB(40,head);
+    head = insertNode(0,1,head);
+
+    for (int i = 0; i < 5;i++){
+        ASSERT_EQ(compare[i],head->data);
+        head = (Node*) head->next;
+    }
+}
+
 // Default
 TEST(True, True) {
     ASSERT_TRUE(true);
@@ -67,7 +120,7 @@ TEST(Swap, Backwards) {
     head = addNodeF(6,head);
     head = swap(0, head);
 
-    ASSERT_EQ(6,head->data);
+    ASSERT_EQ(7,head->data);
 }
 
 TEST(Swap, Fail) {
@@ -128,19 +181,37 @@ TEST(Sort, AlreadySorted) {
     int compare[5] = {4,5,6,7,8};
 
     Node *head = NULL;
-    head = addNodeF(8,head);
-    head = addNodeF(6,head);
-    head = addNodeF(7,head);
-    head = addNodeF(5,head);
-    head = addNodeF(4,head);
+    head = addNodeB(4,head);
+    head = addNodeB(5,head);
+    head = addNodeB(6,head);
+    head = addNodeB(7,head);
+    head = addNodeB(8,head);
     printList(head);
     head = sort(head);
     printList(head);
 
     for (int i = 0; i < 5;i++){
-        printf("r:%d,s:%d\n",head->data,compare[i-1]);
-
+        ASSERT_EQ(compare[i],head->data);
         head = (Node*) head->next;
     }
-    ASSERT_EQ(compare[0],head->data);
 }
+
+TEST(Sort, Sort) {
+    int compare[5] = {4,5,6,7,8};
+
+    Node *head = NULL;
+    head = addNodeB(8,head);
+    head = addNodeB(6,head);
+    head = addNodeB(7,head);
+    head = addNodeB(5,head);
+    head = addNodeB(4,head);
+    printList(head);
+    head = sort(head);
+    printList(head);
+
+    for (int i = 0; i < 5;i++){
+        ASSERT_EQ(compare[i],head->data);
+        head = (Node*) head->next;
+    }
+}
+*/

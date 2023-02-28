@@ -57,54 +57,34 @@ Node *addNodeB(int data,Node * head)
         ptr->next = newNode;
     }
     return head;
-    /*
-    // temporary structure
-    Node *temp = NULL;
-    temp = malloc(sizeof(Node));
-
-    //fill the structure with data
-    temp->data = data;
-    temp->next = NULL;
-
-    if (head == NULL)
-    {
-        //if (temp == NULL)
-        //    return NULL;
-
-        head = temp;
-    } else {
-        //if (temp == NULL)
-        //    return NULL;
-
-        ptr = head;
-        while (ptr->next!= NULL) ptr = ptr->next;
-        ptr->next = temp;
-    }
-    return head;*/
 }
 
 // insert a node into a position in the list
-Node *insertNode(int data, int position, Node * head)   //TODO: fix always inserting at position 2
+Node *insertNode(int data, int position, Node * head)
 {
-    Node *current = head;
-    while (position != 0)
+    if (head == NULL && position != 0)
     {
-        current = current->next;
-        position--;
-        if (current == NULL){
-            printf("Requested position too far into list\n");
-            printf("Failed to insert into list\n");
-            return head;
-        }
-    }
-
-    Node *newNode = malloc(sizeof(Node));
-    if (newNode == NULL) {
+        printf("Requested position too far into list\n");
+        printf("Failed to insert into list\n");
         return head;
     }
 
-    newNode->data = data;
+    Node *current = head;
+    while (position > 1 && current != NULL)
+    {
+        current = current->next;
+        position--;
+    }
+
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL)
+    {
+        printf("Failed to allocate memory");
+        return head;
+    }
+
     newNode->next = current->next;
+    newNode->data = data;
     current->next = newNode;
 
     return head;

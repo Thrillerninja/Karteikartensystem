@@ -18,12 +18,13 @@ char answer[20] = "test";
 Node *loadData(char filepath[], Node *head){
     int times_correct = 0;
     char buffer[BUFFER_SIZE];
-    char *filename = "data.json";
+    char *filename = "C:\\Users\\Thrillerninja\\CLionProjects\\Karteikartensystem\\data.json";
     FILE *file;
     errno_t err = fopen_s(&file, filename, "r");
 
     if (err != 0) {
         printf("Unable to open file '%s'\n", filename);
+        printf("Error: %s\n", strerror(errno));
         return NULL;
     }
 
