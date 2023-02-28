@@ -8,5 +8,6 @@
 #include "node.h"
 
 Node *abfrageStart(Node *head);
+int searchNode(int data, Node * head);
 
 #endif //KARTEIKARTENSYSTEM_ABFRAGE_H

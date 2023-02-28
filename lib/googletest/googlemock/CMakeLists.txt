@@ -65,7 +65,7 @@ endif()
 # call it again here.
 config_compiler_and_linker()  # from ${gtest_dir}/cmake/internal_utils.cmake
 
-# Adds Google Mock's and Google Test's header directories to the search path.
+# Adds Google Mock's and Google Test's header directories to the searchNode path.
 set(gmock_build_include_dirs
   "${gmock_SOURCE_DIR}/include"
   "${gmock_SOURCE_DIR}"
