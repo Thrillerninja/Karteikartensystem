@@ -5,9 +5,9 @@
 #ifndef KARTEIKARTENSYSTEM_NODE_H
 #define KARTEIKARTENSYSTEM_NODE_H
 
-typedef struct {
-    void *next;
+typedef struct Node {
     int data;
+    struct Node *next;
 } Node;
 
 #endif //KARTEIKARTENSYSTEM_NODE_H

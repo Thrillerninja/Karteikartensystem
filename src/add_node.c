@@ -14,16 +14,15 @@ Node *addNodeF(int data,Node * head)
     if (head == NULL) //if empty
     {
         newNode = malloc(sizeof(Node));
-        if (newNode == NULL)
-            return NULL;
+        if (newNode == NULL) return NULL;
 
         newNode->data = data;
         head = newNode;
         newNode->next = NULL;
+
     } else {
         newNode = malloc(sizeof(Node));
-        if (newNode == NULL)
-            return NULL;
+        if (newNode == NULL) return NULL;
 
         newNode->data = data;
         newNode->next = head;
@@ -36,20 +35,17 @@ Node *addNodeB(int data,Node * head)
 {
     Node *newNode = NULL;
     Node *ptr = head;
+
+    newNode = malloc(sizeof(Node));
+    if (newNode == NULL) return NULL;
+
     if (head == NULL) //if empty
     {
-        newNode = malloc(sizeof(Node));
-        if (newNode == NULL)
-            return NULL;
-
         newNode->data = data;
         newNode->next = NULL;
         head = newNode;
-    } else {
-        newNode = malloc(sizeof(Node));
-        if (newNode == NULL)
-            return NULL;
 
+    } else {
         newNode->data = data;
         newNode->next = NULL;
 
@@ -62,10 +58,10 @@ Node *addNodeB(int data,Node * head)
 // insert a node into a position in the list
 Node *insertNode(int data, int position, Node * head)
 {
-    if (head == NULL && position != 0)
-    {
-        printf("Requested position too far into list\n");
-        printf("Failed to insert into list\n");
+    if (position < 0){
+        return head;
+    }else if (position == 0) {
+        head = addNodeF(data,head);
         return head;
     }
 
@@ -76,12 +72,14 @@ Node *insertNode(int data, int position, Node * head)
         position--;
     }
 
-    Node *newNode = malloc(sizeof(Node));
-    if (newNode == NULL)
-    {
-        printf("Failed to allocate memory");
+    if (current == NULL && position != 0){
+        printf("Requested position too far into list\n");
+        printf("Failed to insert into list\n");
         return head;
     }
+
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL) return NULL;
 
     newNode->next = current->next;
     newNode->data = data;
