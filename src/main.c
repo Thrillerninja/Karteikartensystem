@@ -3,7 +3,6 @@
 #include "node.h"
 #include "add_node.h"
 #include "remove_node.h"
-#include "search_node.h"
 #include "swap_node.h"
 #include "sort_node.h"
 #include "print_list.h"
@@ -82,7 +81,7 @@ int main(int argc, char **argv)
                 // remove operation
                 printf("What data should I remove?:\n");
                 scanf("%d", &arg1);
-                head = removeNode(arg1, head, ptr);
+                head = removeNode(arg1, head);
                 break;
 
             case 4:
@@ -111,10 +110,17 @@ int main(int argc, char **argv)
                 break;
 
             case 7:
-                // search operation
+                // searchNode operation
                 printf("What data should be searched?:\n");
+                int position;
                 scanf("%d", &arg1);
-                search(arg1, head);
+                position = searchNode(arg1, head);
+
+                if (position == -1){
+                    printf("Not found\n");
+                }else{
+                    printf("%d is the at position %d in the list\n",arg1,position);
+                }
                 break;
 
             case 8:

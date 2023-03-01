@@ -1,13 +1,16 @@
 //
 // Created by rorba on 09.02.2023.
 //
-// add a node to the list at the back
 
 #include <stdio.h>
 #include "node.h"
 #include "swap_node.h"
 
 Node *sort(Node * head) {
+    if (head == NULL || head->next == NULL){ // already sorted
+        return head;
+    }
+
     Node *ptr = head;
 
     int list_length = 0;
