@@ -121,7 +121,7 @@
 //
 // MORE INFORMATION:
 //
-// To learn more about using these macros, please search for 'ACTION' on
+// To learn more about using these macros, please searchNode for 'ACTION' on
 // https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md
 
 // IWYU pragma: private, include "gmock/gmock.h"

@@ -238,7 +238,7 @@
 // More Information
 // ================
 //
-// To learn more about using these macros, please search for 'MATCHER'
+// To learn more about using these macros, please searchNode for 'MATCHER'
 // on
 // https://github.com/google/googletest/blob/main/docs/gmock_cook_book.md
 //

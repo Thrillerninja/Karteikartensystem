@@ -45,7 +45,6 @@ void clearScreen(int lines){
 
 int main(int argc, char **argv)
 {
-
     int option = -1;
     int arg1 = 0;
     int arg2 = 0;
@@ -157,6 +156,10 @@ int main(int argc, char **argv)
                 break;
 
             case 13:
+                head = abfrageStart(head);
+                break;
+
+            case 14:
                 clearScreen(10);
                 exit(0);
                 break;
