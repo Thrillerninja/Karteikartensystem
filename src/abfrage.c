@@ -3,8 +3,10 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <conio.h>
+#include <time.h>
 #include "node.h"
 
 /* Max number of chars in question. This is reasoned by this study: https://arxiv.org/ftp/arxiv/papers/1207/1207.2334.pdf
@@ -12,6 +14,7 @@
  * different answers to a vocable by a pre-/postfix of a shorthand*/
 #define MAX_QUESTION_LENGTH 38
 #define MAX_ANSWER_LENGTH 36
+
 
 void showFrame(int x){
     switch(x){
@@ -154,7 +157,7 @@ void showFrame(int x){
 
 int userInput(){
     while (1) {
-        char c = _getch();   // get user input immediately //TODO: input only gets registered after `"enter"`
+        char c = _getch();   // get user input immediately TODO: input only gets registered after `"enter"`
         int value = 0;
         printf("\b");
         return value * 10 + (c - '0'); // converts to number
@@ -172,7 +175,7 @@ Node *abfrageStart(Node *head) {
     switch (choice) {
         case 1:
             showFrame(1); //show typeselect window
-            menuSelectAbfrage();
+            menuSelectAbfrage(head);
             break;
 
         case 2:
@@ -189,7 +192,7 @@ Node *abfrageStart(Node *head) {
     printf("awdawdawd\n");
 }
 
-void menuSelectAbfrage(){
+void menuSelectAbfrage(Node *head){
     int choice = userInput();
     switch(choice) {
         case 1: // question new vocabulary
@@ -200,7 +203,7 @@ void menuSelectAbfrage(){
         case 3: //we´ll see
             break;
         default:
-            menuSelectAbfrage();
+            menuSelectAbfrage(head);
             break;
     }
 }
@@ -236,7 +239,31 @@ void printQuestion(char question[],char answer[]){
     printf("\n");
 }
 
-void mainAbfrage(){
+void mainAbfrage(Node *head){
+    Node *current = head;
+    int counter = 0;
+    while (current->next != NULL){
+        counter += current->times_correct;
+        current = current->next;
+    }
+
+    // Initialize the random seed
+    srand(time(NULL));
+
+    // Generate a random number between 1 and sum
+    int r = rand() % counter + 1;
+
+    // Loop through the list to find the word that corresponds to the random number
+    // The higher the number, the higher the probability of being chosen
+    while (current != NULL) {
+        r -= current->times_correct;
+        if (r <= 0) {
+            return current->question,current->answer;
+        }
+        current = current->next;
+    }
+    return head->question,head->answer;
+
     printQuestion("awdawdawdu","rftzguhijtrerhtjzukilo");
 }
 
