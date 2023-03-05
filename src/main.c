@@ -109,26 +109,30 @@ int main(int argc, char **argv)
 
             case 6:
                 // change operation
-                printf("What times_correct should changed?:\n");
-                scanf("%d", &arg1);
+                printf("What question should I change?:\n");
+                scanf("%s", &question);
                 printf("To what?:\n");
                 scanf("%d", &arg2);
-                head = setValue(arg1, arg2, head);
+                head = setValue(question, arg2, head);
                 if (head == NULL)
                     printf("Failed to change value\n");
                 break;
 
             case 7:
                 // searchNode operation
-                printf("What times_correct should be searched?:\n");
-                int position;
-                scanf("%d", &arg1);
-                position = searchNode(arg1, head);
-
+                printf("What question should be searched for?:\n");
+                scanf("%s", &question);
+                int position = searchNode(question, head);
                 if (position == -1){
                     printf("Not found\n");
                 }else{
-                    printf("%d is the at position %d in the list\n",arg1,position);
+                    Node *ptr = head;
+                    int temp_position = position;
+                    while (position != 0){
+                        ptr = ptr->next;
+                        position--;
+                    }
+                    printf("%s with answer: %s and times_correct: %d is the at position %d in the list\n",ptr->question, ptr->answer, ptr->times_correct, temp_position);
                 }
                 break;
 

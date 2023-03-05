@@ -261,17 +261,17 @@ void mainAbfrage(Node *head){
     printQuestion("awdawdawdu","rftzguhijtrerhtjzukilo");
 }
 
-int searchNode(int data, Node * head) {
+int searchNode(char question[MAX_QUESTION_LENGTH], Node * head) {
     Node *current = head;
     int position = 0;
     while (current!= NULL)
     {
-        if (current->times_correct == data)
+        if (strcmp(current->question,question) == 0)
         {
             return position;
         }
         current = current->next;
-        position ++;
+        position++;
     }
     return -1;
 }

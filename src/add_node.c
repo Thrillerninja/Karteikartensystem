@@ -123,11 +123,11 @@ Node *insertNode(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGT
 }
 
 // set a node value
-Node *setValue(int times_correct ,int value, Node *head) {
+Node *setValue(char question[MAX_QUESTION_LENGTH] ,int value, Node *head) {
     Node *current = head;
     while (current != NULL)
     {
-        if (current->times_correct == times_correct)
+        if (strcmp(current->question, question) == 0)
         {
             current->times_correct = value;
             return head;
