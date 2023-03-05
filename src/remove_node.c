@@ -12,7 +12,7 @@ Node *removeNode(int data, Node *head)
     Node *current = head->next;
     Node *prev = head;
 
-    if (head->data == data){    // if first element needs to be removed (reduces number of necessary structs)
+    if (head->times_correct == data){    // if first element needs to be removed (reduces number of necessary structs)
         Node *temp = head->next;
         free(head);
         return temp;
@@ -20,7 +20,7 @@ Node *removeNode(int data, Node *head)
 
     while (current != NULL) //returns directly if list is empty
     {
-        if (current->data == data)
+        if (current->times_correct == data)
         {
             prev->next = current->next;
             free(current); //delete the node

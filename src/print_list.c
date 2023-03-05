@@ -9,7 +9,7 @@ void printList(Node * head)
     Node *current = head;
     while (current != NULL)
     {
-        printf("%d->", current->data);
+        printf("%d->", current->times_correct);
         current = current->next;
     }
 

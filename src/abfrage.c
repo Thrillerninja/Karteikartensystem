@@ -9,12 +9,6 @@
 #include <time.h>
 #include "node.h"
 
-/* Max number of chars in question. This is reasoned by this study: https://arxiv.org/ftp/arxiv/papers/1207/1207.2334.pdf
- * showing that words longer than 30 chars don´t really exist. 8 extra chars are given to be able to differentiate between
- * different answers to a vocable by a pre-/postfix of a shorthand*/
-#define MAX_QUESTION_LENGTH 38
-#define MAX_ANSWER_LENGTH 36
-
 
 void showFrame(int x){
     switch(x){
@@ -272,7 +266,7 @@ int searchNode(int data, Node * head) {
     int position = 0;
     while (current!= NULL)
     {
-        if (current->data == data)
+        if (current->times_correct == data)
         {
             return position;
         }

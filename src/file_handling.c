@@ -12,13 +12,13 @@
 const char* FILTER_READ = "{\"question\": \"%[^\"]\", \"answer\": \"%[^\"]\", \"times_correct\": %d}\n";
 const char* FILTER_WRITE = "{\"question\": \"%s\", \"answer\": \"%s\", \"times_correct\": %d}\n";
 
-char question[20] = "test";
-char answer[20] = "test";
+char question[MAX_QUESTION_LENGTH] = "test";
+char answer[MAX_ANSWER_LENGTH] = "test";
 
-Node *loadData(char filepath[], Node *head){
+Node *loadData(char filepath[], Node *head){ //TODO: fix questions and answers with spaces
     int times_correct = 0;
     char buffer[BUFFER_SIZE];
-    char *filename = "C:\\Users\\Thrillerninja\\CLionProjects\\Karteikartensystem\\data.json";
+    char *filename = "..\\..\\data.json";
     FILE *file;
     errno_t err = fopen_s(&file, filename, "r");
 
@@ -32,8 +32,8 @@ Node *loadData(char filepath[], Node *head){
 
     fseek(file, 0, SEEK_SET);
     while(feof(file) == 0){
-        fscanf_s(file, FILTER_READ, question,20, answer,20, &times_correct);  //after reading string, the number of allocated bytes has to be given
-        ptr = addNodeB(times_correct, ptr);
+        fscanf_s(file, FILTER_READ, question,MAX_QUESTION_LENGTH, answer,MAX_ANSWER_LENGTH, &times_correct);  //after reading string, the number of allocated bytes has to be given
+        ptr = addNodeB(question,answer,times_correct, ptr);
     }
 
     fclose(file);
@@ -42,18 +42,19 @@ Node *loadData(char filepath[], Node *head){
 
 void saveData(char filepath[],Node *head){
     char buffer[BUFFER_SIZE];
-    char *filename = "data.json";
+    char *filename = "..\\..\\data.json";
     FILE *file;
     fopen_s(&file, filename, "w+");
 
     if (file == NULL) {
         fprintf(stderr, "Unable to open file '%s'\n", filename);
+        printf("Unable to open file '%s'\n", filename);
         exit(EXIT_FAILURE);
     }
 
     Node * ptr = head;
     while (ptr != NULL) {
-        fprintf_s(file, FILTER_WRITE, question, answer, ptr->data);
+        fprintf_s(file, FILTER_WRITE, ptr->question, ptr->answer, ptr->times_correct);
         ptr = ptr->next;
     }
 

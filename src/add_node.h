@@ -6,8 +6,8 @@
 #define KARTEIKARTENSYSTEM_ADD_NODE_H
 
 #include "node.h"
-Node *addNodeF(int data,Node * head);
-Node *addNodeB(int data,Node * head);
-Node *insertNode(int data, int position, Node * head);
-Node *setValue(int data ,int value, Node *head);
+Node *addNodeF(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, Node * head);
+Node *addNodeB(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, Node * head);
+Node *insertNode(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, int position, Node * head);
+Node *setValue(int times_correct ,int value, Node *head);
 #endif //KARTEIKARTENSYSTEM_ADD_NODE_H

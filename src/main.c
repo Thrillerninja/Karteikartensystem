@@ -46,6 +46,8 @@ void clearScreen(int lines){
 int main(int argc, char **argv)
 {
     int option = -1;
+    char question[MAX_QUESTION_LENGTH];
+    char answer[MAX_QUESTION_LENGTH];
     int arg1 = 0;
     int arg2 = 0;
 
@@ -64,32 +66,40 @@ int main(int argc, char **argv)
                 break;
             case 1:
                 // add operation
-                printf("What data should I insert?:\n");
-                scanf("%d", &arg1);
-                head = addNodeF(arg1, head);
+                printf("What question should I insert?:\n");
+                scanf("%s", &question);
+                printf("What answer should I insert?:\n");
+                scanf("%s", &answer);
+                head = addNodeF(question, answer,arg1, head);
                 break;
 
             case 2:
                 // add operation
-                printf("What data should I insert?:\n");
-                scanf("%d", &arg1);
-                head = addNodeB(arg1, head);
+                printf("What question should I insert?:\n");
+                scanf("%s", &question);
+                printf("What answer should I insert?:\n");
+                scanf("%s", &answer);
+                head = addNodeB(question, answer,arg1, head);
                 break;
 
             case 3:
                 // remove operation
-                printf("What data should I remove?:\n");
+                printf("What times_correct should I remove?:\n");
                 scanf("%d", &arg1);
                 head = removeNode(arg1, head);
                 break;
 
             case 4:
                 // insert operation
-                printf("What data should I insert?:\n");
+                printf("What question should I insert?:\n");
+                scanf("%s", &question);
+                printf("What answer should I insert?:\n");
+                scanf("%s", &answer);
+                printf("What times_correct should I insert?:\n");
                 scanf("%d", &arg1);
                 printf("What position?:\n");
                 scanf("%d", &arg2);
-                head = insertNode(arg1, arg2, head);
+                head = insertNode(question,answer,arg1, arg2, head);
                 break;
 
             case 5:
@@ -99,7 +109,7 @@ int main(int argc, char **argv)
 
             case 6:
                 // change operation
-                printf("What data should changed?:\n");
+                printf("What times_correct should changed?:\n");
                 scanf("%d", &arg1);
                 printf("To what?:\n");
                 scanf("%d", &arg2);
@@ -110,7 +120,7 @@ int main(int argc, char **argv)
 
             case 7:
                 // searchNode operation
-                printf("What data should be searched?:\n");
+                printf("What times_correct should be searched?:\n");
                 int position;
                 scanf("%d", &arg1);
                 position = searchNode(arg1, head);
@@ -124,7 +134,7 @@ int main(int argc, char **argv)
 
             case 8:
                 // swap operation
-                printf("What data should be pushed backwards?:\n");
+                printf("What times_correct should be pushed backwards?:\n");
                 scanf("%d", &arg1);
                 head = swap(arg1, head);
                 if (head == NULL)
@@ -133,7 +143,7 @@ int main(int argc, char **argv)
 
             case 9:
                 // pull operation
-                printf("What data should be pulled forwards?:\n");
+                printf("What times_correct should be pulled forwards?:\n");
                 scanf("%d", &arg1);
                 head = pull(arg1, head);
                 if (head == NULL)

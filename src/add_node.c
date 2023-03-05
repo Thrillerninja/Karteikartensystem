@@ -4,98 +4,132 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "node.h"
 #include "add_node.h"
 
 // add a node to the list at the front
-Node *addNodeF(int data,Node * head)
+Node *addNodeF(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, Node * head)
 {
     Node *newNode = NULL;
     if (head == NULL) //if empty
     {
+        //allocate memory
         newNode = malloc(sizeof(Node));
         if (newNode == NULL) return NULL;
 
-        newNode->data = data;
+        //set data
+        strcpy(newNode->question, question);
+        strcpy(newNode->answer, answer);
+        newNode->times_correct = times_correct;
+
+        //set list equal to newNode
         head = newNode;
         newNode->next = NULL;
 
     } else {
+        //allocate memory
         newNode = malloc(sizeof(Node));
         if (newNode == NULL) return NULL;
 
-        newNode->data = data;
+        //set data
+        strcpy(newNode->question, question);
+        strcpy(newNode->answer, answer);
+        newNode->times_correct = times_correct;
+
+        //set list equal to newNode
         newNode->next = head;
         head = newNode;
     }
     return newNode;
 }
 
-Node *addNodeB(int data,Node * head)
+Node *addNodeB(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, Node * head)
 {
     Node *newNode = NULL;
     Node *ptr = head;
-
-    newNode = malloc(sizeof(Node));
-    if (newNode == NULL) return NULL;
-
     if (head == NULL) //if empty
     {
-        newNode->data = data;
-        newNode->next = NULL;
+        //allocate memory
+        newNode = malloc(sizeof(Node));
+        if (newNode == NULL) return NULL;
+
+        //set data
+        strcpy(newNode->question, question);
+        strcpy(newNode->answer, answer);
+        newNode->times_correct = times_correct;
+
+        //set list equal to newNode
         head = newNode;
+        newNode->next = NULL;
 
     } else {
-        newNode->data = data;
-        newNode->next = NULL;
+        //allocate memory
+        newNode = malloc(sizeof(Node));
+        if (newNode == NULL) return NULL;
+
+        //set data
+        strcpy(newNode->question, question);
+        strcpy(newNode->answer, answer);
+        newNode->times_correct = times_correct;
+
 
         while (ptr->next!= NULL) ptr = ptr->next;
         ptr->next = newNode;
     }
     return head;
 }
-
 // insert a node into a position in the list
-Node *insertNode(int data, int position, Node * head)
+Node *insertNode(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, int position, Node * head)
 {
+    Node *ptr = head;
+
+    //check if insertion is needed
     if (position < 0){
         return head;
     }else if (position == 0) {
-        head = addNodeF(data,head);
+        head = addNodeF(question,answer,times_correct,head);
         return head;
     }
 
-    Node *current = head;
-    while (position > 1 && current != NULL)
+    //move to insert position
+    while (position > 1 && ptr != NULL)
     {
-        current = current->next;
+        ptr = ptr->next;
         position--;
     }
 
-    if (current == NULL && position != 0){
+    //some error correction
+    if (ptr == NULL && position != 0){
         printf("Requested position too far into list\n");
         printf("Failed to insert into list\n");
         return head;
     }
 
+    //on reached position allocate memory. Only created if position is actually reached
     Node *newNode = malloc(sizeof(Node));
     if (newNode == NULL) return NULL;
 
-    newNode->next = current->next;
-    newNode->data = data;
-    current->next = newNode;
+    //insert data into newNode
+    newNode->next = ptr->next;
+    newNode->times_correct = times_correct;
+    strcpy(newNode->question,question);
+    strcpy(newNode->answer,answer);
+
+    //insert newNode into list
+    ptr->next = newNode;
 
     return head;
 }
 
 // set a node value
-Node *setValue(int data ,int value, Node *head) {
+Node *setValue(int times_correct ,int value, Node *head) {
     Node *current = head;
     while (current != NULL)
     {
-        if (current->data == data)
+        if (current->times_correct == times_correct)
         {
-            current->data = value;
+            current->times_correct = value;
             return head;
         }
         current = current->next;

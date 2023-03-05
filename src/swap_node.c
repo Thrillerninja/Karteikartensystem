@@ -55,7 +55,7 @@ Node *pushdata(int pushdata, Node * head)
     Node *current = head;
     int position = 0;
 
-    while (current && current->data != pushdata) {
+    while (current && current->times_correct != pushdata) {
         if(current->next == NULL) {     // if it isn´t existing
             printf("End of List reached without reaching the swap position, cannot swap\n");
             return head;
@@ -90,7 +90,7 @@ Node *pull(int data, Node * head) {
     Node *previous = NULL;
     Node *current = head;
 
-    while (current && current->data != 1) {
+    while (current && current->times_correct != 1) {
         previous = current;
         current = current->next;
     }

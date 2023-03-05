@@ -26,7 +26,7 @@ Node *sort(Node * head) {
 
         for (int j = 0; j < list_length - i; j++) { //loops threw every element and swaps if needed
             Node *next_node = current->next;
-            if (current->data > next_node->data) {  //compares values
+            if (current->times_correct > next_node->times_correct) {  //compares values
                 head = swap(j, head);   //swaps
                 if (j == 0) {
                     current = head;
