@@ -3,8 +3,15 @@
 //
 
 #include <stdio.h>
+#include <string.h>
 #include <conio.h>
 #include "node.h"
+
+/* Max number of chars in question. This is reasoned by this study: https://arxiv.org/ftp/arxiv/papers/1207/1207.2334.pdf
+ * showing that words longer than 30 chars don´t really exist. 8 extra chars are given to be able to differentiate between
+ * different answers to a vocable by a pre-/postfix of a shorthand*/
+#define MAX_QUESTION_LENGTH 38
+#define MAX_ANSWER_LENGTH 36
 
 void showFrame(int x){
     switch(x){
@@ -38,26 +45,26 @@ void showFrame(int x){
         case 1: //Start
             printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
-                |                                   __  __               _                                          |
-                |                                  |  \/  |             | |                                         |
-                |                                  | \  / |   ___     __| |   ___                                   |
-                |                                  | |\/| |  / _ \   / _` |  / _ \                                  |
-                |                                  | |  | | | (_) | | (_| | |  __/                                  |
-                |                                  |_|  |_|  \___/   \__,_|  \___|                                  |
+                |               _____                                                      _                        |
+                |              / ____|                                                    | |                       |
+                |             | |  __    __ _   _ __ ___     ___   _ __ ___     ___     __| |   ___   ___           |
+                |             | | |_ |  / _` | | '_ ` _ \   / _ \ | '_ ` _ \   / _ \   / _` |  / _ \ / __|          |
+                |             | |__| | | (_| | | | | | | | |  __/ | | | | | | | (_) | | (_| | |  __/ \__ \          |
+                |              \_____|  \__,_| |_| |_| |_|  \___| |_| |_| |_|  \___/   \__,_|  \___| |___/          |
                 |                                                                                                   |
                 |                                                                                                   |
                 |                                                                                                   |
                 |                                                                                                   |
+                |   +---------------------------+   +---------------------------+   +---------------------------+   |
+                |   |                           |   |                           |   |                           |   |
+                |   |     1-Recently added      |   |        2-Standard         |   |         3-Games           |   |
+                |   |                           |   |                           |   |                           |   |
+                |   +---------------------------+   +---------------------------+   +---------------------------+   |
                 |                                                                                                   |
                 |                                                                                                   |
-                |  +--------------------------+     +--------------------------+     +--------------------------+   |
-                |  |            1             |     |            2             |     |             3            |   |
-                |  |                          |     |                          |     |                          |   |
-                |  |           New            |     |         Standard         |     |         Not Known        |   |
-                |  |                          |     |                          |     |                          |   |
-                |  +--------------------------+     +--------------------------+     +--------------------------+   |
-                |                                                                                                   |
-                |                                                                                                   |
+                |   +------+                                                                                        |
+                |   |0-Exit|                                                                                        |
+                |   +------+                                                                                        |
                 +---------------------------------------------------------------------------------------------------+)EOF");
             printf("\n");
             break;
@@ -129,7 +136,7 @@ void showFrame(int x){
                 |                         +----------------------------------------------+                          |
                 |                         |                                              |                          |
                 |                         |                                              |                          |
-                |                         | Frage: awdawdawdawdawdawdawdadwawdawdawdaw   |                          |
+                |                         | Frage: trash trashtrash remove               |                          |
                 |                         |                                              |                          |
                 |                         |                                              |                          |
                 |                         | Antwort: _______________________________     |                          |
@@ -147,25 +154,90 @@ void showFrame(int x){
 
 int userInput(){
     while (1) {
-        char c = getch();   // get user input
+        char c = _getch();   // get user input immediately //TODO: input only gets registered after `"enter"`
         int value = 0;
-        if (c >= '0' && c <= '3') {   // if input is a digit, add it to value
-            value = value * 10 + (c - '0'); // converts to number
-            return value;
-        }
+        printf("\b");
+        return value * 10 + (c - '0'); // converts to number
     }
 }
+
+void menuSettings();
+void mainAbfrage();
+void menuSelectAbfrage();
 
 Node *abfrageStart(Node *head) {
     showFrame(0); // show main menu
 
     int choice = userInput(); // asks user to choose
-    if (choice != 0) { // if choice is 0 stay in main menu
-        showFrame(userInput()); // shows selection (1->Start; 2->Settings; 3->Quit)
+    switch (choice) {
+        case 1:
+            showFrame(1); //show typeselect window
+            menuSelectAbfrage();
+            break;
+
+        case 2:
+            showFrame(2); //show settings
+            break;
+
+        case 3:
+            showFrame(3); //Quit screen
+            break;
+
+        default: //stay in main menu if something wrong is selected
+            break;
     }
-
-
     printf("awdawdawd\n");
+}
+
+void menuSelectAbfrage(){
+    int choice = userInput();
+    switch(choice) {
+        case 1: // question new vocabulary
+            break;
+        case 2: //normal questioning
+            mainAbfrage();
+            break;
+        case 3: //we´ll see
+            break;
+        default:
+            menuSelectAbfrage();
+            break;
+    }
+}
+
+void printQuestion(char question[],char answer[]){
+    printf(R"EOF(
+                +---------------------------------------------------------------------------------------------------+
+                |                                                                                                   |
+                |  Spielmodus                                                                            Streek     |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                         +----------------------------------------------+                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         | Frage: )EOF");
+    printf("%.*s%*s", MAX_QUESTION_LENGTH, question, MAX_QUESTION_LENGTH-strlen(question), "");
+    printf(R"EOF(|                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         | Antwort: )EOF");
+    printf("%.*s%*s", MAX_ANSWER_LENGTH, answer, MAX_ANSWER_LENGTH-strlen(answer), "");
+    printf(R"EOF(|                          |
+                |                         |                                              |                          |
+                |                         |                                        1/20  |                          |
+                |                         +----------------------------------------------+                          |
+                |                                                                                                   |
+                |  0-Exit                                                                                           |
+                |                                                                                                   |
+                +---------------------------------------------------------------------------------------------------+)EOF");
+    printf("\n");
+}
+
+void mainAbfrage(){
+    printQuestion("awdawdawdu","rftzguhijtrerhtjzukilo");
 }
 
 int searchNode(int data, Node * head) {
