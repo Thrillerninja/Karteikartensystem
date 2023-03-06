@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "node.h"
 #include "add_node.h"
 #include "remove_node.h"
@@ -66,11 +67,17 @@ int main(int argc, char **argv)
                 break;
             case 1:
                 // add operation
+                getchar(); //empties the input buffer so that no newline char remains in the buffer
+                // complex operation to read data from user needed for allowing spaces in question and answer
                 printf("What question should I insert?:\n");
-                scanf("%s", &question);
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
                 printf("What answer should I insert?:\n");
-                scanf("%s", &answer);
-                head = addNodeF(question, answer,arg1, head);
+                fgets(answer, MAX_ANSWER_LENGTH, stdin);  // read input string with spaces
+                answer[strcspn(answer, "\n")] = '\0';  // remove trailing newline character
+
+                head = addNodeF(question, answer, arg1, head);
                 break;
 
             case 2:

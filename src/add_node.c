@@ -19,8 +19,8 @@ Node *addNodeF(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH]
         if (newNode == NULL) return NULL;
 
         //set data
-        strcpy(newNode->question, question);
-        strcpy(newNode->answer, answer);
+        strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
+        strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
         newNode->times_correct = times_correct;
 
         //set list equal to newNode
@@ -33,8 +33,8 @@ Node *addNodeF(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH]
         if (newNode == NULL) return NULL;
 
         //set data
-        strcpy(newNode->question, question);
-        strcpy(newNode->answer, answer);
+        strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
+        strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
         newNode->times_correct = times_correct;
 
         //set list equal to newNode
