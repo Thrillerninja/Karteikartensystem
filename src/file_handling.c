@@ -9,8 +9,8 @@
 
 #define BUFFER_SIZE 1024
 
-const char* FILTER_READ = "{\"question\": \"%[^\"]\", \"answer\": \"%[^\"]\", \"times_correct\": %d}\n";
-const char* FILTER_WRITE = "{\"question\": \"%s\", \"answer\": \"%s\", \"times_correct\": %d}\n";
+const char* FILTER_READ = "{\"question\": \"%[^\"]\", \"answer\": \"%[^\"]\", \"times_correct\": %d},\n";
+const char* FILTER_WRITE = "{\"question\": \"%s\", \"answer\": \"%s\", \"times_correct\": %d},\n";
 
 char question[MAX_QUESTION_LENGTH] = "test";
 char answer[MAX_ANSWER_LENGTH] = "test";
@@ -30,10 +30,12 @@ Node *loadData(char filepath[], Node *head){ //TODO: fix questions and answers w
 
     Node *ptr = NULL;     //create a new linked list
 
-    fseek(file, 0, SEEK_SET);
-    while(feof(file) == 0){
-        fscanf_s(file, FILTER_READ, question,MAX_QUESTION_LENGTH, answer,MAX_ANSWER_LENGTH, &times_correct);  //after reading string, the number of allocated bytes has to be given
-        ptr = addNodeB(question,answer,times_correct, ptr);
+    fseek(file, 0, SEEK_SET); //go to the start of the file
+    while (fgets(buffer, BUFFER_SIZE, file) != NULL) { //get the data
+        char question[MAX_QUESTION_LENGTH];
+        char answer[MAX_ANSWER_LENGTH];
+        sscanf(buffer, FILTER_READ, question, answer, &times_correct); //split the data into question, answer, times_correct
+        ptr = addNodeB(question, answer, times_correct, ptr); //append to list
     }
 
     fclose(file);
