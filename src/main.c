@@ -21,7 +21,7 @@ void printMenu(int style){
         printf("\t6. Change data in the list\n");
         printf("\t7. Search for a node in the list\n");
         printf("\t8. Push node\n");
-        printf("\t9. Pull node\n");
+        printf("\t9. DEPRECATED: Pull node\n");
         printf("\t10.Sort by times correctly answered\n");
         printf("\t11.Load from file\n");
         printf("\t12.Save to file\n");
@@ -30,7 +30,7 @@ void printMenu(int style){
         printf("You have the following options:\n");
         printf("\t1. Add a node to the start of the list.       7. Search for a node in the list\n");
         printf("\t2. Add a node at the end of the list.         8. Push node\n");
-        printf("\t3. Remove a node from the list.               9. Pull node\n");
+        printf("\t3. Remove a node from the list.               9. DEPRECATED: Pull node\n");
         printf("\t4. Insert a node to the list.                 10. Sort by times correct\n");
         printf("\t5. Print your list.                           11. Load from file\n");
         printf("\t6. Change data in the list                    12. Save to file\n");
@@ -91,9 +91,9 @@ int main(int argc, char **argv)
 
             case 3:
                 // remove operation
-                printf("What times_correct should I remove?:\n");
-                scanf("%d", &arg1);
-                head = removeNode(arg1, head);
+                printf("What question should I remove?:\n");
+                scanf("%s", &question);
+                head = removeNode(question, head);
                 break;
 
             case 4:
@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 
             case 6:
                 // change operation
-                printf("What question should I change?:\n");
+                printf("times_correct of what question should I change?:\n");
                 scanf("%s", &question);
                 printf("To what?:\n");
                 scanf("%d", &arg2);
@@ -145,21 +145,18 @@ int main(int argc, char **argv)
 
             case 8:
                 // swap operation
-                printf("What times_correct should be pushed backwards?:\n");
-                scanf("%d", &arg1);
-                head = swap(arg1, head);
-                if (head == NULL)
-                    printf("Failed to change value\n");
-                break;
+                printf("What question should be searched for?:\n");
+                scanf("%s", &question);
+                head = swap(searchNode(question,head), head);
 
-            case 9:
+            /*case 9:
                 // pull operation
-                printf("What times_correct should be pulled forwards?:\n");
-                scanf("%d", &arg1);
-                head = pull(arg1, head);
+                printf("What question should be searched for?:\n");
+                scanf("%s", &question);
+                head = pull(question, head);
                 if (head == NULL)
                     printf("Failed to change value\n");
-                break;
+                break;*/
 
             case 10:
                 head = sort(head);

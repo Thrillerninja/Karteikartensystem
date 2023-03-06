@@ -8,7 +8,8 @@
 #include "node.h"
 
 Node *swap(int swap_position, Node * head);
+/* DEPRECATED
 Node *pushdata(int push_data, Node * head);
-Node *pull(int data, Node * head);
+Node *pull(int data, Node * head);*/
 
 #endif //KARTEIKARTENSYSTEM_SWAP_NODE_H

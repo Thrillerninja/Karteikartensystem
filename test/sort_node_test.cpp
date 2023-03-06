@@ -21,7 +21,7 @@ TEST(SortTest, SortsSingleElementList) {
 
     head = sort(head);
 
-    EXPECT_EQ(head->data, 1);
+    EXPECT_EQ(head->times_correct, 1);
     EXPECT_EQ(head->next, nullptr);
     delete head;
 }
@@ -33,8 +33,8 @@ TEST(SortTest, SortsTwoElementList) {
 
     head = sort(head);
 
-    EXPECT_EQ(head->data, 1);
-    EXPECT_EQ(head->next->data, 2);
+    EXPECT_EQ(head->times_correct, 1);
+    EXPECT_EQ(head->next->times_correct, 2);
     EXPECT_EQ(head->next->next, nullptr);
     delete head->next;
     delete head;
@@ -48,9 +48,9 @@ TEST(SortTest, SortsThreeElementList) {
 
     head = sort(head);
 
-    EXPECT_EQ(head->data, 1);
-    EXPECT_EQ(head->next->data, 2);
-    EXPECT_EQ(head->next->next->data, 3);
+    EXPECT_EQ(head->times_correct, 1);
+    EXPECT_EQ(head->next->times_correct, 2);
+    EXPECT_EQ(head->next->next->times_correct, 3);
     EXPECT_EQ(head->next->next->next, nullptr);
     delete head->next->next;
     delete head->next;

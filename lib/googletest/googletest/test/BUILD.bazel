@@ -178,7 +178,7 @@ py_test(
         "//:has_absl": ["--has_absl_flags"],
         "//conditions:default": [],
     }),
-    data = [":gtest_help_test_"],
+    times_correct = [":gtest_help_test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -197,7 +197,7 @@ py_test(
         "//:has_absl": [],
         "//conditions:default": ["--no_stacktrace_support"],
     }),
-    data = [
+    times_correct = [
         "googletest-output-test-golden-lin.txt",
         ":googletest-output-test_",
     ],
@@ -215,7 +215,7 @@ py_test(
     name = "googletest-color-test",
     size = "small",
     srcs = ["googletest-color-test.py"],
-    data = [":googletest-color-test_"],
+    times_correct = [":googletest-color-test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -230,7 +230,7 @@ py_test(
     name = "googletest-env-var-test",
     size = "medium",
     srcs = ["googletest-env-var-test.py"],
-    data = [":googletest-env-var-test_"],
+    times_correct = [":googletest-env-var-test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -245,7 +245,7 @@ py_test(
     name = "googletest-failfast-unittest",
     size = "medium",
     srcs = ["googletest-failfast-unittest.py"],
-    data = [":googletest-failfast-unittest_"],
+    times_correct = [":googletest-failfast-unittest_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -260,7 +260,7 @@ py_test(
     name = "googletest-filter-unittest",
     size = "medium",
     srcs = ["googletest-filter-unittest.py"],
-    data = [":googletest-filter-unittest_"],
+    times_correct = [":googletest-filter-unittest_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -275,7 +275,7 @@ py_test(
     name = "googletest-global-environment-unittest",
     size = "medium",
     srcs = ["googletest-global-environment-unittest.py"],
-    data = [":googletest-global-environment-unittest_"],
+    times_correct = [":googletest-global-environment-unittest_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -290,7 +290,7 @@ py_test(
     name = "googletest-break-on-failure-unittest",
     size = "small",
     srcs = ["googletest-break-on-failure-unittest.py"],
-    data = [":googletest-break-on-failure-unittest_"],
+    times_correct = [":googletest-break-on-failure-unittest_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -312,7 +312,7 @@ py_test(
     name = "googletest-throw-on-failure-test",
     size = "small",
     srcs = ["googletest-throw-on-failure-test.py"],
-    data = [":googletest-throw-on-failure-test_"],
+    times_correct = [":googletest-throw-on-failure-test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -341,7 +341,7 @@ py_test(
     name = "gtest_skip_check_output_test",
     size = "small",
     srcs = ["gtest_skip_check_output_test.py"],
-    data = [":gtest_skip_test"],
+    times_correct = [":gtest_skip_test"],
     deps = [":gtest_test_utils"],
 )
 
@@ -349,7 +349,7 @@ py_test(
     name = "gtest_skip_environment_check_output_test",
     size = "small",
     srcs = ["gtest_skip_environment_check_output_test.py"],
-    data = [
+    times_correct = [
         ":gtest_skip_in_environment_setup_test",
     ],
     deps = [":gtest_test_utils"],
@@ -359,7 +359,7 @@ py_test(
     name = "googletest-list-tests-unittest",
     size = "small",
     srcs = ["googletest-list-tests-unittest.py"],
-    data = [":googletest-list-tests-unittest_"],
+    times_correct = [":googletest-list-tests-unittest_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -373,7 +373,7 @@ py_test(
     name = "googletest-shuffle-test",
     size = "small",
     srcs = ["googletest-shuffle-test.py"],
-    data = [":googletest-shuffle-test_"],
+    times_correct = [":googletest-shuffle-test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -396,7 +396,7 @@ py_test(
     name = "googletest-catch-exceptions-test",
     size = "small",
     srcs = ["googletest-catch-exceptions-test.py"],
-    data = [
+    times_correct = [
         ":googletest-catch-exceptions-ex-test_",
         ":googletest-catch-exceptions-no-ex-test_",
     ],
@@ -428,7 +428,7 @@ py_test(
         "//:has_absl": [],
         "//conditions:default": ["--no_stacktrace_support"],
     }),
-    data = [
+    times_correct = [
         # We invoke gtest_no_test_unittest to verify the XML output
         # when the test program contains no test definition.
         ":gtest_no_test_unittest",
@@ -458,7 +458,7 @@ py_test(
         "gtest_xml_outfiles_test.py",
         "gtest_xml_test_utils.py",
     ],
-    data = [
+    times_correct = [
         ":gtest_xml_outfile1_test_",
         ":gtest_xml_outfile2_test_",
     ],
@@ -476,7 +476,7 @@ py_test(
     name = "googletest-setuptestsuite-test",
     size = "medium",
     srcs = ["googletest-setuptestsuite-test.py"],
-    data = [":googletest-setuptestsuite-test_"],
+    times_correct = [":googletest-setuptestsuite-test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -491,7 +491,7 @@ py_test(
     name = "googletest-uninitialized-test",
     size = "medium",
     srcs = ["googletest-uninitialized-test.py"],
-    data = ["googletest-uninitialized-test_"],
+    times_correct = ["googletest-uninitialized-test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -507,7 +507,7 @@ py_test(
     name = "gtest_testbridge_test",
     size = "small",
     srcs = ["gtest_testbridge_test.py"],
-    data = [":gtest_testbridge_test_"],
+    times_correct = [":gtest_testbridge_test_"],
     deps = [":gtest_test_utils"],
 )
 
@@ -518,7 +518,7 @@ py_test(
         "googletest-json-outfiles-test.py",
         "gtest_json_test_utils.py",
     ],
-    data = [
+    times_correct = [
         ":gtest_xml_outfile1_test_",
         ":gtest_xml_outfile2_test_",
     ],
@@ -536,7 +536,7 @@ py_test(
         "//:has_absl": [],
         "//conditions:default": ["--no_stacktrace_support"],
     }),
-    data = [
+    times_correct = [
         # We invoke gtest_no_test_unittest to verify the JSON output
         # when the test program contains no test definition.
         ":gtest_no_test_unittest",
@@ -573,7 +573,7 @@ py_test(
     name = "googletest-param-test-invalid-name1-test",
     size = "small",
     srcs = ["googletest-param-test-invalid-name1-test.py"],
-    data = [":googletest-param-test-invalid-name1-test_"],
+    times_correct = [":googletest-param-test-invalid-name1-test_"],
     tags = [
         "no_test_msvc2015",
         "no_test_msvc2017",
@@ -585,7 +585,7 @@ py_test(
     name = "googletest-param-test-invalid-name2-test",
     size = "small",
     srcs = ["googletest-param-test-invalid-name2-test.py"],
-    data = [":googletest-param-test-invalid-name2-test_"],
+    times_correct = [":googletest-param-test-invalid-name2-test_"],
     tags = [
         "no_test_msvc2015",
         "no_test_msvc2017",

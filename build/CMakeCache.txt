@@ -82,10 +82,10 @@ CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=C:/$$Meine Daten/Studium/Programmieren 1
 //User executables (bin)
 CMAKE_INSTALL_BINDIR:PATH=bin
 
-//Read-only architecture-independent data (DATAROOTDIR)
+//Read-only architecture-independent times_correct (DATAROOTDIR)
 CMAKE_INSTALL_DATADIR:PATH=
 
-//Read-only architecture-independent data root (share)
+//Read-only architecture-independent times_correct root (share)
 CMAKE_INSTALL_DATAROOTDIR:PATH=share
 
 //Documentation root (DATAROOTDIR/doc/PROJECT_NAME)
@@ -103,10 +103,10 @@ CMAKE_INSTALL_LIBDIR:PATH=lib
 //Program executables (libexec)
 CMAKE_INSTALL_LIBEXECDIR:PATH=libexec
 
-//Locale-dependent data (DATAROOTDIR/locale)
+//Locale-dependent times_correct (DATAROOTDIR/locale)
 CMAKE_INSTALL_LOCALEDIR:PATH=
 
-//Modifiable single-machine data (var)
+//Modifiable single-machine times_correct (var)
 CMAKE_INSTALL_LOCALSTATEDIR:PATH=var
 
 //Man documentation (DATAROOTDIR/man)
@@ -118,16 +118,16 @@ CMAKE_INSTALL_OLDINCLUDEDIR:PATH=/usr/include
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=C:/Program Files (x86)/Karteikartensystem
 
-//Run-time variable data (LOCALSTATEDIR/run)
+//Run-time variable times_correct (LOCALSTATEDIR/run)
 CMAKE_INSTALL_RUNSTATEDIR:PATH=
 
 //System admin executables (sbin)
 CMAKE_INSTALL_SBINDIR:PATH=sbin
 
-//Modifiable architecture-independent data (com)
+//Modifiable architecture-independent times_correct (com)
 CMAKE_INSTALL_SHAREDSTATEDIR:PATH=com
 
-//Read-only single-machine data (etc)
+//Read-only single-machine times_correct (etc)
 CMAKE_INSTALL_SYSCONFDIR:PATH=etc
 
 //Path to a program.

@@ -4229,7 +4229,7 @@ inline internal::UnorderedElementsAreArrayMatcher<T> UnorderedElementsAreArray(
 //
 //   1. The C++ standard permits using the name _ in a namespace that
 //      is not the global namespace or ::std.
-//   2. The AnythingMatcher class has no data member or constructor,
+//   2. The AnythingMatcher class has no times_correct member or constructor,
 //      so it's OK to create global variables of this type.
 //   3. c-style has approved of using _ in this case.
 const internal::AnythingMatcher _ = {};

@@ -40,7 +40,7 @@ TEST_F(SwapNodeTest, SwapFirstSecond) {
     Node *test_head = swap(0, head);
     int compare[] = { 1, 0, 2, 3, 4, 5};
     for (int i = 0; i < 5; i++) {
-        EXPECT_EQ(test_head->data, compare[i]);
+        EXPECT_EQ(test_head->times_correct, compare[i]);
         test_head = test_head->next;
     }
 }
@@ -49,7 +49,7 @@ TEST_F(SwapNodeTest, SwapMiddleEnd) {
     Node *test_head = swap(3, head);
     int compare[] = { 0, 1, 2, 4, 3, 5};
     for (int i = 0; i < 5; i++) {
-        EXPECT_EQ(test_head->data, compare[i]);
+        EXPECT_EQ(test_head->times_correct, compare[i]);
         test_head = test_head->next;
     }
 }
@@ -65,7 +65,7 @@ TEST_F(SwapNodeTest, PushdataFirstSecond) {
     Node *test_head = pushdata(0, head);
     int compare[] = { 1, 0, 2, 3, 4, 5};
     for (int i = 0; i < 5; i++) {
-        EXPECT_EQ(test_head->data, compare[i]);
+        EXPECT_EQ(test_head->times_correct, compare[i]);
         test_head = test_head->next;
     }
 }
@@ -74,7 +74,7 @@ TEST_F(SwapNodeTest, PushdataMiddleEnd) {
     Node *test_head = pushdata(2, head);
     int compare[] = { 0, 1, 3, 2, 4, 5};
     for (int i = 0; i < 5; i++) {
-        EXPECT_EQ(test_head->data, compare[i]);
+        EXPECT_EQ(test_head->times_correct, compare[i]);
         test_head = test_head->next;
     }
 }
@@ -90,7 +90,7 @@ TEST_F(SwapNodeTest, PullFirstSecond) {
     Node *test_head = pull(0, head);
     int compare[] = { 0, 2, 1, 3, 4, 5};
     for (int i = 0; i < 5; i++) {
-        EXPECT_EQ(test_head->data, compare[i]);
+        EXPECT_EQ(test_head->times_correct, compare[i]);
         test_head = test_head->next;
     }
 }
@@ -99,7 +99,7 @@ TEST_F(SwapNodeTest, PullMiddleEnd) {
     Node *test_head = pull(3, head);
     int compare[] = { 0, 2, 1, 3, 4, 5};
     for (int i = 0; i < 5; i++) {
-        EXPECT_EQ(test_head->data, compare[i]);
+        EXPECT_EQ(test_head->times_correct, compare[i]);
         test_head = test_head->next;
     }
 }

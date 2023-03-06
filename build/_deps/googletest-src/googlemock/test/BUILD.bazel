@@ -68,7 +68,7 @@ py_test(
     name = "gmock_leak_test",
     size = "medium",
     srcs = ["gmock_leak_test.py"],
-    data = [
+    times_correct = [
         ":gmock_leak_test_",
         ":gmock_test_utils",
     ],
@@ -99,7 +99,7 @@ py_test(
     name = "gmock_output_test",
     size = "medium",
     srcs = ["gmock_output_test.py"],
-    data = [
+    times_correct = [
         ":gmock_output_test_",
         ":gmock_output_test_golden.txt",
     ],

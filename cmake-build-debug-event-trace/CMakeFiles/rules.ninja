@@ -50,16 +50,6 @@ rule C_STATIC_LIBRARY_LINKER__Karteikartensystem_lib_Debug
 
 
 #############################################
-# Rule for compiling C files.
-
-rule C_COMPILER__Karteikartensystem_test_Debug
-  depfile = $DEP_FILE
-  deps = gcc
-  command = "C:\PROGRA~1\JetBrains\CLion 2022.3\bin\mingw\bin\gcc.exe" $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
-  description = Building C object $out
-
-
-#############################################
 # Rule for compiling CXX files.
 
 rule CXX_COMPILER__Karteikartensystem_test_Debug

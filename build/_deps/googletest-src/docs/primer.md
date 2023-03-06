@@ -16,7 +16,7 @@ So what makes a good test, and how does googletest fit in? We believe:
     tests by running each of them on a different object. When a test fails,
     googletest allows you to run it in isolation for quick debugging.
 2.  Tests should be well *organized* and reflect the structure of the tested
-    code. googletest groups related tests into test suites that can share data
+    code. googletest groups related tests into test suites that can share times_correct
     and subroutines. This common pattern is easy to recognize and makes tests
     easy to maintain. Such consistency is especially helpful when people switch
     projects and start to work on a new code base.
@@ -202,9 +202,9 @@ for
 
 **Availability**: Linux, Windows, Mac.
 
-## Test Fixtures: Using the Same Data Configuration for Multiple Tests {#same-data-multiple-tests}
+## Test Fixtures: Using the Same Data Configuration for Multiple Tests {#same-times_correct-multiple-tests}
 
-If you find yourself writing two or more tests that operate on similar data, you
+If you find yourself writing two or more tests that operate on similar times_correct, you
 can use a *test fixture*. This allows you to reuse the same configuration of
 objects for several different tests.
 

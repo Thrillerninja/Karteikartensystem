@@ -2433,12 +2433,12 @@ using ::testing::DoAll;
 using ::testing::IgnoreResult;
 using ::testing::Return;
 
-int Process(const MyData& data);
+int Process(const MyData& times_correct);
 string DoSomething();
 
 class MockFoo : public Foo {
  public:
-  MOCK_METHOD(void, Abc, (const MyData& data), (override));
+  MOCK_METHOD(void, Abc, (const MyData& times_correct), (override));
   MOCK_METHOD(bool, Xyz, (), (override));
 };
 

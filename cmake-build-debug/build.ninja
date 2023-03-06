@@ -102,13 +102,6 @@ build src/CMakeFiles/Karteikartensystem_run.dir/remove_node.c.obj: C_COMPILER__K
   OBJECT_DIR = src\CMakeFiles\Karteikartensystem_run.dir
   OBJECT_FILE_DIR = src\CMakeFiles\Karteikartensystem_run.dir
 
-build src/CMakeFiles/Karteikartensystem_run.dir/search_node.c.obj: C_COMPILER__Karteikartensystem_run_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/src/search_node.c || cmake_object_order_depends_target_Karteikartensystem_run
-  DEP_FILE = src\CMakeFiles\Karteikartensystem_run.dir\search_node.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src"
-  OBJECT_DIR = src\CMakeFiles\Karteikartensystem_run.dir
-  OBJECT_FILE_DIR = src\CMakeFiles\Karteikartensystem_run.dir
-
 build src/CMakeFiles/Karteikartensystem_run.dir/sort_node.c.obj: C_COMPILER__Karteikartensystem_run_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/src/sort_node.c || cmake_object_order_depends_target_Karteikartensystem_run
   DEP_FILE = src\CMakeFiles\Karteikartensystem_run.dir\sort_node.c.obj.d
   FLAGS = -g -fdiagnostics-color=always
@@ -131,7 +124,7 @@ build src/CMakeFiles/Karteikartensystem_run.dir/swap_node.c.obj: C_COMPILER__Kar
 #############################################
 # Link the executable src\Karteikartensystem_run.exe
 
-build src/Karteikartensystem_run.exe: C_EXECUTABLE_LINKER__Karteikartensystem_run_Debug src/CMakeFiles/Karteikartensystem_run.dir/abfrage.c.obj src/CMakeFiles/Karteikartensystem_run.dir/add_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/file_handling.c.obj src/CMakeFiles/Karteikartensystem_run.dir/main.c.obj src/CMakeFiles/Karteikartensystem_run.dir/print_list.c.obj src/CMakeFiles/Karteikartensystem_run.dir/remove_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/search_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/sort_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/swap_node.c.obj
+build src/Karteikartensystem_run.exe: C_EXECUTABLE_LINKER__Karteikartensystem_run_Debug src/CMakeFiles/Karteikartensystem_run.dir/abfrage.c.obj src/CMakeFiles/Karteikartensystem_run.dir/add_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/file_handling.c.obj src/CMakeFiles/Karteikartensystem_run.dir/main.c.obj src/CMakeFiles/Karteikartensystem_run.dir/print_list.c.obj src/CMakeFiles/Karteikartensystem_run.dir/remove_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/sort_node.c.obj src/CMakeFiles/Karteikartensystem_run.dir/swap_node.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = src\CMakeFiles\Karteikartensystem_run.dir
@@ -192,13 +185,6 @@ build src/CMakeFiles/Karteikartensystem_lib.dir/remove_node.c.obj: C_COMPILER__K
   OBJECT_DIR = src\CMakeFiles\Karteikartensystem_lib.dir
   OBJECT_FILE_DIR = src\CMakeFiles\Karteikartensystem_lib.dir
 
-build src/CMakeFiles/Karteikartensystem_lib.dir/search_node.c.obj: C_COMPILER__Karteikartensystem_lib_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/src/search_node.c || cmake_object_order_depends_target_Karteikartensystem_lib
-  DEP_FILE = src\CMakeFiles\Karteikartensystem_lib.dir\search_node.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always
-  INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src"
-  OBJECT_DIR = src\CMakeFiles\Karteikartensystem_lib.dir
-  OBJECT_FILE_DIR = src\CMakeFiles\Karteikartensystem_lib.dir
-
 build src/CMakeFiles/Karteikartensystem_lib.dir/sort_node.c.obj: C_COMPILER__Karteikartensystem_lib_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/src/sort_node.c || cmake_object_order_depends_target_Karteikartensystem_lib
   DEP_FILE = src\CMakeFiles\Karteikartensystem_lib.dir\sort_node.c.obj.d
   FLAGS = -g -fdiagnostics-color=always
@@ -221,7 +207,7 @@ build src/CMakeFiles/Karteikartensystem_lib.dir/swap_node.c.obj: C_COMPILER__Kar
 #############################################
 # Link the static library src\libKarteikartensystem_lib.a
 
-build src/libKarteikartensystem_lib.a: C_STATIC_LIBRARY_LINKER__Karteikartensystem_lib_Debug src/CMakeFiles/Karteikartensystem_lib.dir/abfrage.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/add_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/file_handling.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/main.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/print_list.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/remove_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/search_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/sort_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/swap_node.c.obj
+build src/libKarteikartensystem_lib.a: C_STATIC_LIBRARY_LINKER__Karteikartensystem_lib_Debug src/CMakeFiles/Karteikartensystem_lib.dir/abfrage.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/add_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/file_handling.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/main.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/print_list.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/remove_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/sort_node.c.obj src/CMakeFiles/Karteikartensystem_lib.dir/swap_node.c.obj
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = src\CMakeFiles\Karteikartensystem_lib.dir
   POST_BUILD = cd .
@@ -249,16 +235,44 @@ build src/list_install_components: phony
 
 build cmake_object_order_depends_target_Karteikartensystem_test: phony || cmake_object_order_depends_target_Karteikartensystem_lib cmake_object_order_depends_target_gtest
 
-build test/CMakeFiles/Karteikartensystem_test.dir/add_node_front_test.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/add_node_front_test.cpp || cmake_object_order_depends_target_Karteikartensystem_test
-  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\add_node_front_test.cpp.obj.d
+build test/CMakeFiles/Karteikartensystem_test.dir/abfrage_test.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/abfrage_test.cpp || cmake_object_order_depends_target_Karteikartensystem_test
+  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\abfrage_test.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always -std=gnu++14
   INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest/include" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest"
   OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir
   OBJECT_FILE_DIR = test\CMakeFiles\Karteikartensystem_test.dir
 
-build test/CMakeFiles/Karteikartensystem_test.dir/gtest.c.obj: C_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/gtest.c || cmake_object_order_depends_target_Karteikartensystem_test
-  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\gtest.c.obj.d
-  FLAGS = -g -fdiagnostics-color=always
+build test/CMakeFiles/Karteikartensystem_test.dir/add_node_test.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/add_node_test.cpp || cmake_object_order_depends_target_Karteikartensystem_test
+  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\add_node_test.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest/include" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest"
+  OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+  OBJECT_FILE_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+
+build test/CMakeFiles/Karteikartensystem_test.dir/gtest.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/gtest.cpp || cmake_object_order_depends_target_Karteikartensystem_test
+  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\gtest.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest/include" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest"
+  OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+  OBJECT_FILE_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+
+build test/CMakeFiles/Karteikartensystem_test.dir/remove_node_test.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/remove_node_test.cpp || cmake_object_order_depends_target_Karteikartensystem_test
+  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\remove_node_test.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest/include" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest"
+  OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+  OBJECT_FILE_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+
+build test/CMakeFiles/Karteikartensystem_test.dir/sort_node_test.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/sort_node_test.cpp || cmake_object_order_depends_target_Karteikartensystem_test
+  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\sort_node_test.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
+  INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest/include" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest"
+  OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+  OBJECT_FILE_DIR = test\CMakeFiles\Karteikartensystem_test.dir
+
+build test/CMakeFiles/Karteikartensystem_test.dir/swap_node_test.cpp.obj: CXX_COMPILER__Karteikartensystem_test_Debug C$:/$$$$Meine$ Daten/Studium/Programmieren$ 1/Karteikartensystem/test/swap_node_test.cpp || cmake_object_order_depends_target_Karteikartensystem_test
+  DEP_FILE = test\CMakeFiles\Karteikartensystem_test.dir\swap_node_test.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++14
   INCLUDES = -I"C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/src" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest/include" -isystem "C:/$$$$Meine Daten/Studium/Programmieren 1/Karteikartensystem/lib/googletest/googletest"
   OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir
   OBJECT_FILE_DIR = test\CMakeFiles\Karteikartensystem_test.dir
@@ -271,7 +285,7 @@ build test/CMakeFiles/Karteikartensystem_test.dir/gtest.c.obj: C_COMPILER__Karte
 #############################################
 # Link the executable test\Karteikartensystem_test.exe
 
-build test/Karteikartensystem_test.exe: CXX_EXECUTABLE_LINKER__Karteikartensystem_test_Debug test/CMakeFiles/Karteikartensystem_test.dir/add_node_front_test.cpp.obj test/CMakeFiles/Karteikartensystem_test.dir/gtest.c.obj | src/libKarteikartensystem_lib.a lib/libgtest.a || lib/libgtest.a src/libKarteikartensystem_lib.a
+build test/Karteikartensystem_test.exe: CXX_EXECUTABLE_LINKER__Karteikartensystem_test_Debug test/CMakeFiles/Karteikartensystem_test.dir/abfrage_test.cpp.obj test/CMakeFiles/Karteikartensystem_test.dir/add_node_test.cpp.obj test/CMakeFiles/Karteikartensystem_test.dir/gtest.cpp.obj test/CMakeFiles/Karteikartensystem_test.dir/remove_node_test.cpp.obj test/CMakeFiles/Karteikartensystem_test.dir/sort_node_test.cpp.obj test/CMakeFiles/Karteikartensystem_test.dir/swap_node_test.cpp.obj | src/libKarteikartensystem_lib.a lib/libgtest.a || lib/libgtest.a src/libKarteikartensystem_lib.a
   FLAGS = -g
   LINK_LIBRARIES = src/libKarteikartensystem_lib.a  lib/libgtest.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = test\CMakeFiles\Karteikartensystem_test.dir

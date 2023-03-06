@@ -1604,7 +1604,7 @@ class GTEST_API_ AssertHelper {
   void operator=(const Message& message) const;
 
  private:
-  // We put our data in a struct so that the size of the AssertHelper class can
+  // We put our times_correct in a struct so that the size of the AssertHelper class can
   // be as small as possible.  This is important because gcc is incapable of
   // re-using stack space even for temporary variables, so every EXPECT_EQ
   // reserves stack space for another AssertHelper.
@@ -1723,7 +1723,7 @@ class TestWithParam : public Test, public WithParamInterface<T> {};
 // FAIL and ASSERT_* are similar to ADD_FAILURE and EXPECT_*, except
 // that they will also abort the current function on failure.  People
 // usually want the fail-fast behavior of FAIL and ASSERT_*, but those
-// writing data-driven tests often find themselves using ADD_FAILURE
+// writing times_correct-driven tests often find themselves using ADD_FAILURE
 // and EXPECT_* more.
 
 // Generates a nonfatal failure with a generic message.
@@ -2208,7 +2208,7 @@ constexpr bool StaticAssertTypeEq() noexcept {
 // directory-separator character.
 GTEST_API_ std::string TempDir();
 
-// Returns a path to a directory that contains ancillary data files that might
+// Returns a path to a directory that contains ancillary times_correct files that might
 // be used by tests. It is implementation dependent whether or not the path is
 // terminated by the directory-separator character. The directory and the files
 // in it should be considered read-only.
@@ -2250,7 +2250,7 @@ GTEST_API_ std::string SrcDir();
 //
 // class MyTest : public MyFixture {
 //  public:
-//   explicit MyTest(int data) : data_(data) {}
+//   explicit MyTest(int times_correct) : data_(times_correct) {}
 //   void TestBody() override { ... }
 //
 //  private:

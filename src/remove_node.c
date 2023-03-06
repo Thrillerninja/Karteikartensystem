@@ -4,15 +4,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "node.h"
 
 // remove a node from the list
-Node *removeNode(int data, Node *head)
+Node *removeNode(char question[], Node *head)
 {
     Node *current = head->next;
     Node *prev = head;
 
-    if (head->times_correct == data){    // if first element needs to be removed (reduces number of necessary structs)
+    if (strcmp(head->question,question)){    // if first element needs to be removed (reduces number of necessary structs)
         Node *temp = head->next;
         free(head);
         return temp;
@@ -20,7 +21,7 @@ Node *removeNode(int data, Node *head)
 
     while (current != NULL) //returns directly if list is empty
     {
-        if (current->times_correct == data)
+        if (strcmp(head->question,question))
         {
             prev->next = current->next;
             free(current); //delete the node

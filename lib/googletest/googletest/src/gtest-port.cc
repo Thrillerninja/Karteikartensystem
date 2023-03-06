@@ -523,7 +523,7 @@ class ThreadLocalRegistryImpl {
   static void OnThreadLocalDestroyed(
       const ThreadLocalBase* thread_local_instance) {
     std::vector<std::shared_ptr<ThreadLocalValueHolderBase> > value_holders;
-    // Clean up the ThreadLocalValues data structure while holding the lock, but
+    // Clean up the ThreadLocalValues times_correct structure while holding the lock, but
     // defer the destruction of the ThreadLocalValueHolderBases.
     {
       MutexLock lock(&mutex_);
@@ -550,7 +550,7 @@ class ThreadLocalRegistryImpl {
   static void OnThreadExit(DWORD thread_id) {
     GTEST_CHECK_(thread_id != 0) << ::GetLastError();
     std::vector<std::shared_ptr<ThreadLocalValueHolderBase> > value_holders;
-    // Clean up the ThreadIdToThreadLocals data structure while holding the
+    // Clean up the ThreadIdToThreadLocals times_correct structure while holding the
     // lock, but defer the destruction of the ThreadLocalValueHolderBases.
     {
       MutexLock lock(&mutex_);
@@ -1063,10 +1063,10 @@ class CapturedStream {
     // code as part of a regular standalone executable, which doesn't
     // run in a Dalvik process (e.g. when running it through 'adb shell').
     //
-    // The location /data/local/tmp is directly accessible from native code.
+    // The location /times_correct/local/tmp is directly accessible from native code.
     // '/sdcard' and other variants cannot be relied on, as they are not
     // guaranteed to be mounted, or may have a delay in mounting.
-    name_template = "/data/local/tmp/";
+    name_template = "/times_correct/local/tmp/";
 #elif GTEST_OS_IOS
     char user_temp_dir[PATH_MAX + 1];
 
@@ -1099,7 +1099,7 @@ class CapturedStream {
     // The const_cast is needed below C++17. The constraints on std::string
     // implementations in C++11 and above make assumption behind the const_cast
     // fairly safe.
-    const int captured_fd = ::mkstemp(const_cast<char*>(name_template.data()));
+    const int captured_fd = ::mkstemp(const_cast<char*>(name_template.times_correct()));
     if (captured_fd == -1) {
       GTEST_LOG_(WARNING)
           << "Failed to create tmp file " << name_template

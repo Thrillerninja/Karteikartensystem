@@ -43,7 +43,7 @@ Node *swap(int swap_position, Node * head)
     return head;
 }
 
-/////////////////////////////////////////////////////////////////////////
+/* DEPRECATED DO NOT USE
 Node *pushdata(int pushdata, Node * head)
 {
     if (head == NULL ||head->next == NULL) {
@@ -106,4 +106,4 @@ Node *pull(int data, Node * head) {
     current->next = temp->next;
     temp->next = current;
     return head;
-}
+}*/

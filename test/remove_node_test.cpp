@@ -37,33 +37,33 @@ protected:
 // Test removing the first node
 TEST_F(RemoveNodeTest, RemoveFirstNode) {
     head = removeNode(0, head);
-    EXPECT_EQ(head->data, 1);
+    EXPECT_EQ(head->times_correct, 1);
 }
 
 // Test removing the last node
 TEST_F(RemoveNodeTest, RemoveLastNode) {
     head = removeNode(2, head);
-    EXPECT_EQ(head->next->data, 1);
+    EXPECT_EQ(head->next->times_correct, 1);
 }
 
 // Test removing a node in the middle
 TEST_F(RemoveNodeTest, RemoveMiddleNode) {
     head = removeNode(1, head);
-    EXPECT_EQ(head->next->data, 2);
+    EXPECT_EQ(head->next->times_correct, 2);
 }
 
 // Test removing a node that does not exist
 TEST_F(RemoveNodeTest, RemoveNonExistingNode) {
     head = removeNode(4, head);
-    EXPECT_EQ(head->data, 0);
-    EXPECT_EQ(head->next->data, 1);
-    EXPECT_EQ(head->next->next->data, 2);
+    EXPECT_EQ(head->times_correct, 0);
+    EXPECT_EQ(head->next->times_correct, 1);
+    EXPECT_EQ(head->next->next->times_correct, 2);
 }
 
 // Test removing the only node in the list
 TEST_F(RemoveNodeTest, RemoveOnlyNode) {
     Node *node = new Node;
-    node->data = 42;
+    node->times_correct = 42;
     node->next = nullptr;
     head = removeNode(42, node);
     EXPECT_EQ(head, nullptr);

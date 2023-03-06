@@ -465,7 +465,7 @@ void DeathTestImpl::ReadAndInterpretStatusByte() {
   char flag;
   int bytes_read;
 
-  // The read() here blocks until data is available (signifying the
+  // The read() here blocks until times_correct is available (signifying the
   // failure of the death test) or until the pipe is closed (signifying
   // its success), so it's okay to call this in the parent before
   // the child process has exited.
@@ -510,7 +510,7 @@ std::string DeathTestImpl::GetErrorLogs() { return GetCapturedStderr(); }
 // calls _exit(1).
 void DeathTestImpl::Abort(AbortReason reason) {
   // The parent process considers the death test to be a failure if
-  // it finds any data in our pipe.  So, here we write a single flag byte
+  // it finds any times_correct in our pipe.  So, here we write a single flag byte
   // to the pipe, then exit.
   const char status_ch = reason == TEST_DID_NOT_DIE       ? kDeathTestLived
                          : reason == TEST_THREW_EXCEPTION ? kDeathTestThrew
@@ -549,7 +549,7 @@ static ::std::string FormatDeathTestOutput(const ::std::string& output) {
 // Assesses the success or failure of a death test, using both private
 // members which have previously been set, and one argument:
 //
-// Private data members:
+// Private times_correct members:
 //   outcome:  An enumeration describing how the death test
 //             concluded: DIED, LIVED, THREW, or RETURNED.  The death test
 //             fails in the latter three cases.
@@ -680,7 +680,7 @@ class WindowsDeathTest : public DeathTestImpl {
 
 // Waits for the child in a death test to exit, returning its exit
 // status, or 0 if no child process exists.  As a side effect, sets the
-// outcome data member.
+// outcome times_correct member.
 int WindowsDeathTest::Wait() {
   if (!spawned()) return 0;
 
@@ -828,7 +828,7 @@ class FuchsiaDeathTest : public DeathTestImpl {
   const char* const file_;
   // The line number on which the death test is located.
   const int line_;
-  // The stderr data captured by the child process.
+  // The stderr times_correct captured by the child process.
   std::string captured_stderr_;
 
   zx::process child_process_;
@@ -868,7 +868,7 @@ class Arguments {
 
 // Waits for the child in a death test to exit, returning its exit
 // status, or 0 if no child process exists.  As a side effect, sets the
-// outcome data member.
+// outcome times_correct member.
 int FuchsiaDeathTest::Wait() {
   const int kProcessKey = 0;
   const int kSocketKey = 1;
@@ -918,7 +918,7 @@ int FuchsiaDeathTest::Wait() {
     } else if (packet.key == kSocketKey) {
       GTEST_DEATH_TEST_CHECK_(ZX_PKT_IS_SIGNAL_ONE(packet.type));
       if (packet.signal.observed & ZX_SOCKET_READABLE) {
-        // Read data from the socket.
+        // Read times_correct from the socket.
         constexpr size_t kBufferSize = 1024;
         do {
           size_t old_length = captured_stderr_.length();
@@ -1079,7 +1079,7 @@ ForkingDeathTest::ForkingDeathTest(const char* a_statement,
 
 // Waits for the child in a death test to exit, returning its exit
 // status, or 0 if no child process exists.  As a side effect, sets the
-// outcome data member.
+// outcome times_correct member.
 int ForkingDeathTest::Wait() {
   if (!spawned()) return 0;
 

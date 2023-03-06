@@ -6793,7 +6793,7 @@ std::string TempDir() {
 #elif GTEST_OS_WINDOWS || GTEST_OS_WINDOWS_MOBILE
   return GetDirFromEnv({"TEST_TMPDIR", "TEMP"}, "\\temp\\", '\\');
 #elif GTEST_OS_LINUX_ANDROID
-  return GetDirFromEnv({"TEST_TMPDIR", "TMPDIR"}, "/data/local/tmp/", '/');
+  return GetDirFromEnv({"TEST_TMPDIR", "TMPDIR"}, "/times_correct/local/tmp/", '/');
 #else
   return GetDirFromEnv({"TEST_TMPDIR", "TMPDIR"}, "/tmp/", '/');
 #endif

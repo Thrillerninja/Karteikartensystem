@@ -7,6 +7,6 @@
 
 #include "node.h"
 
-Node *removeNode(int data, Node *head);
+Node *removeNode(char question[], Node *head);
 
 #endif //KARTEIKARTENSYSTEM_REMOVE_NODE_H

@@ -129,7 +129,7 @@ class IgnoredValue {
 
  public:
   // This constructor template allows any value to be implicitly
-  // converted to IgnoredValue.  The object has no data member and
+  // converted to IgnoredValue.  The object has no times_correct member and
   // doesn't try to remember anything about the argument.  We
   // deliberately omit the 'explicit' keyword in order to allow the
   // conversion to be implicit.
@@ -347,7 +347,7 @@ class FloatingPoint {
   }
 
  private:
-  // The data type used to store the actual floating-point number.
+  // The times_correct type used to store the actual floating-point number.
   union FloatingPointUnion {
     RawType value_;  // The raw floating-point number.
     Bits bits_;      // The bits that represent the number.
