@@ -134,30 +134,32 @@ void showFrame(int x){
 
         case 4: //Abfrage
             system("cls");
-            printf(R"EOF(
-                +---------------------------------------------------------------------------------------------------+
-                |                                                                                                   |
-                |  Spielmodus                                                                            Streek     |
-                |                                                                                                   |
-                |                                                                                                   |
-                |                                                                                                   |
-                |                                                                                                   |
-                |                                                                                                   |
-                |                         +----------------------------------------------+                          |
-                |                         |                                              |                          |
-                |                         |                                              |                          |
-                |                         | Frage: trash trashtrash remove               |                          |
-                |                         |                                              |                          |
-                |                         |                                              |                          |
-                |                         | Antwort: _______________________________     |                          |
-                |                         |                                              |                          |
-                |                         |                                        1/20  |                          |
-                |                         +----------------------------------------------+                          |
-                |                                                                                                   |
-                |  0-Exit                                                                                           |
-                |                                                                                                   |
-                +---------------------------------------------------------------------------------------------------+  )EOF");
-            printf("\n");
+            static const char* mainMenu =
+                    R"EOF(
+                    +---------------------------------------------------------------------------------------------------+
+                    |                          _____    _                              _____                            |
+                    |                         |  __ \  | |                            | ____|                           |
+                    |                         | |__) | | |__     __ _   ___    ___    | |__                             |
+                    |                         |  ___/  | '_ \   / _` | / __|  / _ \   |___ \                            |
+                    |                         | |      | | | | | (_| | \__ \ |  __/    ___) |                           |
+                    |                         |_|      |_| |_|  \__,_| |___/  \___|   |____/                            |
+                    |                                                                                                   |
+                    |                                                                                                   |
+                    |                                      +---------------------+                                      |
+                    |                                      |     1  Start        |                                      |
+                    |                                      +---------------------+                                      |
+                    |                                                                                                   |
+                    |                                      +---------------------+                                      |
+                    |                                      |     2 Settings      |                                      |
+                    |                                      +---------------------+                                      |
+                    |                                                                                                   |
+                    |                                      +---------------------+                                      |
+                    |                                      |     3  Quit         |                                      |
+                    |                                      +---------------------+                                      |
+                    |                                                                                                   |
+                    +---------------------------------------------------------------------------------------------------+)EOF";
+
+            printf("%s\n",mainMenu);
             break;
     }
 }
@@ -232,6 +234,7 @@ void menuSelectAbfrage(Node *head){
 }
 
 void printSolution(char question[], char answer[], int order_number, int max_number){
+    system("cls");
     printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                                                                                                   |
@@ -244,27 +247,27 @@ void printSolution(char question[], char answer[], int order_number, int max_num
                 |                         +----------------------------------------------+                          |
                 |                         |                                              |                          |
                 |                         |                                              |                          |
-                |                         | Frage: )EOF");
-    printf("%.*s%*s", MAX_QUESTION_LENGTH, question, MAX_QUESTION_LENGTH-strlen(question), "");
-    printf(R"EOF(|                          |
+                |                         | Frage: %-*s|                          |
                 |                         |                                              |                          |
                 |                         |                                              |                          |
-                |                         | Antwort: )EOF");
-    printf("%.*s%*s", MAX_ANSWER_LENGTH, answer, MAX_ANSWER_LENGTH-strlen(answer), "");
-    printf(R"EOF(|                          |
+                |                         | Antwort: %-*s|                          |
                 |                         |                                              |                          |
-                |                         |                                       )EOF");
-    printf("%.*d/%.*d", MAX_VOCAB, order_number, MAX_VOCAB, max_number);
-    printf(R"EOF(  |                          |
+                |                         |                                        %*d/%*d |                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
                 |                         +----------------------------------------------+                          |
                 |                                                                                                   |
                 |  0-Exit                                                                                           |
                 |                                                                                                   |
-                +---------------------------------------------------------------------------------------------------+)EOF");
-    printf("\n");
+                +---------------------------------------------------------------------------------------------------+)EOF",
+           MAX_QUESTION_LENGTH, question,
+           MAX_ANSWER_LENGTH, answer,
+           MAX_VOCAB, order_number,
+           MAX_VOCAB, max_number);
 }
 
-void printQuestion(char question[], char answer[], int order_number, int max_number){
+void printQuestion(char question[], char answer[], int order_number, int max_number) {
+    system("cls");
     printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                                                                                                   |
@@ -277,24 +280,23 @@ void printQuestion(char question[], char answer[], int order_number, int max_num
                 |                         +----------------------------------------------+                          |
                 |                         |                                              |                          |
                 |                         |                                              |                          |
-                |                         | Frage: )EOF");
-    printf("%.*s%*s", MAX_QUESTION_LENGTH, question, MAX_QUESTION_LENGTH-strlen(question), "");
-    printf(R"EOF(|                          |
+                |                         | Frage: %-*s|                          |
                 |                         |                                              |                          |
                 |                         |                                              |                          |
-                |                         | Antwort: )EOF");
-    printf("%.*s%*s", MAX_ANSWER_LENGTH, answer, MAX_ANSWER_LENGTH-strlen(answer), "");
-    printf(R"EOF(|                          |
+                |                         | Antwort: %-*s|                          |
                 |                         |                                              |                          |
-                |                         |                                       )EOF");
-    printf("%.*d/%.*d", MAX_VOCAB, order_number, MAX_VOCAB, max_number);
-    printf(R"EOF(  |                          |
+                |                         |                                        %*d/%*d |                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
                 |                         +----------------------------------------------+                          |
                 |                                                                                                   |
                 |  0-Exit                                                                                           |
                 |                                                                                                   |
-                +---------------------------------------------------------------------------------------------------+)EOF");
-    printf("\n");
+                +---------------------------------------------------------------------------------------------------+)EOF",
+           MAX_QUESTION_LENGTH, question,
+           MAX_ANSWER_LENGTH, answer,
+           MAX_VOCAB, order_number,
+           MAX_VOCAB, max_number);
 }
 
 int selectVocabulary(Node *head){
@@ -332,28 +334,37 @@ int selectVocabulary(Node *head){
 void mainAbfrage(Node *head) {
     Node *current = head;
     int number_of_questoins_to_ask = 5;
+    int correct_answer;
+    char answer[MAX_ANSWER_LENGTH] = "";
+
     for (int i = 1; i < number_of_questoins_to_ask+1; i++) {
+        correct_answer = 0;
         //Select variable and show it
         int position = selectVocabulary(head);
 
         current = head;
-        while (position != 0) {
+        while (position != 0 && current != NULL) {
             current = current->next;
             position--;
         }
-        printQuestion(current->question, "",i,number_of_questoins_to_ask); //show question
+
         //End of visualisation
 
-        //Wait for User to enter an answer
-        char answer[MAX_ANSWER_LENGTH];
-        userInputChar(current->question, answer, i, number_of_questoins_to_ask);
-        if (strcmp(answer, current->answer) == 0) { //answer is correct
-            printSolution(current->question, current->answer,i,number_of_questoins_to_ask);
-            printf("Correct answer");
-        } else { //answer is wrong
-            i-=1; //restart answering process until correct answer is given
-        }
+        while (correct_answer != 1) {
+            memset(answer, 0, sizeof(answer));  // set answer to all null characters (resetting it)
+            printQuestion(current->question, "",i,number_of_questoins_to_ask); //show question
 
+            //Wait for User to enter an answer
+            userInputChar(current->question, answer, i, number_of_questoins_to_ask);
+
+            if (strcmp(answer, current->answer) == 0) { //answer is correct
+                printSolution(current->question, current->answer, i, number_of_questoins_to_ask);
+                printf("Correct answer");
+                correct_answer = 1;
+                current->times_correct ++;
+            }
+            //restart answering process until correct answer is given
+        }
         printf("User chose: %s\n", answer);
     }
 }
