@@ -55,6 +55,11 @@ int main(int argc, char **argv)
     Node *head = NULL;
     Node *ptr = NULL;
 
+    if (argc > 1){    //skips dev menu if argv exists and is user
+        head = loadData("test",head);
+        head = abfrageStart(head);
+    }
+
     while (1)
     {
         printMenu(0);

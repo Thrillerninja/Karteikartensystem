@@ -48,7 +48,7 @@ Node *addNodeB(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH]
 {
     Node *newNode = NULL;
     Node *ptr = head;
-    if (head == NULL) //if empty
+    if (ptr == NULL) //if empty
     {
         //allocate memory
         newNode = malloc(sizeof(Node));
@@ -72,9 +72,9 @@ Node *addNodeB(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH]
         strcpy(newNode->question, question);
         strcpy(newNode->answer, answer);
         newNode->times_correct = times_correct;
+        newNode->next = NULL;
 
-
-        while (ptr->next!= NULL) ptr = ptr->next;
+        while (ptr->next != NULL) ptr = ptr->next;
         ptr->next = newNode;
     }
     return head;

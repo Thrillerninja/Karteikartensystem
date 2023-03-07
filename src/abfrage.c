@@ -9,10 +9,19 @@
 #include <time.h>
 #include "node.h"
 
+#define MAX_VOCAB 2
+void menuSettings();
+void mainAbfrage(Node *head);
+void menuSelectAbfrage(Node *head);
+Node *abfrageStart(Node *head);
+void printQuestion(char question[], char answer[], int order_number, int max_number);
+void userInputChar(char question[],char *answer,int order_number,int number_of_questoins_to_ask);
+
 
 void showFrame(int x){
     switch(x){
         case 0: //Main Menu
+            system("cls");
             printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                          _____    _                              _____                            |
@@ -40,6 +49,7 @@ void showFrame(int x){
             break;
 
         case 1: //Start
+            system("cls");
             printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |               _____                                                      _                        |
@@ -67,6 +77,7 @@ void showFrame(int x){
             break;
 
         case 2: //Settings
+            system("cls");
             printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                               ___        _      _    _                                            |
@@ -94,6 +105,7 @@ void showFrame(int x){
             break;
 
         case 3: //Quit
+            system("cls");
             printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                          _____    _                              _____                            |
@@ -121,6 +133,7 @@ void showFrame(int x){
             break;
 
         case 4: //Abfrage
+            system("cls");
             printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                                                                                                   |
@@ -149,7 +162,7 @@ void showFrame(int x){
     }
 }
 
-int userInput(){
+int userInputInt(){
     while (1) {
         char c = _getch();   // get user input immediately TODO: input only gets registered after `"enter"`
         int value = 0;
@@ -158,14 +171,29 @@ int userInput(){
     }
 }
 
-void menuSettings();
-void mainAbfrage();
-void menuSelectAbfrage();
+void userInputChar(char question[], char* answer, int order_number, int number_of_questions_to_ask) {
+    while (1) {
+        char c = _getch(); // get user input immediately
+        printf("\b");
+
+        int len = strlen(answer); // gets length of answer so far
+        if (c == '\r') {
+            answer[len] = '\0'; // add null terminator to the end of the string
+            return;
+
+        } else if (len < MAX_ANSWER_LENGTH) {
+            answer[len] = c; // appends the next inputted character
+            answer[len + 1] = '\0'; // finishes with the closing character
+
+            printQuestion(question, answer, order_number, number_of_questions_to_ask); // prints inputted char at the right position
+        }
+    }
+}
 
 Node *abfrageStart(Node *head) {
     showFrame(0); // show main menu
 
-    int choice = userInput(); // asks user to choose
+    int choice = userInputInt(); // asks user to choose
     switch (choice) {
         case 1:
             showFrame(1); //show typeselect window
@@ -187,12 +215,13 @@ Node *abfrageStart(Node *head) {
 }
 
 void menuSelectAbfrage(Node *head){
-    int choice = userInput();
+    int choice = userInputInt();
     switch(choice) {
         case 1: // question new vocabulary
             break;
         case 2: //normal questioning
-            mainAbfrage();
+            system("cls");
+            mainAbfrage(head);
             break;
         case 3: //we´ll see
             break;
@@ -202,7 +231,7 @@ void menuSelectAbfrage(Node *head){
     }
 }
 
-void printQuestion(char question[],char answer[]){
+void printSolution(char question[], char answer[], int order_number, int max_number){
     printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                                                                                                   |
@@ -224,7 +253,9 @@ void printQuestion(char question[],char answer[]){
     printf("%.*s%*s", MAX_ANSWER_LENGTH, answer, MAX_ANSWER_LENGTH-strlen(answer), "");
     printf(R"EOF(|                          |
                 |                         |                                              |                          |
-                |                         |                                        1/20  |                          |
+                |                         |                                       )EOF");
+    printf("%.*d/%.*d", MAX_VOCAB, order_number, MAX_VOCAB, max_number);
+    printf(R"EOF(  |                          |
                 |                         +----------------------------------------------+                          |
                 |                                                                                                   |
                 |  0-Exit                                                                                           |
@@ -233,33 +264,120 @@ void printQuestion(char question[],char answer[]){
     printf("\n");
 }
 
-void mainAbfrage(Node *head){
+void printQuestion(char question[], char answer[], int order_number, int max_number){
+    printf(R"EOF(
+                +---------------------------------------------------------------------------------------------------+
+                |                                                                                                   |
+                |  Spielmodus                                                                            Streek     |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                         +----------------------------------------------+                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         | Frage: )EOF");
+    printf("%.*s%*s", MAX_QUESTION_LENGTH, question, MAX_QUESTION_LENGTH-strlen(question), "");
+    printf(R"EOF(|                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         | Antwort: )EOF");
+    printf("%.*s%*s", MAX_ANSWER_LENGTH, answer, MAX_ANSWER_LENGTH-strlen(answer), "");
+    printf(R"EOF(|                          |
+                |                         |                                              |                          |
+                |                         |                                       )EOF");
+    printf("%.*d/%.*d", MAX_VOCAB, order_number, MAX_VOCAB, max_number);
+    printf(R"EOF(  |                          |
+                |                         +----------------------------------------------+                          |
+                |                                                                                                   |
+                |  0-Exit                                                                                           |
+                |                                                                                                   |
+                +---------------------------------------------------------------------------------------------------+)EOF");
+    printf("\n");
+}
+
+int selectVocabulary(Node *head){
     Node *current = head;
     int counter = 0;
-    while (current->next != NULL){
+    int position = 0;
+
+    while (current != NULL){
         counter += current->times_correct;
         current = current->next;
     }
 
     // Initialize the random seed
     srand(time(NULL));
+    printf("Random counter: %d\n",counter);
 
     // Generate a random number between 1 and sum
-    int r = rand() % counter + 1;
+    int r = rand() % counter+1;
 
     // Loop through the list to find the word that corresponds to the random number
     // The higher the number, the higher the probability of being chosen
+    current = head;
+
     while (current != NULL) {
         r -= current->times_correct;
-        if (r <= 0) {
-            return current->question,current->answer;
+        if (r < 0) {
+            return position;
         }
         current = current->next;
+        position++;
     }
-    return head->question,head->answer;
-
-    printQuestion("awdawdawdu","rftzguhijtrerhtjzukilo");
+    return position;
 }
+
+void mainAbfrage(Node *head) {
+    Node *current = head;
+    int number_of_questoins_to_ask = 5;
+    for (int i = 1; i < number_of_questoins_to_ask+1; i++) {
+        //Select variable and show it
+        int position = selectVocabulary(head);
+
+        current = head;
+        while (position != 0) {
+            current = current->next;
+            position--;
+        }
+        printQuestion(current->question, "",i,number_of_questoins_to_ask); //show question
+        //End of visualisation
+
+        //Wait for User to enter an answer
+        char answer[MAX_ANSWER_LENGTH];
+        userInputChar(current->question, answer, i, number_of_questoins_to_ask);
+        if (strcmp(answer, current->answer) == 0) { //answer is correct
+            printSolution(current->question, current->answer,i,number_of_questoins_to_ask);
+            printf("Correct answer");
+        } else { //answer is wrong
+            i-=1; //restart answering process until correct answer is given
+        }
+
+        printf("User chose: %s\n", answer);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 int searchNode(char question[MAX_QUESTION_LENGTH], Node * head) {
     Node *current = head;
