@@ -8,6 +8,6 @@
 void showMenues(int x);
 void printSolution(char question[], char answer[], int order_number, int max_number, int tries, int max_tries,char fail[]);
 void printQuestion(char question[], char answer[], int order_number, int max_number, int tries, int max_tries);
-void quitScreen();
-
+int quitScreen();
+void printSettings(char filepath[], int questions_per_turn);
 #endif //KARTEIKARTENSYSTEM_ASCIART_H

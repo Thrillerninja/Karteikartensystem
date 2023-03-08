@@ -1,11 +1,14 @@
+//
+// Created by rorba on 08.03.2023.
+//
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "node.h"
-#include "asciart.h"
-#include "abfrage.h"
+#include "devmenu.h"
 
-/*#include "add_node.h"
+#include "node.h"
+#include "add_node.h"
 #include "remove_node.h"
 #include "swap_node.h"
 #include "sort_node.h"
@@ -15,7 +18,7 @@
 #include "asciart.h"
 
 void printMenu(int style){
-    if (style ==1) {
+    if (style == 1) {
         printf("You have the following options:\n");
         printf("\t1. Add a node to the start of the list.\n");
         printf("\t2. Add a node at the end of the list.\n");
@@ -48,7 +51,7 @@ void clearScreen(int lines){
     }
 }
 
-int main(int argc, char **argv)
+int devMenu()
 {
     int option = -1;
     char question[MAX_QUESTION_LENGTH];
@@ -59,10 +62,7 @@ int main(int argc, char **argv)
     Node *head = NULL;
     Node *ptr = NULL;
 
-    if (argc > 1){    //skips dev menu if argv exists
-        abfrageMenuSelect();
-    }
-
+    system("cls");
     while (1)
     {
         printMenu(0);
@@ -71,9 +71,8 @@ int main(int argc, char **argv)
         {
             case 0:
                 //start the abfrage
-                abfrageMenuSelect();
-                system("cls");
-                break;
+                system("cls"); //TODO: RETURN TO MAIN PROGRAM
+                return 0;
             case 1:
                 // add operation
                 getchar(); //empties the input buffer so that no newline char remains in the buffer
@@ -158,14 +157,14 @@ int main(int argc, char **argv)
                 scanf("%s", &question);
                 head = swap(searchNode(question,head), head);
 
-            case 9:
-                // pull operation
-                printf("What question should be searched for?:\n");
-                scanf("%s", &question);
-                head = pull(question, head);
-                if (head == NULL)
-                    printf("Failed to change value\n");
-                break;
+                /*case 9:
+                    // pull operation
+                    printf("What question should be searched for?:\n");
+                    scanf("%s", &question);
+                    head = pull(question, head);
+                    if (head == NULL)
+                        printf("Failed to change value\n");
+                    break;*/
 
             case 10:
                 head = sort(head);
@@ -173,7 +172,7 @@ int main(int argc, char **argv)
                 break;
 
             case 11:
-                head = loadData("test",head);
+                head = loadData("..\\..\\data.json",head); //TODO: inspect
                 printf("Load from file\n");
                 break;
 
@@ -189,51 +188,5 @@ int main(int argc, char **argv)
             default:
                 break;
         }
-    }
-}
-*/
-
-void main(int argc, char **argv){
-    int exit = 1;
-
-    while(1){
-        if(exit == 1) { showMenues(0); } // show main menu
-        exit = 0;
-
-        int choice = getUserInputNumber(); // asks user to choose
-
-        switch (choice) {
-            case 1:
-                showMenues(1); //show typeselect window
-                do {
-                    choice = getUserInputNumber();
-                    switch (choice) {
-                        case 0:
-                            exit = quitScreen();
-                            break;
-                        case 1: // question new vocabulary
-                            break;
-                        case 2: //normal questioning
-                            system("cls");
-                            exit = mainAbfrage(); //TODO: Abfrage Reigenfolge fixen
-                            break;
-                        case 3: //we´ll see
-                            break;
-                    }
-                } while (exit != 1);
-                break;
-
-            case 2:
-                exit = Settings(); //show settings
-                break;
-
-            case 3:
-                exit = quitScreen();
-                break;
-
-            default: //stay in main menu if something wrong is selected
-                break;
-        }
-        printf("awdawdawd\n");
     }
 }

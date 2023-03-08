@@ -133,7 +133,7 @@ void showMenues(int x){
             break;
     }
 }
-void printSettings(char filepath[], int questions_per_turn, char dev_options[]) {
+void printSettings(char filepath[], int questions_per_turn) {
     system("cls");
     printf(R"EOF(
         +---------------------------------------------------------------------------------------------------+
@@ -146,21 +146,20 @@ void printSettings(char filepath[], int questions_per_turn, char dev_options[]) 
         |                                                                 __/ |                             |
         |                                                                |___/                              |
         |     +------------------------------------------------------------------------------------+        |
-        |     |1-Vocabulary File Location: %-*s                                                        |        |
+        |     |1-Vocabulary File Location: %-*s                          |        |
         |     +------------------------------------------------------------------------------------+        |
         |                                                                                                   |
         |     +------------------------------------+                                                        |
-        |     |2-Questions asked every turn:  %*d     |                                                        |
+        |     |2-Questions asked every turn:  %*d |                                                        |
         |     +------------------------------------+                                                        |
         |                                                                                                   |
-        |     +-------------------------+                                                                   |
-        |     |3-Developer Options %-*s  |                                                                   |
-        |     +-------------------------+                                                                   |
+        |     +-------------------+                                                                         |
+        |     |3-Developer Options|                                                                         |
+        |     +-------------------+                                                                         |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF",
        MAX_FILEPATH_LENGTH, filepath,
-       MAX_QUESTION_LENGTH, questions_per_turn,
-       3, dev_options); // on or off
+       4, questions_per_turn);
     printf("\n");
 }
 
@@ -271,12 +270,13 @@ void printQuestion(char question[], char answer[], int order_number, int max_num
    MAX_VOCAB, max_number);
 }
 
-void quitScreen(){
+int quitScreen(){
     showMenues(3); //Quit screen
     switch (getUserInputNumber()){
         case 1:
             break;
         case 2:
+            return 1; //TODO: INSPECT
             abfrageMenuSelect();
             break;
         case 3:

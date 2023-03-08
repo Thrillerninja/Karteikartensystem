@@ -10,6 +10,7 @@
 #include "node.h"
 #include "file_handling.h"
 #include "asciart.h"
+#include "devmenu.h"
 
 int getUserInputNumber(){
     while (1) {
@@ -106,9 +107,9 @@ Node *selectVocabulary(Node *head){/* Low times_correct questioning not working
     return current;
 }
 
-void mainAbfrage() {
+int mainAbfrage() {
     //loads the data
-    Node *head = loadData("filepath", head);
+    Node *head = loadData("..\\..\\data.json", head); //TODO: live changing
     if (head == NULL) { //check if head has no elements
         printf("No data present");
     }
@@ -146,51 +147,12 @@ void mainAbfrage() {
             mainAbfrage();
             break;
         case 2:
-            return;
+            return 1;
         case 3:
             exit(0);
     }
 }
 
-void abfrageMenuSelect() {
-    showMenues(0); // show main menu
-
-    int choice = getUserInputNumber(); // asks user to choose
-
-    switch (choice) {
-        case 1:
-            showMenues(1); //show typeselect window
-            do {
-                int choice = getUserInputNumber();
-                switch (choice) {
-                    case 0:
-                        quitScreen();
-                        break;
-                    case 1: // question new vocabulary
-                        break;
-                    case 2: //normal questioning
-                        system("cls");
-                        mainAbfrage(); //TODO: Abfrage Reigenfolge fixen
-                        return;
-                    case 3: //we´ll see
-                        break;
-                }
-            }while (choice != 1 || choice != 2 || choice != 3);
-            break;
-
-        case 2:
-            Settings(); //show settings
-            break;
-
-        case 3:
-            quitScreen();
-            break;
-
-        default: //stay in main menu if something wrong is selected
-            break;
-    }
-    printf("awdawdawd\n");
-}
 
 void menuSelectAbfrage(Node *head){
     switch(getUserInputNumber()) {
@@ -211,24 +173,24 @@ void menuSelectAbfrage(Node *head){
     }
 }
 
-void Settings(){
+int Settings(){
     int choice;
 
-    printSettings();
+    printSettings("..\\..\\data.json",1);
     do{
         choice = getUserInputNumber();
         switch(choice) {
             case 0:
-                return;
+                return 1;
             case 1: //enter new filepath
                 break;
             case 2: //change questions asked every turn
                 break;
             case 3: //start dev menu
+                devMenu();
                 break;
         }
     }while (choice != 0||choice != 1 || choice != 2 || choice != 3);
-    char *filename = "..\\..\\data.json";
 }
 
 
