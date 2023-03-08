@@ -12,18 +12,17 @@
 const char* FILTER_READ = "{\"question\": \"%[^\"]\", \"answer\": \"%[^\"]\", \"times_correct\": %d},\n";
 const char* FILTER_WRITE = "{\"question\": \"%s\", \"answer\": \"%s\", \"times_correct\": %d},\n";
 
-char question[MAX_QUESTION_LENGTH] = "test";
-char answer[MAX_ANSWER_LENGTH] = "test";
+char question[MAX_QUESTION_LENGTH];
+char answer[MAX_ANSWER_LENGTH];
 
 Node *loadData(char filepath[], Node *head){ //TODO: fix questions and answers with spaces
     int times_correct = 0;
     char buffer[BUFFER_SIZE];
-    char *filename = "..\\..\\data.json";
     FILE *file;
-    errno_t err = fopen_s(&file, filename, "r");
+    errno_t err = fopen_s(&file, filepath, "r");
 
     if (err != 0) {
-        printf("Unable to open file '%s'\n", filename);
+        printf("Unable to open file '%s'\n", filepath);
         printf("Error: %s\n", strerror(errno));
         return NULL;
     }
@@ -43,14 +42,12 @@ Node *loadData(char filepath[], Node *head){ //TODO: fix questions and answers w
 }
 
 void saveData(char filepath[],Node *head){
-    char buffer[BUFFER_SIZE];
-    char *filename = "..\\..\\data.json";
     FILE *file;
-    fopen_s(&file, filename, "w+");
+    fopen_s(&file, filepath, "w+");
 
     if (file == NULL) {
-        fprintf(stderr, "Unable to open file '%s'\n", filename);
-        printf("Unable to open file '%s'\n", filename);
+        fprintf(stderr, "Unable to open file '%s'\n", filepath);
+        printf("Unable to open file '%s'\n", filepath);
         exit(EXIT_FAILURE);
     }
 
