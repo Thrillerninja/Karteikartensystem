@@ -56,8 +56,7 @@ int main(int argc, char **argv)
     Node *ptr = NULL;
 
     if (argc > 1){    //skips dev menu if argv exists and is user
-        head = loadData("test",head);
-        head = abfrageStart(head);
+        abfrageMenuSelect();
     }
 
     while (1)
@@ -68,7 +67,7 @@ int main(int argc, char **argv)
         {
             case 0:
                 //start the abfrage
-                head = abfrageStart(head);
+                abfrageMenuSelect();
                 break;
             case 1:
                 // add operation
@@ -179,10 +178,6 @@ int main(int argc, char **argv)
                 break;
 
             case 13:
-                head = abfrageStart(head);
-                break;
-
-            case 14:
                 clearScreen(10);
                 exit(0);
                 break;

@@ -8,17 +8,19 @@
 #include <conio.h>
 #include <time.h>
 #include "node.h"
+#include "file_handling.h"
 
 #define MAX_VOCAB 2
-void menuSettings();
-void mainAbfrage(Node *head);
-void menuSelectAbfrage(Node *head);
-Node *abfrageStart(Node *head);
-void printQuestion(char question[], char answer[], int order_number, int max_number);
-void userInputChar(char question[],char *answer,int order_number,int number_of_questoins_to_ask);
+#define MAX_TRY_LENGTH 1
+
+void mainAbfrage();
+void menuSelectAbfrage();
+void abfrageMenuSelect();
+void printQuestion(char question[], char answer[], int order_number, int max_number,int tries, int max_tries);
+void getUserInputString(char question[], char *answer, int order_number, int number_of_questoins_to_ask, int tries, int max_tries);
 
 
-void showFrame(int x){
+void showMenues(int x){
     switch(x){
         case 0: //Main Menu
             system("cls");
@@ -164,7 +166,7 @@ void showFrame(int x){
     }
 }
 
-int userInputInt(){
+int getUserInputNumber(){
     while (1) {
         char c = _getch();   // get user input immediately TODO: input only gets registered after `"enter"`
         int value = 0;
@@ -173,7 +175,7 @@ int userInputInt(){
     }
 }
 
-void userInputChar(char question[], char* answer, int order_number, int number_of_questions_to_ask) {
+void getUserInputString(char question[], char* answer, int order_number, int number_of_questions_to_ask, int tries, int max_tries) {
     while (1) {
         char c = _getch(); // get user input immediately
         printf("\b");
@@ -187,27 +189,40 @@ void userInputChar(char question[], char* answer, int order_number, int number_o
             answer[len] = c; // appends the next inputted character
             answer[len + 1] = '\0'; // finishes with the closing character
 
-            printQuestion(question, answer, order_number, number_of_questions_to_ask); // prints inputted char at the right position
+            printQuestion(question, answer, order_number, number_of_questions_to_ask,tries,max_tries); // prints inputted char at the right position
         }
     }
 }
 
-Node *abfrageStart(Node *head) {
-    showFrame(0); // show main menu
+void abfrageMenuSelect() {
+    showMenues(0); // show main menu
 
-    int choice = userInputInt(); // asks user to choose
+    int choice = getUserInputNumber(); // asks user to choose
+
     switch (choice) {
         case 1:
-            showFrame(1); //show typeselect window
-            menuSelectAbfrage(head);
+            showMenues(1); //show typeselect window
+            do {
+                int choice = getUserInputNumber();
+                switch (choice) {
+                    case 1: // question new vocabulary
+                        break;
+                    case 2: //normal questioning
+                        system("cls");
+                        mainAbfrage();
+                        break;
+                    case 3: //we´ll see
+                        break;
+                }
+            }while (choice != 1 || choice != 2 || choice != 3);
             break;
 
         case 2:
-            showFrame(2); //show settings
+            showMenues(2); //show settings
             break;
 
         case 3:
-            showFrame(3); //Quit screen
+            showMenues(3); //Quit screen
             break;
 
         default: //stay in main menu if something wrong is selected
@@ -217,13 +232,13 @@ Node *abfrageStart(Node *head) {
 }
 
 void menuSelectAbfrage(Node *head){
-    int choice = userInputInt();
+    int choice = getUserInputNumber();
     switch(choice) {
         case 1: // question new vocabulary
             break;
         case 2: //normal questioning
             system("cls");
-            mainAbfrage(head);
+            mainAbfrage();
             break;
         case 3: //we´ll see
             break;
@@ -233,12 +248,47 @@ void menuSelectAbfrage(Node *head){
     }
 }
 
-void printSolution(char question[], char answer[], int order_number, int max_number){
-    system("cls");
-    printf(R"EOF(
+void printSolution(char question[], char answer[], int order_number, int max_number, int tries, int max_tries,char fail[]){
+    if (strcmp(fail,"failed")==0){
+        system("cls");
+        printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                                                                                                   |
-                |  Spielmodus                                                                            Streek     |
+                |  Spielmodus                                                                       Tries: %*d/%*d    |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                                                                                   |
+                |                                              Failed                                               |
+                |                         +----------------------------------------------+                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         | Frage: %-*s|                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         | Antwort: %-*s|                          |
+                |                         |                                              |                          |
+                |                         |                                        %*d/%*d |                          |
+                |                         |                                              |                          |
+                |                         |                                              |                          |
+                |                         +----------------------------------------------+                          |
+                |                                    Press any key to continue                                      |
+                |  0-Exit                                                                                           |
+                |                                                                                                   |
+                +---------------------------------------------------------------------------------------------------+)EOF",
+               MAX_TRY_LENGTH, tries,
+               MAX_TRY_LENGTH, max_tries,
+               MAX_QUESTION_LENGTH, question,
+               MAX_ANSWER_LENGTH, answer,
+               MAX_VOCAB, order_number,
+               MAX_VOCAB, max_number);
+        _getch(); //waits until user presses any button
+    }else {
+        system("cls");
+        printf(R"EOF(
+                +---------------------------------------------------------------------------------------------------+
+                |                                                                                                   |
+                |  Spielmodus                                                                       Tries: %*d/%*d    |
                 |                                                                                                   |
                 |                                                                                                   |
                 |                                                                                                   |
@@ -260,18 +310,21 @@ void printSolution(char question[], char answer[], int order_number, int max_num
                 |  0-Exit                                                                                           |
                 |                                                                                                   |
                 +---------------------------------------------------------------------------------------------------+)EOF",
-           MAX_QUESTION_LENGTH, question,
-           MAX_ANSWER_LENGTH, answer,
-           MAX_VOCAB, order_number,
-           MAX_VOCAB, max_number);
+               MAX_TRY_LENGTH, tries,
+               MAX_TRY_LENGTH, max_tries,
+               MAX_QUESTION_LENGTH, question,
+               MAX_ANSWER_LENGTH, answer,
+               MAX_VOCAB, order_number,
+               MAX_VOCAB, max_number);
+    }
 }
 
-void printQuestion(char question[], char answer[], int order_number, int max_number) {
+void printQuestion(char question[], char answer[], int order_number, int max_number, int tries, int max_tries) {
     system("cls");
     printf(R"EOF(
                 +---------------------------------------------------------------------------------------------------+
                 |                                                                                                   |
-                |  Spielmodus                                                                            Streek     |
+                |  Spielmodus                                                                       Tries: %*d/%*d    |
                 |                                                                                                   |
                 |                                                                                                   |
                 |                                                                                                   |
@@ -293,80 +346,82 @@ void printQuestion(char question[], char answer[], int order_number, int max_num
                 |  0-Exit                                                                                           |
                 |                                                                                                   |
                 +---------------------------------------------------------------------------------------------------+)EOF",
+           MAX_TRY_LENGTH, tries,
+           MAX_TRY_LENGTH, max_tries,
            MAX_QUESTION_LENGTH, question,
            MAX_ANSWER_LENGTH, answer,
            MAX_VOCAB, order_number,
            MAX_VOCAB, max_number);
 }
 
-int selectVocabulary(Node *head){
+Node *selectVocabulary(Node *head){
     Node *current = head;
-    int counter = 0;
-    int position = 0;
+    int total_weight = 0;
+    int weight;
 
     while (current != NULL){
-        counter += current->times_correct;
+        if (current->times_correct < 0) {
+            // Handle invalid node weight
+            printf("Invalid node weight");
+            return NULL;
+        }
+        total_weight += current->times_correct;
         current = current->next;
     }
 
     // Initialize the random seed
     srand(time(NULL));
-    printf("Random counter: %d\n",counter);
+    printf("Random counter: %d\n",total_weight);
 
     // Generate a random number between 1 and sum
-    int r = rand() % counter+1;
+    weight = rand() % (total_weight+1);
+    printf("Weight %d,%d",weight,total_weight);
 
     // Loop through the list to find the word that corresponds to the random number
     // The higher the number, the higher the probability of being chosen
     current = head;
 
-    while (current != NULL) {
-        r -= current->times_correct;
-        if (r < 0) {
-            return position;
-        }
+    while (current->next != NULL && weight < current->times_correct) {
+        weight -= current->times_correct;
         current = current->next;
-        position++;
     }
-    return position;
+    return current;
 }
 
-void mainAbfrage(Node *head) {
-    Node *current = head;
-    int number_of_questoins_to_ask = 5;
-    int correct_answer;
+void mainAbfrage() {
+    Node *head = loadData("filepath", head);
+    if (head == NULL) {
+        printf("No data present");
+    }
+
+    int number_of_questions_to_ask = 5;
     char answer[MAX_ANSWER_LENGTH] = "";
+    int tries;
 
-    for (int i = 1; i < number_of_questoins_to_ask+1; i++) {
-        correct_answer = 0;
-        //Select variable and show it
-        int position = selectVocabulary(head);
+    for (int i = 1; i <= number_of_questions_to_ask; i++) {
+        tries = 0;
 
-        current = head;
-        while (position != 0 && current != NULL) {
-            current = current->next;
-            position--;
+        //Asks the vocabulary and checks if correct answer is given
+        Node* selected_node = selectVocabulary(head);
+        do {
+            memset(answer, 0, sizeof(answer));
+            printQuestion(selected_node->question, "", i, number_of_questions_to_ask,tries,3);
+            getUserInputString(selected_node->question, answer, i, number_of_questions_to_ask, tries, 3);
+            tries++;
+        } while (strcmp(answer, selected_node->answer) != 0 && tries <=3);
+
+        if (tries <= 3) {
+            selected_node->times_correct++; // if correct increment knowledge
+        }else{
+            printSolution(selected_node->question, selected_node->answer, i, number_of_questions_to_ask, tries, 3, "failed");
         }
 
-        //End of visualisation
-
-        while (correct_answer != 1) {
-            memset(answer, 0, sizeof(answer));  // set answer to all null characters (resetting it)
-            printQuestion(current->question, "",i,number_of_questoins_to_ask); //show question
-
-            //Wait for User to enter an answer
-            userInputChar(current->question, answer, i, number_of_questoins_to_ask);
-
-            if (strcmp(answer, current->answer) == 0) { //answer is correct
-                printSolution(current->question, current->answer, i, number_of_questoins_to_ask);
-                printf("Correct answer");
-                correct_answer = 1;
-                current->times_correct ++;
-            }
-            //restart answering process until correct answer is given
-        }
+        //prints the solution
+        printSolution(selected_node->question, selected_node->answer, i, number_of_questions_to_ask, tries, 3, "success");
+        printf("Correct answer\n");
         printf("User chose: %s\n", answer);
     }
+    saveData("filepath",head);
 }
 
 

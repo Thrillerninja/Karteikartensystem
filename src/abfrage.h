@@ -7,7 +7,7 @@
 
 #include "node.h"
 
-Node *abfrageStart(Node *head);
+void abfrageMenuSelect();
 int searchNode(char question[MAX_QUESTION_LENGTH], Node * head);
 
 #endif //KARTEIKARTENSYSTEM_ABFRAGE_H
