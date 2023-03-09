@@ -14,8 +14,9 @@ const char* FILTER_WRITE = "{\"question\": \"%s\", \"answer\": \"%s\", \"times_c
 
 char question[MAX_QUESTION_LENGTH];
 char answer[MAX_ANSWER_LENGTH];
+extern char filepath[];
 
-Node *loadData(char filepath[], Node *head){ //TODO: fix questions and answers with spaces
+Node *loadData(Node *head){ //TODO: fix questions and answers with spaces
     int times_correct = 0;
     char buffer[BUFFER_SIZE];
     FILE *file;
@@ -41,7 +42,8 @@ Node *loadData(char filepath[], Node *head){ //TODO: fix questions and answers w
     return ptr;
 }
 
-void saveData(char filepath[],Node *head){
+void saveData(Node *head){
+    char filepath[MAX_PATH_LENGTH];
     FILE *file;
     fopen_s(&file, filepath, "w+");
 

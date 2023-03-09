@@ -53,11 +53,11 @@ void clearScreen(int lines){
 
 int devMenu()
 {
-    int option = -1;
     char question[MAX_QUESTION_LENGTH];
     char answer[MAX_QUESTION_LENGTH];
     int arg1 = 0;
     int arg2 = 0;
+    int option = 0;
 
     Node *head = NULL;
     Node *ptr = NULL;
@@ -66,7 +66,7 @@ int devMenu()
     while (1)
     {
         printMenu(0);
-        int num_received = scanf("%d", &option);
+        scanf("%d", &option);
         switch(option)
         {
             case 0:
@@ -172,12 +172,12 @@ int devMenu()
                 break;
 
             case 11:
-                head = loadData("..\\..\\data.json",head); //TODO: inspect
+                head = loadData(head); //TODO: inspect
                 printf("Load from file\n");
                 break;
 
             case 12:
-                saveData("test",head);
+                saveData(head);
                 printf("Save to file\n");
                 break;
 

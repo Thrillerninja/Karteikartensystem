@@ -21,7 +21,7 @@ int getUserInputNumber(){
     }
 }
 
-void getUserInputString(char question[], char* answer, int order_number, int number_of_questions_to_ask, int tries, int max_tries) {
+void getUserInputString(char question[], char* answer, int order_number, int tries, int max_tries) {
     while (1) {
         char c = _getch(); // get user input immediately
         printf("\b");
@@ -35,7 +35,7 @@ void getUserInputString(char question[], char* answer, int order_number, int num
             answer[len] = c; // appends the next inputted character
             answer[len + 1] = '\0'; // finishes with the closing character
 
-            printQuestion(question, answer, order_number, number_of_questions_to_ask,tries,max_tries); // prints inputted char at the right position
+            printQuestion(question, answer, order_number,tries,max_tries); // prints inputted char at the right position
         }
     }
 }
@@ -109,37 +109,36 @@ Node *selectVocabulary(Node *head){/* Low times_correct questioning not working
 
 int mainAbfrage() {
     //loads the data
-    Node *head = loadData("..\\..\\data.json", head); //TODO: live changing
+    Node *head = loadData(head); //TODO: live changing
     if (head == NULL) { //check if head has no elements
         printf("No data present");
     }
 
-    int number_of_questions_to_ask = 1;
     char answer[MAX_ANSWER_LENGTH] = "";
     int tries;
 
     //questioning of vocabulary
-    for (int i = 1; i <= number_of_questions_to_ask; i++) {
+    for (int i = 1; i <= 5; i++) { //TODO: change 5 to number_of_questions_to_ask
         tries = 0;
 
         //Asks the vocabulary and checks if correct answer is given within the limit set by tries
         Node* selected_node = selectVocabulary(head);
         do {
             memset(answer, 0, sizeof(answer));
-            printQuestion(selected_node->question, "", i, number_of_questions_to_ask,tries,3);
-            getUserInputString(selected_node->question, answer, i, number_of_questions_to_ask, tries, 3);
+            printQuestion(selected_node->question, "", i,tries,3);
+            getUserInputString(selected_node->question, answer, i, tries, 3);
             tries++;
         } while (strcmp(answer, selected_node->answer) != 0 && tries <=3);
 
         if (tries <= 3) {
             selected_node->times_correct++; //if correct increment knowledge
-            printSolution(selected_node->question, selected_node->answer, i, number_of_questions_to_ask, tries, 3, "success"); // and print solution
+            printSolution(selected_node->question, selected_node->answer, i,tries, 3, 's'); // and print solution
         }else{
-            printSolution(selected_node->question, selected_node->answer, i, number_of_questions_to_ask, tries, 3, "failed");  //else print solution
+            printSolution(selected_node->question, selected_node->answer, i, tries, 3, 'f');  //else print solution
         }
     }
 
-    saveData("filepath",head);  //save data to file
+    saveData(head);  //save data to file
 
     showMenues(4);
     switch (getUserInputNumber()){
@@ -173,16 +172,41 @@ void menuSelectAbfrage(Node *head){
     }
 }
 
+void getFilepath() {
+    //extern char filepath[]; //use global filepath TODO: remove
+    char answer[MAX_PATH_LENGTH]; //stores the new filepath
+
+    while (1) {
+        char c = _getch(); // get user input immediately
+        printf("\b");
+
+        int len = strlen(answer); // gets length of answer so far
+        if (c == '\r') {
+            answer[len] = '\0'; // add null terminator to the end of the string
+            //TODO:strcpy(filepath, answer);
+            return;
+
+        } else if (len < MAX_ANSWER_LENGTH) {
+            answer[len] = c; // appends the next inputted character
+            answer[len + 1] = '\0'; // finishes with the closing character
+
+            printSettings(answer, 1); // prints inputted char at the right position
+        }
+    }
+}
+
 int Settings(){
+    //extern char filepath[];
     int choice;
 
-    printSettings("..\\..\\data.json",1);
+    printSettings("nothing",1);
     do{
         choice = getUserInputNumber();
         switch(choice) {
             case 0:
-                return 1;
+                return 1;//return to main menu
             case 1: //enter new filepath
+                getFilepath();
                 break;
             case 2: //change questions asked every turn
                 break;

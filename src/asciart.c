@@ -133,7 +133,7 @@ void showMenues(int x){
             break;
     }
 }
-void printSettings(char filepath[], int questions_per_turn) {
+void printSettings(char path[], int questions_per_turn) {
     system("cls");
     printf(R"EOF(
         +---------------------------------------------------------------------------------------------------+
@@ -158,13 +158,14 @@ void printSettings(char filepath[], int questions_per_turn) {
         |     +-------------------+                                                                         |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF",
-       MAX_FILEPATH_LENGTH, filepath,
+       MAX_FILEPATH_LENGTH, path,
        4, questions_per_turn);
     printf("\n");
 }
 
-void printSolution(char question[], char answer[], int order_number, int max_number, int tries, int max_tries,char fail[]){
-    if (strcmp(fail,"failed")==0){
+void printSolution(char question[], char answer[], int order_number, int tries, int max_tries,char fail){
+    int number_of_questions_to_ask;
+    if (fail == 'f'){
         system("cls");
         printf(R"EOF(
             +---------------------------------------------------------------------------------------------------+
@@ -196,7 +197,7 @@ void printSolution(char question[], char answer[], int order_number, int max_num
        MAX_QUESTION_LENGTH, question,
        MAX_ANSWER_LENGTH, answer,
        MAX_VOCAB, order_number,
-       MAX_VOCAB, max_number);
+       MAX_VOCAB, number_of_questions_to_ask);
         _getch(); //waits until user presses any button
     }else {
         system("cls");
@@ -230,12 +231,13 @@ void printSolution(char question[], char answer[], int order_number, int max_num
        MAX_QUESTION_LENGTH, question,
        MAX_ANSWER_LENGTH, answer,
        MAX_VOCAB, order_number,
-       MAX_VOCAB, max_number);
+       MAX_VOCAB, number_of_questions_to_ask);
         _getch(); //waits until user presses any button
     }
 }
 
-void printQuestion(char question[], char answer[], int order_number, int max_number, int tries, int max_tries) {
+void printQuestion(char question[], char answer[], int order_number, int tries, int max_tries) {
+    int number_of_questions_to_ask;
     system("cls");
     printf(R"EOF(
         +---------------------------------------------------------------------------------------------------+
@@ -267,7 +269,7 @@ void printQuestion(char question[], char answer[], int order_number, int max_num
    MAX_QUESTION_LENGTH, question,
    MAX_ANSWER_LENGTH, answer,
    MAX_VOCAB, order_number,
-   MAX_VOCAB, max_number);
+   MAX_VOCAB, number_of_questions_to_ask);
 }
 
 int quitScreen(){

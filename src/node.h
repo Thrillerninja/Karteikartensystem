@@ -10,6 +10,7 @@
  * different answers to a vocable by a pre-/postfix of a shorthand*/
 #define MAX_QUESTION_LENGTH 38
 #define MAX_ANSWER_LENGTH 36
+#define MAX_PATH_LENGTH 50 //TODO: change to fit field
 
 typedef struct Node {
     char question[MAX_QUESTION_LENGTH];
@@ -17,5 +18,9 @@ typedef struct Node {
     int times_correct;
     struct Node *next;
 } Node;
+
+//global variables to store settings
+char filepath[MAX_PATH_LENGTH];
+extern int number_of_questions_to_ask;
 
 #endif //KARTEIKARTENSYSTEM_NODE_H
