@@ -52,7 +52,13 @@ Node *loadData(Node *head){ //TODO: fix questions and answers with spaces
 
 void saveData(Node *head){
     FILE *file;
-    fopen_s(&file, filepath, "w+");
+    errno_t err = fopen_s(&file, filepath, "w+");
+
+    if (err != 0) {
+        printf("Unable to open file '%s'\n", filepath);
+        printf("Error: %s\n", strerror(errno));
+        return;
+    }
 
     fprintf_s(file, "%c", '['); // add [ at the beginning of the file to comply with json format
 
@@ -66,15 +72,11 @@ void saveData(Node *head){
     while (ptr != NULL) { //loops as long as there is an element in head left and writs the contents to file
         fprintf_s(file, FILTER_WRITE, ptr->question, ptr->answer, ptr->times_correct); //writes the content
 
-        if (ptr->next == NULL) { //code to retain the json format by removing the comma at the end of the line and adding ] if nothing follows
-            fprintf_s(file, "]");
-        }
-        else {
+        if (ptr->next != NULL) { //code to retain the json format by removing the comma at the end of the line and adding ] if nothing follows
             fprintf_s(file, ",\n");
         }
         ptr = ptr->next;
     }
-
+    fprintf_s(file, "]");
     fclose(file);
-    return;
 }

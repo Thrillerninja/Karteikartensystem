@@ -11,79 +11,52 @@
 // add a node to the list at the front
 Node *addNodeF(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, Node * head)
 {
-    Node *newNode = NULL;
-    if (head == NULL) //if empty
-    {
-        //allocate memory
-        newNode = malloc(sizeof(Node));
-        if (newNode == NULL) return NULL;
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL) return NULL;
 
-        //set data
-        strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
-        strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
-        newNode->times_correct = times_correct;
+    //set data
+    strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
+    strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
+    newNode->times_correct = times_correct;
 
-        //set list equal to newNode
-        head = newNode;
-        newNode->next = NULL;
+    //set list equal to newNode
+    newNode->next = head;
 
-    } else {
-        //allocate memory
-        newNode = malloc(sizeof(Node));
-        if (newNode == NULL) return NULL;
-
-        //set data
-        strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
-        strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
-        newNode->times_correct = times_correct;
-
-        //set list equal to newNode
-        newNode->next = head;
-        head = newNode;
-    }
     return newNode;
 }
 
 Node *addNodeB(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, Node * head)
 {
-    Node *newNode = NULL;
-    Node *ptr = head;
-    if (ptr == NULL) //if empty
-    {
-        //allocate memory
-        newNode = malloc(sizeof(Node));
-        if (newNode == NULL) return NULL;
-
-        //set data
-        strcpy(newNode->question, question);
-        strcpy(newNode->answer, answer);
-        newNode->times_correct = times_correct;
-
-        //set list equal to newNode
-        head = newNode;
-        newNode->next = NULL;
-
-    } else {
-        //allocate memory
-        newNode = malloc(sizeof(Node));
-        if (newNode == NULL) return NULL;
-
-        //set data
-        strcpy(newNode->question, question);
-        strcpy(newNode->answer, answer);
-        newNode->times_correct = times_correct;
-        newNode->next = NULL;
-
-        while (ptr->next != NULL) ptr = ptr->next;
-        ptr->next = newNode;
+    Node *newNode = malloc(sizeof(Node)); // create new node
+    if (newNode == NULL) {
+        return NULL;
     }
+
+    if (head == NULL) {
+        return newNode;
+    }
+
+    strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
+    strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
+    newNode->times_correct = times_correct;
+    newNode->next = NULL;
+
+    //walks to the last element
+    Node *current = head;
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    //insert newNode
+    current->next = newNode;
+
+    //return the whole list
     return head;
 }
+
 // insert a node into a position in the list
 Node *insertNode(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH],int times_correct, int position, Node * head)
 {
-    Node *ptr = head;
-
     //check if insertion is needed
     if (position < 0){
         return head;
@@ -92,38 +65,39 @@ Node *insertNode(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGT
         return head;
     }
 
+    Node *newNode = malloc(sizeof(Node));
+    if (newNode == NULL) {
+        return NULL;
+    }
+
+    strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
+    strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
+    newNode->times_correct = times_correct;
+
+
     //move to insert position
-    while (position > 1 && ptr != NULL)
-    {
-        ptr = ptr->next;
+    Node *current = head;
+    while (position > 1 && current != NULL) {
+        current = current->next;
         position--;
     }
 
     //some error correction
-    if (ptr == NULL && position != 0){
+    if (current == NULL){
         printf("Requested position too far into list\n");
         printf("Failed to insert into list\n");
         return head;
     }
 
-    //on reached position allocate memory. Only created if position is actually reached
-    Node *newNode = malloc(sizeof(Node));
-    if (newNode == NULL) return NULL;
-
     //insert data into newNode
-    newNode->next = ptr->next;
-    newNode->times_correct = times_correct;
-    strcpy(newNode->question,question);
-    strcpy(newNode->answer,answer);
-
-    //insert newNode into list
-    ptr->next = newNode;
+    newNode->next = current->next;
+    current->next = newNode;
 
     return head;
 }
 
-// set a node value
 Node *setValue(char question[MAX_QUESTION_LENGTH] ,int value, Node *head) {
+
     Node *current = head;
     while (current != NULL)
     {

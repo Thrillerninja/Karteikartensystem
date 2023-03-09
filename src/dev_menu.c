@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "devmenu.h"
+#include "dev_menu.h"
 
 #include "node.h"
 #include "add_node.h"
@@ -20,28 +20,29 @@
 void printMenu(int style){
     if (style == 1) {
         printf("You have the following options:\n");
+        printf("\t0. Clear the screen.\n");
         printf("\t1. Add a node to the start of the list.\n");
         printf("\t2. Add a node at the end of the list.\n");
         printf("\t3. Remove a node from the list.\n");
-        printf("\t4. Insert a node to the list.\n");
-        printf("\t5. Print your list\n");
-        printf("\t6. Change data in the list\n");
-        printf("\t7. Search for a node in the list\n");
-        printf("\t8. Push node\n");
-        printf("\t9. DEPRECATED: Pull node\n");
-        printf("\t10.Sort by times correctly answered\n");
+        printf("\t4. Clear the whole list.\n");
+        printf("\t5. Insert a node to the list.\n");
+        printf("\t6. Print your list\n");
+        printf("\t7. Change data in the list\n");
+        printf("\t8. Search for a node in the list\n");
+        printf("\t9. Swap node\n");
+        printf("\t10. Sort by times correctly answered\n");
         printf("\t11.Load from file\n");
         printf("\t12.Save to file\n");
         printf("\t13.Exit\n");
     }else{
         printf("You have the following options:\n");
-        printf("\t1. Add a node to the start of the list.       7. Search for a node in the list\n");
-        printf("\t2. Add a node at the end of the list.         8. Push node\n");
-        printf("\t3. Remove a node from the list.               9. DEPRECATED: Pull node\n");
-        printf("\t4. Insert a node to the list.                 10. Sort by times correct\n");
-        printf("\t5. Print your list.                           11. Load from file\n");
-        printf("\t6. Change data in the list                    12. Save to file\n");
-        printf("\t                                              13. Exit\n");
+        printf("\t0. Clear the screen                             7. Change data in the list\n");
+        printf("\t1. Add a node to the start of the list          8. Search for a node in the list\n");
+        printf("\t2. Add a node at the end of the list            9. Swap node\n");
+        printf("\t3. Remove a node from the list                 10. Sort by times correct\n");
+        printf("\t4. Clear the list                              11. Load from file\n");
+        printf("\t5. Insert a node to the list                   12. Save to file\n");
+        printf("\t6. Print your list                             13. Exit\n");
     }
 }
 
@@ -60,7 +61,6 @@ int devMenu()
     int option = 0;
 
     Node *head = NULL;
-    Node *ptr = NULL;
 
     system("cls");
     while (1)
@@ -69,12 +69,16 @@ int devMenu()
         scanf("%d", &option);
         switch(option)
         {
-            case 0:
-                //start the abfrage
-                system("cls"); //TODO: RETURN TO MAIN PROGRAM
-                return 0;
-            case 1:
-                // add operation
+            case 0:// clear screen
+
+                // Here I don´t use system("cls"); as it might be counted as a full feature taken over by a external lib.
+                // In the rest it will be used, because it clears reliable the whole screen
+                // 25 lines is just a guessed number
+                clearTerminal(25);
+                break;
+
+            case 1:// add operation
+
                 getchar(); //empties the input buffer so that no newline char remains in the buffer
                 // complex operation to read data from user needed for allowing spaces in question and answer
                 printf("What question should I insert?:\n");
@@ -88,8 +92,8 @@ int devMenu()
                 head = addNodeF(question, answer, arg1, head);
                 break;
 
-            case 2:
-                // add operation
+            case 2:// add operation
+
                 printf("What question should I insert?:\n");
                 scanf("%s", &question);
                 printf("What answer should I insert?:\n");
@@ -97,15 +101,15 @@ int devMenu()
                 head = addNodeB(question, answer,arg1, head);
                 break;
 
-            case 3:
-                // remove operation
+            case 3:// remove operation
+
                 printf("What question should I remove?:\n");
                 scanf("%s", &question);
                 head = removeNode(question, head);
                 break;
 
-            case 4:
-                // insert operation
+            case 4:// insert operation
+
                 printf("What question should I insert?:\n");
                 scanf("%s", &question);
                 printf("What answer should I insert?:\n");
@@ -117,13 +121,13 @@ int devMenu()
                 head = insertNode(question,answer,arg1, arg2, head);
                 break;
 
-            case 5:
-                // print the list
+            case 5:// print the list
+
                 printList(head);
                 break;
 
-            case 6:
-                // change operation
+            case 6:// change operation
+
                 printf("times_correct of what question should I change?:\n");
                 scanf("%s", &question);
                 printf("To what?:\n");
@@ -133,8 +137,8 @@ int devMenu()
                     printf("Failed to change value\n");
                 break;
 
-            case 7:
-                // searchNode operation
+            case 7:// searchNode operation
+
                 printf("What question should be searched for?:\n");
                 scanf("%s", &question);
                 int position = searchNode(question, head);
@@ -151,37 +155,31 @@ int devMenu()
                 }
                 break;
 
-            case 8:
-                // swap operation
+            case 8:// swap operation
+
                 printf("What question should be searched for?:\n");
                 scanf("%s", &question);
                 head = swap(searchNode(question,head), head);
 
-                /*case 9:
-                    // pull operation
-                    printf("What question should be searched for?:\n");
-                    scanf("%s", &question);
-                    head = pull(question, head);
-                    if (head == NULL)
-                        printf("Failed to change value\n");
-                    break;*/
+            case 9:// sorts the list
 
-            case 10:
                 head = sort(head);
                 printList(head);
                 break;
 
-            case 11:
-                head = loadData(head); //TODO: inspect
+            case 10:// load data from a file
+
+                head = loadData(head);
                 printf("Load from file\n");
                 break;
 
-            case 12:
+            case 11:// save data to a file
+
                 saveData(head);
                 printf("Save to file\n");
                 break;
 
-            case 13:
+            case 12:
                 confirmExit();
                 break;
 

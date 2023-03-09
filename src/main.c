@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "asciart.h"
 #include "abfrage.h"
-#include "devmenu.h"
+#include "dev_menu.h"
 
 int enterVocabularyMode();
 

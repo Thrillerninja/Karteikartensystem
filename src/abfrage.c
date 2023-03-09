@@ -11,29 +11,37 @@
 #include "node.h"
 #include "file_handling.h"
 #include "asciart.h"
-#include "devmenu.h"
+#include "dev_menu.h"
 
+//function prototypes
+int getUserInputNumber();
+void getUserInputString(char question[], char* answer, int order_number, int tries);
+Node *selectVocabulary(Node *head);
+void menuSelectAbfrage(Node *head);
+int mainAbfrage();
+
+//function definitions
 int getUserInputNumber(){
     while (1) {
-        char c = _getch();   // get user input immediately TODO: input only gets registered after `"enter"`
-        int value = 0;
+        char input = _getch();   // get user input immediately TODO: input only gets registered after `"enter"`
+        int number = 0;
         printf("\b");
-        return value * 10 + (c - '0'); // converts to number
+        return number * 10 + (input - '0'); // converts to number
     }
 }
 
 void getUserInputString(char question[], char* answer, int order_number, int tries) {
     while (1) {
-        char c = _getch(); // get user input immediately
+        char input = _getch(); // get user input immediately
         printf("\b");
 
         int len = strlen(answer); // gets length of answer so far
-        if (c == '\r') {
+        if (input == '\r') {
             answer[len] = '\0'; // add null terminator to the end of the string
             return;
 
         } else if (len < MAX_ANSWER_LENGTH) {
-            answer[len] = c; // appends the next inputted character
+            answer[len] = input; // appends the next inputted character
             answer[len + 1] = '\0'; // finishes with the closing character
 
             printQuestion(question, answer, order_number,tries); // prints inputted char at the right position
@@ -41,52 +49,22 @@ void getUserInputString(char question[], char* answer, int order_number, int tri
     }
 }
 
-Node *selectVocabulary(Node *head){/* Low times_correct questioning not working
+Node *selectVocabulary(Node *head){
     Node *current = head;
-    int total_weight = 0;
-    int weight;
-
-    while (current != NULL){
-        if (current->times_correct < 0) {
-            // Handle invalid node weight
-            printf("Invalid node weight");
-            return NULL;
-        }
-        total_weight += current->times_correct;
-        current = current->next;
-    }
-
-    // Initialize the random seed
-    srand(time(NULL));
-    printf("Random counter: %d\n",total_weight);
-
-    // Generate a random number between 1 and sum
-    weight = rand() % (total_weight+1);
-    printf("Weight %d,%d",weight,total_weight);
-
-    // Loop through the list to find the word that corresponds to the random number
-    // The higher the number, the higher the probability of being chosen
-    current = head;
-
-    while (current->next != NULL && weight < current->times_correct) {
-        weight -= current->times_correct;
-        current = current->next;
-    }
-    return current;*/
-
-    Node *current = head;
-    int total_weight = 0;
+    double total_weight = 0;
     int length = 0;
-    int weight;
 
-    while (current != NULL){
+    // Calculate the total weight as the sum of the times_correct inverse
+    while (current != NULL) {
         if (current->times_correct < 0) {
             // Handle invalid node weight
             printf("Invalid node weight");
             return NULL;
         }
         length++;
-        total_weight += current->times_correct;
+        if (current->times_correct != 0) {
+            total_weight += (1.0 / current->times_correct);
+        }
         current = current->next;
     }
 
@@ -97,38 +75,31 @@ Node *selectVocabulary(Node *head){/* Low times_correct questioning not working
         initialized = 1;
     }
 
-    // Generate a random number between 1 and total_weight
-    weight = rand() % total_weight;
-    printf("Weight %d,%d",weight,length);
+    // Generate a random number between 0 and total_weight
+    double weight = (double) rand() /RAND_MAX * total_weight;
+    printf("Weight %f,%f",weight,total_weight);
+    _getch();
 
     // Loop through the list to find the word that corresponds to the random number
     // The higher the number, the higher the probability of being chosen
     current = head;
 
-
-    for (int i = 0; i < length; i++) {
-        if (weight < current->times_correct) {
+    while (current != NULL) {
+        weight -= 1.0/current->times_correct;
+        if (weight < 0) {
             return current;
         }
-        weight -= current->times_correct;
         current = current->next;
     }
 
     // This should never happen
     printf("Failed to select vocabulary\n");
     return NULL;
-
-    /*
-    while (current->next != NULL && weight >= 0) {
-        weight--;
-        current = current->next;
-    }
-    return current;*/
 }
 
 int mainAbfrage() {
     //loads the data
-    Node *head = loadData(head); //TODO: live changing
+    Node *head = loadData(head);
     if (head == NULL) { //check if head has no elements
         printf("No data present");
     }
@@ -171,7 +142,6 @@ int mainAbfrage() {
     }
 }
 
-
 void menuSelectAbfrage(Node *head){
     switch(getUserInputNumber()) {
         case 0:
@@ -192,7 +162,6 @@ void menuSelectAbfrage(Node *head){
 }
 
 void getFilepath() {
-    //extern char filepath[]; //use global filepath TODO: remove
     char answer[MAX_PATH_LENGTH]; //stores the new filepath
 
     while (1) {
@@ -235,15 +204,6 @@ int enterSettings(){
         }
     }while (choice != 0||choice != 1 || choice != 2 || choice != 3);
 }
-
-
-
-
-
-
-
-
-
 
 int searchNode(char question[MAX_QUESTION_LENGTH], Node * head) {
     Node *current = head;
