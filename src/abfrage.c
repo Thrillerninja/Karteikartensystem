@@ -7,6 +7,7 @@
 #include <string.h>
 #include <conio.h>
 #include <time.h> //used for random seed
+
 #include "node.h"
 #include "file_handling.h"
 #include "asciart.h"
@@ -21,7 +22,7 @@ int getUserInputNumber(){
     }
 }
 
-void getUserInputString(char question[], char* answer, int order_number, int tries, int max_tries) {
+void getUserInputString(char question[], char* answer, int order_number, int tries) {
     while (1) {
         char c = _getch(); // get user input immediately
         printf("\b");
@@ -35,7 +36,7 @@ void getUserInputString(char question[], char* answer, int order_number, int tri
             answer[len] = c; // appends the next inputted character
             answer[len + 1] = '\0'; // finishes with the closing character
 
-            printQuestion(question, answer, order_number,tries,max_tries); // prints inputted char at the right position
+            printQuestion(question, answer, order_number,tries); // prints inputted char at the right position
         }
     }
 }
@@ -85,26 +86,44 @@ Node *selectVocabulary(Node *head){/* Low times_correct questioning not working
             return NULL;
         }
         length++;
+        total_weight += current->times_correct;
         current = current->next;
     }
 
-    // Initialize the random seed
-    srand(time(NULL));
-    printf("Random counter: %d\n",length);
+    // Initialize the random seed only once
+    static int initialized = 0;
+    if (!initialized) {
+        srand(time(NULL));
+        initialized = 1;
+    }
 
-    // Generate a random number between 1 and sum
-    weight = rand() % length;
+    // Generate a random number between 1 and total_weight
+    weight = rand() % total_weight;
     printf("Weight %d,%d",weight,length);
 
     // Loop through the list to find the word that corresponds to the random number
     // The higher the number, the higher the probability of being chosen
     current = head;
 
+
+    for (int i = 0; i < length; i++) {
+        if (weight < current->times_correct) {
+            return current;
+        }
+        weight -= current->times_correct;
+        current = current->next;
+    }
+
+    // This should never happen
+    printf("Failed to select vocabulary\n");
+    return NULL;
+
+    /*
     while (current->next != NULL && weight >= 0) {
         weight--;
         current = current->next;
     }
-    return current;
+    return current;*/
 }
 
 int mainAbfrage() {
@@ -118,23 +137,23 @@ int mainAbfrage() {
     int tries;
 
     //questioning of vocabulary
-    for (int i = 1; i <= 5; i++) { //TODO: change 5 to number_of_questions_to_ask
+    for (int i = 1; i <= number_of_questions_to_ask; i++) {
         tries = 0;
 
         //Asks the vocabulary and checks if correct answer is given within the limit set by tries
         Node* selected_node = selectVocabulary(head);
         do {
             memset(answer, 0, sizeof(answer));
-            printQuestion(selected_node->question, "", i,tries,3);
-            getUserInputString(selected_node->question, answer, i, tries, 3);
+            printQuestion(selected_node->question, "", i,tries);
+            getUserInputString(selected_node->question, answer, i, tries);
             tries++;
         } while (strcmp(answer, selected_node->answer) != 0 && tries <=3);
 
         if (tries <= 3) {
             selected_node->times_correct++; //if correct increment knowledge
-            printSolution(selected_node->question, selected_node->answer, i,tries, 3, 's'); // and print solution
+            printSolution(selected_node->question, selected_node->answer, i,tries, 's'); // and print solution
         }else{
-            printSolution(selected_node->question, selected_node->answer, i, tries, 3, 'f');  //else print solution
+            printSolution(selected_node->question, selected_node->answer, i, tries, 'f');  //else print solution
         }
     }
 
@@ -156,7 +175,7 @@ int mainAbfrage() {
 void menuSelectAbfrage(Node *head){
     switch(getUserInputNumber()) {
         case 0:
-            quitScreen();
+            confirmExit();
             break;
         case 1: // question new vocabulary
             break;
@@ -195,7 +214,7 @@ void getFilepath() {
     }
 }
 
-int Settings(){
+int enterSettings(){
     //extern char filepath[];
     int choice;
 

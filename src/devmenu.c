@@ -45,7 +45,7 @@ void printMenu(int style){
     }
 }
 
-void clearScreen(int lines){
+void clearTerminal(int lines){
     for (int i = 0; i < lines; i++){
         printf("\n");
     }
@@ -182,7 +182,7 @@ int devMenu()
                 break;
 
             case 13:
-                quitScreen();
+                confirmExit();
                 break;
 
             default:

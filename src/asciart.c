@@ -8,11 +8,13 @@
 #include <conio.h>
 #include "asciart.h"
 #include "node.h" //for constants
+#include "file_handling.h" //for global settings
 #include "abfrage.h"
 
 #define MAX_VOCAB 2
 #define MAX_TRY_LENGTH 1
 #define MAX_FILEPATH_LENGTH 30
+int max_tries;
 
 void showMenues(int x){
     switch(x){
@@ -72,7 +74,7 @@ void showMenues(int x){
             printf("\n");
             break;
 
-        case 2: //Settings
+        case 2: //enterSettings
             //REMOVED TODO: Remove
             break;
 
@@ -163,8 +165,7 @@ void printSettings(char path[], int questions_per_turn) {
     printf("\n");
 }
 
-void printSolution(char question[], char answer[], int order_number, int tries, int max_tries,char fail){
-    int number_of_questions_to_ask;
+void printSolution(char question[], char answer[], int order_number, int tries,char fail){
     if (fail == 'f'){
         system("cls");
         printf(R"EOF(
@@ -236,8 +237,7 @@ void printSolution(char question[], char answer[], int order_number, int tries, 
     }
 }
 
-void printQuestion(char question[], char answer[], int order_number, int tries, int max_tries) {
-    int number_of_questions_to_ask;
+void printQuestion(char question[], char answer[], int order_number, int tries) {
     system("cls");
     printf(R"EOF(
         +---------------------------------------------------------------------------------------------------+
@@ -272,7 +272,7 @@ void printQuestion(char question[], char answer[], int order_number, int tries, 
    MAX_VOCAB, number_of_questions_to_ask);
 }
 
-int quitScreen(){
+int confirmExit(){
     showMenues(3); //Quit screen
     switch (getUserInputNumber()){
         case 1:

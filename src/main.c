@@ -1,56 +1,32 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
-#include "node.h"
 #include "asciart.h"
 #include "abfrage.h"
 #include "devmenu.h"
 
+int enterVocabularyMode();
 
-void main(int argc, char **argv){
-    extern char filepath[];
-    strcpy(filepath, "..\\..\\data.json");  //sets standard values for settings
-    int number_of_questions_to_ask = 5;
+int main(int argc, char **argv){
+    int shouldExit = 1;
 
-    int exit = 1;
-
-    if(argc > 1){
-        devMenu();
-    }
+    if(argc > 1) devMenu();
 
     while(1){
-        if(exit == 1) { showMenues(0); } // show main menu
-        exit = 0;
+        if(shouldExit == 1) showMenues(0); // show main menu
+        shouldExit = 0;
 
         int choice = getUserInputNumber(); // asks user to choose
-
         switch (choice) {
-            case 1:
-                showMenues(1); //show typeselect window
-                do {
-                    choice = getUserInputNumber();
-                    switch (choice) {
-                        case 0:
-                            exit = quitScreen();
-                            break;
-                        case 1: // question new vocabulary
-                            break;
-                        case 2: //normal questioning
-                            system("cls");
-                            exit = mainAbfrage(); //TODO: Abfrage Reigenfolge fixen
-                            break;
-                        case 3: //we´ll see
-                            break;
-                    }
-                } while (exit != 1);
+            case 1: //ask vocabulary
+                shouldExit = enterVocabularyMode();
                 break;
 
-            case 2:
-                exit = Settings(); //show settings
+            case 2: //show settings
+                shouldExit = enterSettings();
                 break;
 
-            case 3:
-                exit = quitScreen();
+            case 3: //shouldExit program after asking again
+                shouldExit = confirmExit();
                 break;
 
             default: //stay in main menu if something wrong is selected
@@ -58,4 +34,27 @@ void main(int argc, char **argv){
         }
         printf("awdawdawd\n");
     }
+    return 0;
+}
+
+int enterVocabularyMode() {
+    int shouldExit = 1;
+    showMenues(1); //show subselection window
+
+    do {
+        int choice = getUserInputNumber();
+        switch (choice) {
+            case 0: //return to the main menu
+                shouldExit = 1;
+                break;
+            case 1: // question new vocabulary //TODO: add questioning
+                break;
+            case 2: //normal questioning
+                system("cls");
+                shouldExit = mainAbfrage(); //TODO: Abfrage Reigenfolge fixen
+                break;
+            case 3: //TODO:we´ll see
+                break;
+        }
+    } while (shouldExit != 1);
 }

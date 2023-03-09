@@ -6,7 +6,7 @@
 #define KARTEIKARTENSYSTEM_DEVMENU_H
 
 void printMenu(int style);
-void clearScreen(int lines);
+void clearTerminal(int lines);
 int devMenu();
 
 #endif //KARTEIKARTENSYSTEM_DEVMENU_H

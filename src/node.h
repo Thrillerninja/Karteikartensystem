@@ -19,8 +19,4 @@ typedef struct Node {
     struct Node *next;
 } Node;
 
-//global variables to store settings
-char filepath[MAX_PATH_LENGTH];
-extern int number_of_questions_to_ask;
-
 #endif //KARTEIKARTENSYSTEM_NODE_H
