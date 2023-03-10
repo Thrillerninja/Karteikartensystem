@@ -10,7 +10,7 @@
  * different answers to a vocable by a pre-/postfix of a shorthand*/
 #define MAX_QUESTION_LENGTH 38
 #define MAX_ANSWER_LENGTH 36
-#define MAX_PATH_LENGTH 50 //TODO: change to fit field
+#define MAX_PATH_LENGTH 55
 
 typedef struct Node {
     char question[MAX_QUESTION_LENGTH];

@@ -13,7 +13,6 @@
 
 #define MAX_VOCAB 2
 #define MAX_TRY_LENGTH 1
-#define MAX_FILEPATH_LENGTH 30
 
 extern int number_of_questions_to_ask;
 extern int max_tries;
@@ -75,11 +74,7 @@ void showMenues(int x){
         +---------------------------------------------------------------------------------------------------+)EOF");
             printf("\n");
             break;
-
-        case 2: //Settings
-            //REMOVED TODO: Remove
-            break;
-
+        //yes i know there is no case 2, see it as an easteregg
         case 3: //Quit
             system("cls");
             printf(R"EOF(
@@ -137,7 +132,7 @@ void showMenues(int x){
             break;
     }
 }
-void printSettings(char path[], int questions_per_turn) {
+void printSettings(char path[]) {
     system("cls");
     printf(R"EOF(
         +---------------------------------------------------------------------------------------------------+
@@ -150,7 +145,7 @@ void printSettings(char path[], int questions_per_turn) {
         |                                                                 __/ |                             |
         |                                                                |___/                              |
         |     +------------------------------------------------------------------------------------+        |
-        |     |1-Vocabulary File Location: %-*s                          |        |
+        |     |1-Vocabulary File Location: %-*s |        |
         |     +------------------------------------------------------------------------------------+        |
         |                                                                                                   |
         |     +------------------------------------+                                                        |
@@ -162,9 +157,10 @@ void printSettings(char path[], int questions_per_turn) {
         |     +-------------------+                                                                         |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF",
-       MAX_FILEPATH_LENGTH, path,
-       4, questions_per_turn);
+       MAX_PATH_LENGTH, path,
+       4, number_of_questions_to_ask);
     printf("\n");
+
 }
 
 void printSolution(char question[], char answer[], int order_number, int tries,char fail){
@@ -280,9 +276,7 @@ int confirmExit(){
         case 1:
             break;
         case 2:
-            return 1; //TODO: INSPECT
-            //abfrageMenuSelect();
-            //break;
+            return 1;
         case 3:
             exit(0);
     }

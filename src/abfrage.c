@@ -12,24 +12,19 @@
 #include "file_handling.h"
 #include "asciart.h"
 #include "dev_menu.h"
-#include "remove_node.h"
 #include "add_node.h"
-#include "hangman.h"
-
-extern int number_of_questions_to_ask;
 
 //function prototypes
 int getUserInputNumber();
 void getUserInputString(char question[], char* answer, int order_number, int tries);
 Node *selectVocabulary(Node *head);
-int menuSelectAbfrage(Node *head);
 int mainAbfrage();
 int newAbfrage();
 
 //function definitions
 int getUserInputNumber(){
     while (1) {
-        char input = _getch();   // get user input immediately TODO: input only gets registered after `"enter"`
+        char input = _getch();   // get user input immediately
         int number = 0;
         printf("\b");
         return number * 10 + (input - '0'); // converts to number
@@ -69,7 +64,7 @@ Node *selectVocabulary(Node *head){
         }
         length++;
         if (current->times_correct != 0) {
-            total_weight += (1.0 / current->times_correct);
+            total_weight += (1.0 / current->times_correct+1);
         }
         current = current->next;
     }
@@ -96,7 +91,7 @@ Node *selectVocabulary(Node *head){
         current = current->next;
     }
 
-    if (current->next != NULL){
+    if (current->next == NULL || current == NULL ){
         return current;
     }
 
@@ -131,16 +126,16 @@ int mainAbfrage() {
             tries++;
         } while (strcmp(answer, selected_node->answer) != 0 && tries <=3);
 
-        if (tries <= 3) {
+        if (tries <= max_tries) {
             selected_node->times_correct++; //if correct increment knowledge
-            printSolution(selected_node->question, selected_node->answer, i,tries, 's'); // and print solution
+            printSolution(selected_node->question, selected_node->answer, i,tries-1, 's'); // and print solution
         }else{
-            printSolution(selected_node->question, selected_node->answer, i, tries, 'f');  //else print solution
+            printSolution(selected_node->question, selected_node->answer, i, tries-1, 'f');  //else print fail
         }
     }
     saveData(head);  //save data to file
 
-    showMenues(3);
+    showMenues(4);
     switch (getUserInputNumber()){
         case 1:
             mainAbfrage();
@@ -204,7 +199,7 @@ int newAbfrage() {
 
     saveData(head);  //save data to file
 
-    showMenues(3);
+    showMenues(4);
     switch (getUserInputNumber()){
         case 1:
             mainAbfrage();
@@ -217,7 +212,10 @@ int newAbfrage() {
 }
 
 void getFilepath() {
-    char answer[MAX_PATH_LENGTH]; //stores the new filepath
+    strcpy(filepath,"Enter new filepath and confirm with enter");
+    char answer[MAX_PATH_LENGTH] = ""; //stores the new filepath
+
+    printSettings(filepath); //print again with notice filepath
 
     while (1) {
         char c = _getch(); // get user input immediately
@@ -226,23 +224,38 @@ void getFilepath() {
         int len = strlen(answer); // gets length of answer so far
         if (c == '\r') {
             answer[len] = '\0'; // add null terminator to the end of the string
-            //TODO:strcpy(filepath, answer);
+            strcpy(filepath, answer);
             return;
+
+        } else if (c == '\b') { // check for backspace key
+            if (len > 0) { // make sure there is something to delete
+                answer[len-1] = '\0'; // remove last character from answer
+                len--;
+                printSettings(answer); // print updated answer
+            }
 
         } else if (len < MAX_ANSWER_LENGTH) {
             answer[len] = c; // appends the next inputted character
             answer[len + 1] = '\0'; // finishes with the closing character
 
-            printSettings(answer, 1); // prints inputted char at the right position
+            printSettings(answer); // prints inputted char at the right position
         }
     }
+}
+
+void changeQuestionAmount(){
+    number_of_questions_to_ask = 0;
+
+    printSettings(filepath);
+    number_of_questions_to_ask = getUserInputNumber();
+    printSettings(filepath);
 }
 
 int enterSettings(){
     //extern char filepath[];
     int choice;
 
-    printSettings("nothing",1);
+    printSettings(filepath);
     do{
         choice = getUserInputNumber();
         switch(choice) {
@@ -252,6 +265,7 @@ int enterSettings(){
                 getFilepath();
                 break;
             case 2: //change questions asked every turn
+                changeQuestionAmount();
                 break;
             case 3: //start dev menu
                 devMenu();

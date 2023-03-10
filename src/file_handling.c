@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <conio.h>
 #include "node.h"
 #include "add_node.h"
 #include "file_handling.h"
@@ -21,7 +22,7 @@ char filepath[] = "..\\..\\data.json";
 int number_of_questions_to_ask = 5;
 int max_tries = 3;
 
-Node *loadData(Node *head){ //TODO: fix questions and answers with spaces
+Node *loadData(Node *head){
     int times_correct = 0;
     char buffer[BUFFER_SIZE];
     char question[MAX_QUESTION_LENGTH];
@@ -34,6 +35,7 @@ Node *loadData(Node *head){ //TODO: fix questions and answers with spaces
     if (err != 0) {
         printf("Unable to open file '%s'\n", filepath);
         printf("Error: %s\n", strerror(errno));
+        _getch();
         return NULL;
     }
 

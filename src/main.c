@@ -33,7 +33,6 @@ int main(int argc, char **argv){
             default: //stay in main menu if something wrong is selected
                 break;
         }
-        printf("awdawdawd\n");
     }
     return 0;
 }
@@ -42,24 +41,24 @@ int enterVocabularyMode() {
     int shouldExit = 1;
     showMenues(1); //show subselection window
 
-    do {
+    while(1) {
         int choice = getUserInputNumber();
         switch (choice) {
             case 0: //return to the main menu
-                shouldExit = 1;
-                break;
-            case 1: // question new vocabulary //TODO: add questioning
+                return 1;
+            case 1: // question new vocabulary
                 system("cls");
                 newAbfrage();
                 break;
             case 2: //normal questioning
                 system("cls");
-                shouldExit = mainAbfrage(); //TODO: Abfrage Reigenfolge fixen
+                shouldExit = mainAbfrage();
+                if (shouldExit) return 1;
                 break;
             case 3:  //start hangman
                 system("cls");
                 hangman();
                 return 1;
         }
-    } while (shouldExit != 1);
+    }
 }
