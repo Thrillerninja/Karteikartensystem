@@ -26,4 +26,6 @@ To show this, Phase 5 was named in honor of the current vocabulary learning app 
 
 ## Usage: 
 - NO GUARANTEE THAT NON ASCI CHARS DON´T DO EVIL THINGS
+- Run in external Terminal. otherwise the char input won´t work (in clion: edit configuration -> select a configuration -> enable "run in external Konsole")
 - Direct access to the functions can be gained by going to the settings->more_settings
+- The menus are navigated by inputting the numbers indicated at the options
