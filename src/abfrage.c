@@ -42,6 +42,10 @@ void getUserInputString(char question[], char* answer, int order_number, int tri
             answer[len] = '\0'; // add null terminator to the end of the string
             return;
 
+        } else if (input == '\b' && len > 0) {
+            answer[len - 1] = '\0'; // remove the last character from the string
+            printQuestion(question, answer, order_number,tries); // prints inputted char at the right position
+
         } else if (len < MAX_ANSWER_LENGTH) {
             answer[len] = input; // appends the next inputted character
             answer[len + 1] = '\0'; // finishes with the closing character
@@ -146,6 +150,7 @@ int mainAbfrage() {
         case 2:
             return 1;
         case 3:
+            emptyList(head);
             exit(0);
     }
 }

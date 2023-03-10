@@ -152,9 +152,9 @@ void printSettings(char path[]) {
         |     |2-Questions asked every turn:  %*d |                                                        |
         |     +------------------------------------+                                                        |
         |                                                                                                   |
-        |     +-------------------+                                                                         |
-        |     |3-More Options     |                                                                         |
-        |     +-------------------+                                                                         |
+        |     +---------------+                                                                +------+     |
+        |     |3-More Options |                                                                |0-Exit|     |
+        |     +---------------+                                                                +------+     |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF",
        MAX_PATH_LENGTH, path,
@@ -188,7 +188,7 @@ void printSolution(char question[], char answer[], int order_number, int tries,c
             |                         |                                              |                          |
             |                         +----------------------------------------------+                          |
             |                                    Press any key to continue                                      |
-            |  0-Exit                                                                                           |
+            |                                                                                                   |
             |                                                                                                   |
             +---------------------------------------------------------------------------------------------------+)EOF" "\x1B[0m",
        MAX_TRY_LENGTH, tries,
@@ -222,7 +222,7 @@ void printSolution(char question[], char answer[], int order_number, int tries,c
         |                         |                                              |                          |
         |                         +----------------------------------------------+                          |
         |                                    Press any key to continue                                      |
-        |  0-Exit                                                                                           |
+        |                                                                                                   |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF" "\x1B[0m",
        MAX_TRY_LENGTH, tries,
@@ -259,7 +259,7 @@ void printQuestion(char question[], char answer[], int order_number, int tries) 
         |                         |                                              |                          |
         |                         +----------------------------------------------+                          |
         |                                                                                                   |
-        |  0-Exit                                                                                           |
+        |                                                                                                   |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF",
    MAX_TRY_LENGTH, tries,

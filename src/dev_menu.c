@@ -60,6 +60,7 @@ int devMenu()
     int arg1 = 0;
     int arg2 = 0;
     int option = 0;
+    char c;
 
     Node *head = NULL;
 
@@ -67,7 +68,21 @@ int devMenu()
     while (1)
     {
         printMenu(0);
-        scanf("%d", &option);
+
+        while (1) {
+            printf("Enter your choice: ");
+            if (scanf("%d%c", &option, &c) != 2 || c != '\n') {
+                // Input was not a valid number
+                printf("Invalid input, please try again.\n");
+                // Clear the input buffer
+                while ((c = getchar()) != '\n' && c != EOF) {}
+            } else {
+                // Input was a valid number
+                printf("\n");
+                break;
+            }
+        }
+
         switch(option)
         {
             case 0:// clear screen
@@ -80,7 +95,6 @@ int devMenu()
 
             case 1:// add operation
 
-                getchar(); //empties the input buffer so that no newline char remains in the buffer
                 // complex operation to read data from user needed for allowing spaces in question and answer
                 printf("What question should I insert?:\n");
                 fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
@@ -90,22 +104,28 @@ int devMenu()
                 fgets(answer, MAX_ANSWER_LENGTH, stdin);  // read input string with spaces
                 answer[strcspn(answer, "\n")] = '\0';  // remove trailing newline character
 
-                head = addNodeF(question, answer, arg1, head);
+                head = addNodeF(question, answer, 1, head);
                 break;
 
             case 2:// add operation
 
                 printf("What question should I insert?:\n");
-                scanf("%s", &question);
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
                 printf("What answer should I insert?:\n");
-                scanf("%s", &answer);
-                head = addNodeB(question, answer,arg1, head);
+                fgets(answer, MAX_ANSWER_LENGTH, stdin);  // read input string with spaces
+                answer[strcspn(answer, "\n")] = '\0';  // remove trailing newline character
+
+                head = addNodeB(question, answer,1, head);
                 break;
 
             case 3:// remove operation
 
                 printf("What question should I remove?:\n");
-                scanf("%s", &question);
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
                 head = removeNode(question, head);
                 break;
 
@@ -117,10 +137,14 @@ int devMenu()
             case 5:// insert operation
 
                 printf("What question should I insert?:\n");
-                scanf("%s", &question);
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
                 printf("What answer should I insert?:\n");
-                scanf("%s", &answer);
-                printf("What times_correct should I insert?:\n");
+                fgets(answer, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(answer, "\n")] = '\0';  // remove trailing newline character
+
+                printf("What times_correct should I insert? (has to be > 0):\n");
                 scanf("%d", &arg1);
                 printf("What position?:\n");
                 scanf("%d", &arg2);
@@ -135,8 +159,10 @@ int devMenu()
             case 7:// change operation
 
                 printf("times_correct of what question should I change?:\n");
-                scanf("%s", &question);
-                printf("To what?:\n");
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
+                printf("To what?(has to be > 0):\n");
                 scanf("%d", &arg2);
                 head = setValue(question, arg2, head);
                 if (head == NULL)
@@ -146,7 +172,9 @@ int devMenu()
             case 8:// searchNode operation
 
                 printf("What question should be searched for?:\n");
-                scanf("%s", &question);
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
                 int position = searchNode(question, head);
                 if (position == -1){
                     printf("Not found\n");
@@ -164,7 +192,9 @@ int devMenu()
             case 9:// swap operation
 
                 printf("What question should be searched for?:\n");
-                scanf("%s", &question);
+                fgets(question, MAX_QUESTION_LENGTH, stdin);  // read input string with spaces
+                question[strcspn(question, "\n")] = '\0';  // remove trailing newline character
+
                 head = swap(searchNode(question,head), head);
 
             case 10:// sorts the list
