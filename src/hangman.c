@@ -16,12 +16,13 @@ void hangman(){
     Node *head = loadData(head);
     head = selectVocabulary(head);
     char answer[MAX_ANSWER_LENGTH];
-    strcpy(answer, head->answer);
+    strcpy(answer, head->answer); // copy the answer from the linked list
+
     int tries = 0;
     int size = strlen(answer);
-
     //create a mask
     int mask[size];
+
     // Initialize all elements of the array to 0
     for (int i = 0; i < size; i++) {
         if (answer[i] == ' '){
@@ -31,24 +32,28 @@ void hangman(){
         }
     }
 
+    char unknown[MAX_ANSWER_LENGTH];
+    char user_guess = ' ';
+
     //Gameplay loop
     int finished = 1;
     while (finished){
-        //Print - for empty chars
-        printf("The word is: ");
+
+        //Print * for empty chars
         for (int i = 0; i < size; i++){
             if (mask[i]){
-                printf("%c",answer[i]);
+                unknown[i] = answer[i];
+                unknown[i+1] = '\0';
             }else{
-                printf("*");
+                unknown[i] = '*';
+                unknown[i+1] = '\0';
             }
         }
-        printf("\n");
+        printHangman(unknown,user_guess);
 
         //let the player guess
-        printf("Guess the next character\n");
-        char user_guess = _getch();
-        printf("Your Guess is: %c\n\n",user_guess);
+        user_guess = _getch();
+        printHangman(unknown,user_guess);
 
         //update the mask to show guessed char
         for(int g = 0;g < size; g++){
@@ -58,7 +63,7 @@ void hangman(){
             }
         }
 
-        //check if wo
+        //check if won
         finished = 0;
         for (int w = 0; w < size; ++w) {
             if(!mask[w]) {
@@ -68,6 +73,6 @@ void hangman(){
         tries++;
     }
     //quit if correct
-    printf("You guessed correctly, the word is: %s.\nYou guessed %d times. \n\nPress any Key to return to the main menu",answer,tries);
+    printHangmanSuccess(answer, tries);
     _getch();
 }

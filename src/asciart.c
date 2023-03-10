@@ -270,6 +270,66 @@ void printQuestion(char question[], char answer[], int order_number, int tries) 
    MAX_VOCAB, number_of_questions_to_ask);
 }
 
+void printHangman(char unknown[MAX_ANSWER_LENGTH],char guess){
+    system("cls");
+    printf(R"EOF(
+        +---------------------------------------------------------------------------------------------------+
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                       The Word is:                                                |
+        |                                                                                                   |
+        |                                       %-*s                        |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                       Your Guess:   %c                                             |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                       Take your next guess                                        |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        +---------------------------------------------------------------------------------------------------+)EOF",
+           MAX_ANSWER_LENGTH, unknown,
+           guess);
+
+}
+
+void printHangmanSuccess(char unknown[MAX_ANSWER_LENGTH],int guesses_needed){
+    system("cls");
+    printf("\x1B[32m" R"EOF(
+        +---------------------------------------------------------------------------------------------------+
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                       The Word is:                                                |
+        |                                                                                                   |
+        |                                       %-*s                        |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                      You needed %*d guesses                                       |
+        |                                                                                                   |
+        |                             Press any Key to return to the main menu                              |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        |                                                                                                   |
+        +---------------------------------------------------------------------------------------------------+)EOF""\x1B[0m",
+           MAX_ANSWER_LENGTH, unknown,
+           3,guesses_needed);
+
+}
+
 int confirmExit(){
     showMenues(3); //Quit screen
     switch (getUserInputNumber()){
