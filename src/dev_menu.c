@@ -216,7 +216,7 @@ int devMenu()
                 break;
 
             case 13:
-                confirmExit();
+                if (confirmExit()) return 1;
                 break;
 
             case 14:
