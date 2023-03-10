@@ -11,7 +11,8 @@ int getUserInputNumber();
 void getUserInputString(char question[], char* answer, int order_number, int tries);
 Node *selectVocabulary(Node *head);
 int mainAbfrage();
-void menuSelectAbfrage(Node *head);
+int newAbfrage();
+int menuSelectAbfrage(Node *head);
 int enterSettings();
 int searchNode(char question[MAX_QUESTION_LENGTH], Node * head);
 

@@ -12,13 +12,19 @@
 #include "file_handling.h"
 #include "asciart.h"
 #include "dev_menu.h"
+#include "remove_node.h"
+#include "add_node.h"
+#include "hangman.h"
+
+extern int number_of_questions_to_ask;
 
 //function prototypes
 int getUserInputNumber();
 void getUserInputString(char question[], char* answer, int order_number, int tries);
 Node *selectVocabulary(Node *head);
-void menuSelectAbfrage(Node *head);
+int menuSelectAbfrage(Node *head);
 int mainAbfrage();
+int newAbfrage();
 
 //function definitions
 int getUserInputNumber(){
@@ -77,14 +83,12 @@ Node *selectVocabulary(Node *head){
 
     // Generate a random number between 0 and total_weight
     double weight = (double) rand() /RAND_MAX * total_weight;
-    printf("Weight %f,%f",weight,total_weight);
-    _getch();
 
     // Loop through the list to find the word that corresponds to the random number
     // The higher the number, the higher the probability of being chosen
     current = head;
 
-    while (current != NULL) {
+    while (current != NULL && current->next != NULL) {
         weight -= 1.0/current->times_correct;
         if (weight < 0) {
             return current;
@@ -92,8 +96,13 @@ Node *selectVocabulary(Node *head){
         current = current->next;
     }
 
+    if (current->next != NULL){
+        return current;
+    }
+
     // This should never happen
     printf("Failed to select vocabulary\n");
+    _getch();
     return NULL;
 }
 
@@ -101,7 +110,9 @@ int mainAbfrage() {
     //loads the data
     Node *head = loadData(head);
     if (head == NULL) { //check if head has no elements
-        printf("No data present");
+        printf("No data present, add vocabulary via the developer settings or to the data.json file first\nPress any key to return to the main menu");
+        _getch();
+        return 1;
     }
 
     char answer[MAX_ANSWER_LENGTH] = "";
@@ -127,10 +138,9 @@ int mainAbfrage() {
             printSolution(selected_node->question, selected_node->answer, i, tries, 'f');  //else print solution
         }
     }
-
     saveData(head);  //save data to file
 
-    showMenues(4);
+    showMenues(3);
     switch (getUserInputNumber()){
         case 1:
             mainAbfrage();
@@ -142,22 +152,67 @@ int mainAbfrage() {
     }
 }
 
-void menuSelectAbfrage(Node *head){
-    switch(getUserInputNumber()) {
-        case 0:
-            confirmExit();
-            break;
-        case 1: // question new vocabulary
-            break;
-        case 2: //normal questioning
-            system("cls");
+int newAbfrage() {
+    //loads the data
+    Node *head = loadData(head);
+    if (head == NULL) { //check if head has no elements
+        printf("No data present, add vocabulary via the developer settings or to the data.json file first\nPress any key to return to the main menu");
+        _getch();
+        return 1;
+    }
+
+    char answer[MAX_ANSWER_LENGTH] = "";
+    int tries;
+
+    Node *ptr = head;
+    Node *filtered = NULL;
+
+    //filter to only have vocabulary with times_correct = 0
+    while (ptr->next != NULL){
+        if (ptr->times_correct != 0){
+            filtered = addNodeB(ptr->question,ptr->answer, ptr->times_correct,filtered);
+        }
+        ptr = ptr->next;
+    }
+
+    //questioning of vocabulary
+    for (int i = 1; i <= number_of_questions_to_ask; i++) {
+        tries = 0;
+
+        //Asks the vocabulary and checks if correct answer is given within the limit set by tries
+        Node* selected_node = selectVocabulary(filtered);
+        do {
+            memset(answer, 0, sizeof(answer));
+            printQuestion(selected_node->question, "", i,tries);
+            getUserInputString(selected_node->question, answer, i, tries);
+            tries++;
+        } while (strcmp(answer, selected_node->answer) != 0 && tries <=3);
+
+        if (tries <= 3) {
+            selected_node->times_correct++; //if correct increment knowledge
+            printSolution(selected_node->question, selected_node->answer, i,tries, 's'); // and print solution
+        }else{
+            printSolution(selected_node->question, selected_node->answer, i, tries, 'f');  //else print solution
+        }
+    }
+
+    //return data to main datastream
+    while (filtered != NULL) {
+        setValue(filtered->question,filtered->times_correct,head);
+        filtered = filtered->next;
+    }
+
+    saveData(head);  //save data to file
+
+    showMenues(3);
+    switch (getUserInputNumber()){
+        case 1:
             mainAbfrage();
             break;
-        case 3: //we´ll see
-            break;
-        default:
-            menuSelectAbfrage(head);
-            break;
+        case 2:
+            return 1;
+        case 3:
+            exit(0);
     }
 }
 

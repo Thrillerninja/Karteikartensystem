@@ -19,12 +19,14 @@ char answer[MAX_ANSWER_LENGTH];
 //sets standard values for settings
 char filepath[] = "..\\..\\data.json";
 int number_of_questions_to_ask = 5;
+int max_tries = 3;
 
 Node *loadData(Node *head){ //TODO: fix questions and answers with spaces
     int times_correct = 0;
     char buffer[BUFFER_SIZE];
     char question[MAX_QUESTION_LENGTH];
     char answer[MAX_ANSWER_LENGTH];
+    Node *ptr = NULL;     //create a new linked list
 
     FILE *file;
     errno_t err = fopen_s(&file, filepath, "r");
@@ -34,8 +36,6 @@ Node *loadData(Node *head){ //TODO: fix questions and answers with spaces
         printf("Error: %s\n", strerror(errno));
         return NULL;
     }
-
-    Node *ptr = NULL;     //create a new linked list
 
     fseek(file, 1, SEEK_SET); //go to the start of the file, skip the [ and start reading
     while (fgets(buffer, BUFFER_SIZE, file) != NULL) { //get the data

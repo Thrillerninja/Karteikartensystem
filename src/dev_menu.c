@@ -108,7 +108,9 @@ int devMenu()
                 head = removeNode(question, head);
                 break;
 
-            case 4:// insert operation
+            case 4: //TODO: Clear the list
+
+            case 5:// insert operation
 
                 printf("What question should I insert?:\n");
                 scanf("%s", &question);
@@ -121,12 +123,12 @@ int devMenu()
                 head = insertNode(question,answer,arg1, arg2, head);
                 break;
 
-            case 5:// print the list
+            case 6:// print the list
 
                 printList(head);
                 break;
 
-            case 6:// change operation
+            case 7:// change operation
 
                 printf("times_correct of what question should I change?:\n");
                 scanf("%s", &question);
@@ -137,7 +139,7 @@ int devMenu()
                     printf("Failed to change value\n");
                 break;
 
-            case 7:// searchNode operation
+            case 8:// searchNode operation
 
                 printf("What question should be searched for?:\n");
                 scanf("%s", &question);
@@ -155,31 +157,31 @@ int devMenu()
                 }
                 break;
 
-            case 8:// swap operation
+            case 9:// swap operation
 
                 printf("What question should be searched for?:\n");
                 scanf("%s", &question);
                 head = swap(searchNode(question,head), head);
 
-            case 9:// sorts the list
+            case 10:// sorts the list
 
                 head = sort(head);
                 printList(head);
                 break;
 
-            case 10:// load data from a file
+            case 11:// load data from a file
 
                 head = loadData(head);
                 printf("Load from file\n");
                 break;
 
-            case 11:// save data to a file
+            case 12:// save data to a file
 
                 saveData(head);
                 printf("Save to file\n");
                 break;
 
-            case 12:
+            case 13:
                 confirmExit();
                 break;
 

@@ -3,6 +3,7 @@
 #include "asciart.h"
 #include "abfrage.h"
 #include "dev_menu.h"
+#include "hangman.h"
 
 int enterVocabularyMode();
 
@@ -12,7 +13,7 @@ int main(int argc, char **argv){
     if(argc > 1) devMenu();
 
     while(1){
-        if(shouldExit == 1) showMenues(0); // show main menu
+        if(shouldExit == 1) showMenues(0); // show main menu with style 0
         shouldExit = 0;
 
         int choice = getUserInputNumber(); // asks user to choose
@@ -48,13 +49,17 @@ int enterVocabularyMode() {
                 shouldExit = 1;
                 break;
             case 1: // question new vocabulary //TODO: add questioning
+                system("cls");
+                newAbfrage();
                 break;
             case 2: //normal questioning
                 system("cls");
                 shouldExit = mainAbfrage(); //TODO: Abfrage Reigenfolge fixen
                 break;
-            case 3: //TODO:we´ll see
-                break;
+            case 3:  //start hangman
+                system("cls");
+                hangman();
+                return 1;
         }
     } while (shouldExit != 1);
 }

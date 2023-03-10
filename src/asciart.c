@@ -8,13 +8,15 @@
 #include <conio.h>
 #include "asciart.h"
 #include "node.h" //for constants
-#include "file_handling.h" //for global settings
+#include "file_handling.h"
 #include "abfrage.h"
 
 #define MAX_VOCAB 2
 #define MAX_TRY_LENGTH 1
 #define MAX_FILEPATH_LENGTH 30
-int max_tries;
+
+extern int number_of_questions_to_ask;
+extern int max_tries;
 
 void showMenues(int x){
     switch(x){
@@ -74,7 +76,7 @@ void showMenues(int x){
             printf("\n");
             break;
 
-        case 2: //enterSettings
+        case 2: //Settings
             //REMOVED TODO: Remove
             break;
 
@@ -156,7 +158,7 @@ void printSettings(char path[], int questions_per_turn) {
         |     +------------------------------------+                                                        |
         |                                                                                                   |
         |     +-------------------+                                                                         |
-        |     |3-Developer Options|                                                                         |
+        |     |3-More Options     |                                                                         |
         |     +-------------------+                                                                         |
         |                                                                                                   |
         +---------------------------------------------------------------------------------------------------+)EOF",
@@ -168,7 +170,7 @@ void printSettings(char path[], int questions_per_turn) {
 void printSolution(char question[], char answer[], int order_number, int tries,char fail){
     if (fail == 'f'){
         system("cls");
-        printf(R"EOF(
+        printf("\x1B[31m" R"EOF(
             +---------------------------------------------------------------------------------------------------+
             |                                                                                                   |
             |  Spielmodus                                                                           Tries: %*d/%*d  |
@@ -192,7 +194,7 @@ void printSolution(char question[], char answer[], int order_number, int tries,c
             |                                    Press any key to continue                                      |
             |  0-Exit                                                                                           |
             |                                                                                                   |
-            +---------------------------------------------------------------------------------------------------+)EOF",
+            +---------------------------------------------------------------------------------------------------+)EOF" "\x1B[0m",
        MAX_TRY_LENGTH, tries,
        MAX_TRY_LENGTH, max_tries,
        MAX_QUESTION_LENGTH, question,
@@ -202,7 +204,7 @@ void printSolution(char question[], char answer[], int order_number, int tries,c
         _getch(); //waits until user presses any button
     }else {
         system("cls");
-        printf(R"EOF(
+        printf("\x1B[32m" R"EOF(
         +---------------------------------------------------------------------------------------------------+
         |                                                                                                   |
         |  Spielmodus                                                                           Tries: %*d/%*d  |
@@ -226,7 +228,7 @@ void printSolution(char question[], char answer[], int order_number, int tries,c
         |                                    Press any key to continue                                      |
         |  0-Exit                                                                                           |
         |                                                                                                   |
-        +---------------------------------------------------------------------------------------------------+)EOF",
+        +---------------------------------------------------------------------------------------------------+)EOF" "\x1B[0m",
        MAX_TRY_LENGTH, tries,
        MAX_TRY_LENGTH, max_tries,
        MAX_QUESTION_LENGTH, question,
@@ -279,8 +281,8 @@ int confirmExit(){
             break;
         case 2:
             return 1; //TODO: INSPECT
-            abfrageMenuSelect();
-            break;
+            //abfrageMenuSelect();
+            //break;
         case 3:
             exit(0);
     }

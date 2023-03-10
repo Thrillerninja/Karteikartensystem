@@ -32,14 +32,15 @@ Node *addNodeB(char question[MAX_QUESTION_LENGTH],char answer[MAX_ANSWER_LENGTH]
         return NULL;
     }
 
-    if (head == NULL) {
-        return newNode;
-    }
 
     strncpy(newNode->question, question, MAX_QUESTION_LENGTH);
     strncpy(newNode->answer, answer, MAX_ANSWER_LENGTH);
     newNode->times_correct = times_correct;
     newNode->next = NULL;
+
+    if (head == NULL) {
+        return newNode;
+    }
 
     //walks to the last element
     Node *current = head;

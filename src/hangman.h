@@ -1,0 +1,10 @@
+//
+// Created by rorba on 10.03.2023.
+//
+
+#ifndef KARTEIKARTENSYSTEM_HANGMAN_H
+#define KARTEIKARTENSYSTEM_HANGMAN_H
+
+void hangman();
+
+#endif //KARTEIKARTENSYSTEM_HANGMAN_H
