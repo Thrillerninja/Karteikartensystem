@@ -13,6 +13,7 @@
 #include "asciart.h"
 #include "dev_menu.h"
 #include "add_node.h"
+#include "remove_node.h"
 
 //function prototypes
 int getUserInputNumber();
@@ -64,7 +65,7 @@ Node *selectVocabulary(Node *head){
         }
         length++;
         if (current->times_correct != 0) {
-            total_weight += (1.0 / current->times_correct+1);
+            total_weight += (1.0 / (current->times_correct+0.1));
         }
         current = current->next;
     }
@@ -77,14 +78,14 @@ Node *selectVocabulary(Node *head){
     }
 
     // Generate a random number between 0 and total_weight
-    double weight = (double) rand() /RAND_MAX * total_weight;
+    double weight = (double) rand() / RAND_MAX * total_weight;
 
     // Loop through the list to find the word that corresponds to the random number
     // The higher the number, the higher the probability of being chosen
     current = head;
 
     while (current != NULL && current->next != NULL) {
-        weight -= 1.0/current->times_correct;
+        weight -= 1.0/(current->times_correct+0.1);
         if (weight < 0) {
             return current;
         }
@@ -105,7 +106,7 @@ int mainAbfrage() {
     //loads the data
     Node *head = loadData(head);
     if (head == NULL) { //check if head has no elements
-        printf("No data present, add vocabulary via the developer settings or to the data.json file first\nPress any key to return to the main menu");
+        printf("No data present, add vocabulary via the settings or to the data.json file first\nPress any key to return to the main menu");
         _getch();
         return 1;
     }
@@ -138,7 +139,9 @@ int mainAbfrage() {
     showMenues(4);
     switch (getUserInputNumber()){
         case 1:
-            mainAbfrage();
+            if(mainAbfrage()){
+                return 1;
+            }
             break;
         case 2:
             return 1;
@@ -151,7 +154,7 @@ int newAbfrage() {
     //loads the data
     Node *head = loadData(head);
     if (head == NULL) { //check if head has no elements
-        printf("No data present, add vocabulary via the developer settings or to the data.json file first\nPress any key to return to the main menu");
+        printf("No data present, add vocabulary via the settings or to the data.json file first\nPress any key to return to the main menu");
         _getch();
         return 1;
     }
@@ -198,11 +201,14 @@ int newAbfrage() {
     }
 
     saveData(head);  //save data to file
+    emptyList(head); //clear the list
 
     showMenues(4);
     switch (getUserInputNumber()){
         case 1:
-            mainAbfrage();
+            if (mainAbfrage()){
+                return 1;
+            }
             break;
         case 2:
             return 1;
@@ -268,7 +274,9 @@ int enterSettings(){
                 changeQuestionAmount();
                 break;
             case 3: //start dev menu
-                devMenu();
+                if (devMenu()){
+                    return 1;
+                }
                 break;
         }
     }while (choice != 0||choice != 1 || choice != 2 || choice != 3);

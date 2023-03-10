@@ -30,13 +30,14 @@ void printMenu(int style){
         printf("\t7. Change data in the list\n");
         printf("\t8. Search for a node in the list\n");
         printf("\t9. Swap node\n");
-        printf("\t10. Sort by times correctly answered\n");
+        printf("\t10.Sort by times correctly answered\n");
         printf("\t11.Load from file\n");
         printf("\t12.Save to file\n");
         printf("\t13.Exit\n");
+        printf("\t14.Return to main menu");
     }else{
         printf("You have the following options:\n");
-        printf("\t0. Clear the screen                             7. Change data in the list\n");
+        printf("\t0. Clear the screen                             7. Change data in the list               14. Return to main menu\n");
         printf("\t1. Add a node to the start of the list          8. Search for a node in the list\n");
         printf("\t2. Add a node at the end of the list            9. Swap node\n");
         printf("\t3. Remove a node from the list                 10. Sort by times correct\n");
@@ -108,7 +109,10 @@ int devMenu()
                 head = removeNode(question, head);
                 break;
 
-            case 4: //TODO: Clear the list
+            case 4: // clear the list
+                emptyList(head);
+                printf("Whole list cleared");
+                break;
 
             case 5:// insert operation
 
@@ -184,6 +188,9 @@ int devMenu()
             case 13:
                 confirmExit();
                 break;
+
+            case 14:
+                return 1;
 
             default:
                 break;

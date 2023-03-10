@@ -8,5 +8,6 @@
 #include "node.h"
 
 Node *removeNode(char question[], Node *head);
+Node *emptyList(Node *head);
 
 #endif //KARTEIKARTENSYSTEM_REMOVE_NODE_H

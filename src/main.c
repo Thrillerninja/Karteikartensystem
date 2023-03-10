@@ -48,12 +48,11 @@ int enterVocabularyMode() {
                 return 1;
             case 1: // question new vocabulary
                 system("cls");
-                newAbfrage();
+                if (newAbfrage()) return 1;
                 break;
             case 2: //normal questioning
                 system("cls");
-                shouldExit = mainAbfrage();
-                if (shouldExit) return 1;
+                if (mainAbfrage()) return 1;
                 break;
             case 3:  //start hangman
                 system("cls");

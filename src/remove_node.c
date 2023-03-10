@@ -32,3 +32,13 @@ Node *removeNode(char question[], Node *head)
     }
     return head;
 }
+
+Node *emptyList(Node *head){
+    Node* current = head;
+    while (current != NULL) { //goes through the list and clear the memory, works even when list is empty
+        Node* next = current->next;
+        free(current);
+        current = next;
+    }
+    return NULL;
+}

@@ -65,7 +65,6 @@ void saveData(Node *head){
     fprintf_s(file, "%c", '['); // add [ at the beginning of the file to comply with json format
 
     if (file == NULL) { // throws error if file is nonexistent
-        fprintf(stderr, "Unable to open file '%s'\n", filepath);
         printf("Unable to open file '%s'\n", filepath);
         exit(EXIT_FAILURE);
     }
