@@ -23,3 +23,7 @@ To show this, Phase 5 was named in honor of the current vocabulary learning app 
 ## Unique features:
 - ASCI style for the main interfaces
 - Hangman
+
+## Usage: 
+- NO GUARANTEE THAT NON ASCI CHARS DON´T DO EVIL THINGS
+- Direct access to the functions can be gained by going to the settings->more_settings
